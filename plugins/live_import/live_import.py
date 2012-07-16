@@ -108,8 +108,7 @@ class live_import(Plugin_importbase):
 		self.author="xuming"
 		self.authoruri="http://xuming.net"
 		self.uri="http://xuming.net"
-		self.description='''Plugin for import entries from space.zip.<br>
-		将Spaces.Live.com博客导入到Micolog.'''
+		self.description='''Plugin for import entries from space.zip.<br>Spaces.Live.com'''
 		self.name="LiveSapce Import"
 		self.version="0.12"
 		self.register_urlzip('/admin/live_import/swfupload/(.*)','swfupload.zip')

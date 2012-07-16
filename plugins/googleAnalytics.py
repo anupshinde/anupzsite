@@ -6,7 +6,7 @@ class googleAnalytics(Plugin):
 		self.author="xuming"
 		self.authoruri="http://xuming.net"
 		self.uri="http://xuming.net"
-		self.description="Plugin for put google Analytics into micolog."
+		self.description="Plugin for put google Analytics into AnupShindeSite."
 		self.name="google Analytics"
 		self.version="0.1"
 		self.register_filter('footer',self.filter)

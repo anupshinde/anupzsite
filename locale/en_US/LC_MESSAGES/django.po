@@ -341,7 +341,7 @@ msgid "IsAdmin"
 msgstr ""
 
 #: .\views\admin\base.html.py:31
-msgid "Micolog Dashboard"
+msgid "Dashboard"
 msgstr ""
 
 #: .\views\admin\base.html.py:31
@@ -803,7 +803,7 @@ msgid "Domain:"
 msgstr ""
 
 #: .\views\admin\setup.html.py:57
-msgid "Micolog Address(URL):"
+msgid "Address(URL):"
 msgstr ""
 
 #: .\views\admin\setup.html.py:63

@@ -194,7 +194,7 @@ var switchEditors = {
 	},
 	pre_save : function(se,ed,o){
 			if ( typeof(se) == 'object' ) {
-					//Wp默认存quicktag的格式，Micolog默认存储html格式，所以这里进行了修改
+					
 					if ( ed.isHidden() )
                      o.content = se.wpautop(o.element.value);
 						//o.content = o.element.value;

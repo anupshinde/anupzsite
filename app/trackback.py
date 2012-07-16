@@ -42,7 +42,7 @@ class TrackBack:
             # http://python.org/doc/current/lib/httplib-examples.html
             params = urllib.urlencode({'title': self.title, 'url': self.url, 'excerpt': self.excerpt, 'blog_name': self.blog_name})
             headers = ({"Content-type": "application/x-www-form-urlencoded",
-            "User-Agent": "micolog"})
+            "User-Agent": "anupshindecom"})
             # urlparse is my hero
             # http://www.python.org/doc/current/lib/module-urlparse.html
             logging.info("ping...%s",params)

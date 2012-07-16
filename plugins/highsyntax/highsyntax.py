@@ -30,7 +30,7 @@ if ($('pre[class^=brush:]').length > 0)
 
 	def get(self,page):
 		return '''<h3>HighSyntax Plugin</h3>
-			   <p>HighSyntax plugin for micolog.</p>
+			   <p>HighSyntax plugin for AnupShindeSite.</p>
 			   <p>This plugin based on <a href="http://alexgorbatchev.com/wiki/SyntaxHighlighter" target="_blank">SyntaxHighlighter</a>
 			    and <a href="http://www.outofwhatbox.com/blog/syntaxhighlighter-downloads/" target="_blank">SyntaxHighlighter.boot()</a></p>
 				<form action="" method="post">

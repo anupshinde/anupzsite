@@ -795,8 +795,8 @@ def pingback_ping(source_uri, target_uri):
 
     #pingback_post(response,source_uri,target_uri,path_info)
     try:
-        logging.info('Micolog pingback succeed!')
-        return "Micolog pingback succeed!"
+        logging.info('Pingback succeed!')
+        return "Pingback succeed!"
     except:
         raise Fault(49,"Access denied.")
 

@@ -17,7 +17,7 @@
 	<language>zh-cn</language>
 	<sy:updatePeriod>daily</sy:updatePeriod>
 	<sy:updateFrequency>1</sy:updateFrequency>
-	<generator>Micolog {{blog.version}}</generator>
+	<generator>Anup Shinde {{blog.version}}</generator>
 		{% for entry in entries %}<item>
 		<title>{{entry.title|escape}}</title>
 		<link>{{ blog.baseurl }}/{{entry.link|escape}}</link>

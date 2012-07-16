@@ -61,7 +61,7 @@
 				<div id="intro">
 					<p>
 						This is a XML Sitemap which is supposed to be processed by search engines like <a href="http://www.google.com">Google</a>, <a href="http://search.msn.com">MSN Search</a> and <a href="http://www.yahoo.com">YAHOO</a>.<br />
-						It was generated using the Blogging-Software <a href="http://xuming.net">Micolog</a> .<br />
+						
 						You can find more information about XML sitemaps on <a href="http://sitemaps.org">sitemaps.org</a> and Google's <a href="http://code.google.com/sm_thirdparty.html">list of sitemap programs</a>.
 					</p>
 				</div>
@@ -102,7 +102,7 @@
 					</table>
 				</div>
 				<div id="footer">
-					Generated with <a href="http://xuming.net/micolog" title="Micro blog powered by google app engine">Micolog</a> by <a href="http://xuming.net">xuming.net</a>. This XSLT template is released under GPL.
+					Anup Shinde.
 				</div>
 			</body>
 		</html>

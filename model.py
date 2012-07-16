@@ -149,8 +149,8 @@ class Blog(db.Model):
     description = db.TextProperty()
     baseurl = db.StringProperty(default=None)
     urlpath = db.StringProperty()
-    title = db.StringProperty(default='Micolog')
-    subtitle = db.StringProperty(default='This is a micro blog.')
+    title = db.StringProperty(default='AnupShinde')
+    subtitle = db.StringProperty(default='This is a small blog.')
     entrycount = db.IntegerProperty(default=0)
     posts_per_page= db.IntegerProperty(default=10)
     feedurl = db.StringProperty(default='/feed')
@@ -867,11 +867,9 @@ def InitBlogData():
     g_blog.save()
 
     entry=Entry(title="Hello world!".decode('utf8'))
-    entry.content='<p>Welcome to micolog %s. This is your first post. Edit or delete it, then start blogging!</p>'%g_blog.version
+    entry.content='<p>Welcome to AnupShindeSite %s. This is your first post. Edit or delete it, then start blogging!</p>'%g_blog.version
     entry.save(True)
-    link=Link(href='http://xuming.net',linktext="Xuming's blog".decode('utf8'))
-    link.put()
-    link=Link(href='http://eric.cloud-mes.com/',linktext="Eric Guo's blog".decode('utf8'))
+    link=Link(href='http://anupshinde.com',linktext="Anup Shinde".decode('utf8'))
     link.put()
     return g_blog
 

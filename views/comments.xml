@@ -14,7 +14,7 @@
 	<lastBuildDate>{{last_updated}}</lastBuildDate>
 	<sy:updatePeriod>daily</sy:updatePeriod>
 	<sy:updateFrequency>1</sy:updateFrequency>
-	<generator>Micolog {{blog.version}}</generator>
+	<generator>Anup Shinde {{blog.version}}</generator>
 {% for comment in comments %}	<item>
 		<title><![CDATA[由：{{comment.author}} 在 {{comment.entry.title|escape}}]]></title>
 		<link>{{ blog.baseurl }}/{{comment.entry.link|escape}}#comment-{{comment.key.id}}</link>

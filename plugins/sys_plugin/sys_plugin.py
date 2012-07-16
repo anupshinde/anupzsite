@@ -57,7 +57,7 @@ class sys_plugin(Plugin):
 		self.author="xuming"
 		self.authoruri="http://xuming.net"
 		self.uri="http://xuming.net"
-		self.description="System plugin for micolog"
+		self.description="System plugin for AnupShindeSite"
 		self.name="Sys Plugin"
 		self.version="0.2"
 		self.blocklist=OptionSet.getValue("sys_plugin_blocklist",default="")
@@ -75,11 +75,11 @@ class sys_plugin(Plugin):
 		self.bbody=OptionSet.getValue('sys_plugin_bbody',BBODY)
 
 	def head(self,content,blog=None,*arg1,**arg2):
-		content=content+'<meta name="generator" content="Micolog %s" />'%blog.version
+		content=content+'<meta name="generator" content="AnupShinde %s" />'%blog.version
 		return content
 
 	def footer(self,content,blog=None,*arg1,**arg2):
-		return content+'<!--Powered by micolog %s-->'%blog.version
+		return content+'<!--Powered by Anup Shinde %s-->'%blog.version
 
 	def setup(self,page=None,*arg1,**arg2):
 		if not page.is_login:
@@ -101,11 +101,11 @@ class sys_plugin(Plugin):
 
 	def get(self,page):
 		return '''<h3>Sys Plugin</h3>
-			   <p>This is a system plugin for micolog. <br>Also a demo for how to write plugin for micolog.</p>
+			   <p>This is a system plugin for AnupShinde. <br>Also a demo for how to write plugin.</p>
 			   <h4>feature</h4>
 			   <p><ol>
-			   <li>Add Meta &lt;meta name="generator" content="Micolog x.x" /&gt;</li>
-			   <li>Add footer "&lt;!--Powered by micolog x.x--&gt;"</li>
+			   <li>Add Meta &lt;meta name="generator" content="AnupShinde x.x" /&gt;</li>
+			   <li>Add footer "&lt;!--Powered by Anup Shinde--&gt;"</li>
 			   <li>Comments Filter with blocklist <a href="/e/sys_plugin/setup">Setup</a></li>
 			   <li>Comment Notify <a href="/admin/sys_plugin/notify">Setup</a></li>
 			   </ol></p>
