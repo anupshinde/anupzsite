@@ -11,7 +11,10 @@
   <h2 class="topTitle"><a href="/{{ entry.link }}" title="Permanent Link to {{entry.title}}">{{entry.title}}</a></h2>
   <p class="topMeta">by {{entry.author_name}} on {{entry.date|datetz:"F jS, Y"}}, under {%for cate in entry.categories%} <a href="/category/{{cate.slug}}">{{cate.name}}</a> {%endfor%}</p>
   <div class="topContent">{{entry.content_excerpt|safe}}</div>
-  <span class="topComments"><a href="/{{entry.link}}#comments">Comments({{entry.commentcount}})&#187;</a></span>
+  <span class="topComments">
+  <!-- <a href="/{{entry.link}}#comments">Comments({{entry.commentcount}})&#187;</a> old comments method -->
+  <a href="{{entry.link}}#disqus_thread">Comments</a>
+  </span>
   <span class="topTags">{% if entry.strtags %}{%for tag in entry.tags%}<a href="/tag/{{tag|urlencode}}">{{tag}}</a> {%endfor%}{%endif%}</span>
   <span class="topMore"><a href="/{{ entry.link }}">more...</a></span>
 <div class="cleared"></div>
@@ -41,5 +44,21 @@
 
 {% include "sidebar.html" %}
 <div class="cleared"></div>
+
+<!-- disqus script at the end of listing -->
+ <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'anupshinde'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function () {
+		var s = document.createElement('script'); s.async = true;
+		s.type = 'text/javascript';
+		s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+	}());
+</script>
+
 </div><!-- Closes Main -->
 {% endblock %}
+
