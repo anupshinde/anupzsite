@@ -1,0 +1,42 @@
+/******************carousel**********************/
+#carousel{
+	position:relative;
+}
+	#carousel .es-carousel{
+		width:100%;
+		overflow:hidden;
+	}
+		#carousel li{float:left; position:relative;}
+#carousel .es-nav-prev, #carousel .es-nav-next{
+	display:block !important;
+	width:28px;
+	height:31px;
+	overflow:hidden;
+	background-position: 10px 12px;
+	background-repeat: no-repeat;
+	background-color:#9b9b9b;
+	position:absolute;
+	top:-56px;
+	text-indent: -100%;
+	white-space: nowrap;
+	cursor:pointer;
+	z-index:997;
+}
+#carousel .es-nav-prev{background-image:url(../images/carousel-prev.gif); border-right:1px solid #dcdcdc; right:28px;}
+#carousel .es-nav-next{background-image:url(../images/carousel-next.gif); right:0px;}
+	#carousel .es-nav-prev:hover, #carousel .es-nav-next:hover{background-color:#FF3333;}
+
+/*-------------------------------------------------------------------*/
+
+@media only screen and (max-width: 995px) {
+	#carousel li{width:246px !important;}
+	#carousel .es-nav-prev, #carousel .es-nav-next{top:-40px;}
+}
+
+@media only screen and (max-width: 767px) {
+	#carousel li{width:420px !important; margin-right:0 !important;}
+}
+
+@media only screen and (max-width: 479px) {
+	#carousel li{width:300px !important;}
+}

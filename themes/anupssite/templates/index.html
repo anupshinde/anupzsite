@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content%}
+
+<div class="indent-right6-1">
+
+	{% if entries %}
+
+	{% for entry in entries %}
+		<div class="border-top indent-top5-1 indent-bottom11 ">
+
+		<div class="wrapper">
+
+
+
+			<div class="extra-wrap">
+
+				<p class="font-1">
+				<a href="/{{ entry.link }}" title="Permanent Link to {{entry.title}}">
+					{{entry.title}}
+				</a>
+				</p>
+
+				<h6><p class="topMeta">by {{entry.author_name}} on {{entry.date|datetz:"F jS, Y"}}
+				
+				{% if entry.categories %}
+					, under 
+					{%for cate in entry.categories%} 
+					<a href="/category/{{cate.slug}}" class="link">
+					{{cate.name}}
+					</a> 
+					{%endfor%}
+				{% endif %}
+				
+				</p></h6>
+
+			</div>
+			<figure class="img-indent5 img-indent-none-ml">
+
+				<img src="http://localhost:8086/media/ag1kZXZ-YW51cHNibG9ncgsLEgVNZWRpYRhmDA/iteration_burndown.PNG?a=download" width="150" height="150" alt="{{entry.title}} logo">
+
+			</figure>
+			<p class="p4">{{entry.content_excerpt|safe}}</p>
+
+		</div>
+		<div class="extra-wrap">
+		{% include "share.html" %}
+		</div>
+		</div>
+
+	{% endfor %}
+
+	{% else %}
+
+	<div class="topPost"
+	<h3 class="p5-1">Not Found</h3>
+	  <div  class="wrapper"><p>Sorry, but you are looking for something that isn't here.</p></div>
+	</div>
+
+	{% endif %}
+
+
+
+
+</div>
+
+
+<div id="nextprevious">
+<div class="alignleft">{% if show_next %}<a href="/page/{{ pageindex|add:"1" }}">&laquo; Older Entries</a>{%endif%}</div>
+<div class="aligncenter">
+<script type="text/javascript" src="/static/js/pagenavi.js"></script>
+<script type="text/javascript">showPageLink("/page/",{{ pageindex }},{{ pagecount }},"");</script>
+</div>
+<div class="alignright">{% if show_prev %}<a href="/page/{{ pageindex|add:"-1" }}">Newer Entries &raquo;</a>{%endif%}</div>
+<div class="cleared"></div>
+</div>
+	
+{% endblock %}
+
