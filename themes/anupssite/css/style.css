@@ -196,3 +196,11 @@ margin-bottom: 15px;
 .font-1 a {
   color:#1A1A1A;
 }
+
+.font_author {
+font: 12px/18px "Lucida Grande", Arial, sans-serif;
+}
+
+.font_comments {
+font: bold 13px/19px Arial, Helvetica, sans-serif;
+}

@@ -370,6 +370,7 @@ class Link(db.Model):
 class Entry(BaseModel):
     author = db.UserProperty()
     author_name = db.StringProperty()
+    image_link = db.StringProperty(default='default_image')
     published = db.BooleanProperty(default=False)
     content = db.TextProperty(default='')
     readtimes = db.IntegerProperty(default=0)

@@ -414,6 +414,7 @@ class admin_entry(base.BaseRequestHandler):
         tags=self.param("tags")
         cats=self.request.get_all('cats')
         key=self.param('key')
+        image_link=self.param('image_link')
         if self.param('publish')!='':
             published=True
         elif self.param('unpublish')!='':
@@ -443,6 +444,7 @@ class admin_entry(base.BaseRequestHandler):
                          'allow_comment':allow_comment,
                          'allow_trackback':allow_trackback,
                         'slug':entry_slug,
+                        'image_link':image_link,
                         'entry_parent':entry_parent,
                         'excerpt':entry_excerpt,
                         'menu_order':menu_order,
@@ -466,6 +468,7 @@ class admin_entry(base.BaseRequestHandler):
                 entry.menu_order=menu_order
                 entry.excerpt=entry_excerpt
                 entry.is_external_page=is_external_page
+                entry.image_link=image_link
                 entry.target=target
                 entry.external_page_address=external_page_address
                 newcates=[]
@@ -500,6 +503,7 @@ class admin_entry(base.BaseRequestHandler):
                 try:
                     entry=Entry.get(key)
                     entry.title=title
+                    entry.image_link=image_link
                     entry.content=content
                     entry.slug=entry_slug.replace(' ','-')
                     entry.entry_parent=entry_parent

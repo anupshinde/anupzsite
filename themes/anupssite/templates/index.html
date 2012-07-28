@@ -9,9 +9,6 @@
 		<div class="border-top indent-top5-1 indent-bottom11 ">
 
 		<div class="wrapper">
-
-
-
 			<div class="extra-wrap">
 
 				<p class="font-1">
@@ -20,28 +17,51 @@
 				</a>
 				</p>
 
-				<h6><p class="topMeta">by {{entry.author_name}} on {{entry.date|datetz:"F jS, Y"}}
-				
+				<h6><p class="font_author">by 
+				<b>{{entry.author_name}}</b>
+				on {{entry.date|datetz:"F jS, Y"}}
 				{% if entry.categories %}
 					, under 
-					{%for cate in entry.categories%} 
-					<a href="/category/{{cate.slug}}" class="link">
-					{{cate.name}}
-					</a> 
+					<i>
+					{%for cate in entry.categories%}
+					
+						{% if forloop.counter0 != 0 %}
+							,
+						{% endif %}
+						<a href="/category/{{cate.slug}}">
+						{{cate.name}}
+						</a> 
 					{%endfor%}
+					</i>
 				{% endif %}
+				<br/>
+				{% if entry.strtags %}
+					{%for tag in entry.tags%}
+					<a href="/tag/{{tag|urlencode}}">#{{tag}}</a> 
+					{%endfor%}
+					&nbsp;&nbsp;  | &nbsp; &nbsp;
+				{%endif%}
+				<a class="font_comments" href="{{entry.link}}#disqus_thread">Comments</a>
 				
-				</p></h6>
-
+				</p>
+				
+				<p class="font_comments">
+				</p>
+				</h6>
+				
+				
 			</div>
 			<figure class="img-indent5 img-indent-none-ml">
 
-				<img src="http://localhost:8086/media/ag1kZXZ-YW51cHNibG9ncgsLEgVNZWRpYRhmDA/iteration_burndown.PNG?a=download" width="150" height="150" alt="{{entry.title}} logo">
+				<img src="{{ entry.image_link }}" width="150" height="150" alt="{{entry.title}} logo">
 
 			</figure>
 			<p class="p4">{{entry.content_excerpt|safe}}</p>
 
+
+			
 		</div>
+
 		<div class="extra-wrap">
 		{% include "share.html" %}
 		</div>
@@ -58,9 +78,6 @@
 
 	{% endif %}
 
-
-
-
 </div>
 
 
@@ -73,6 +90,9 @@
 <div class="alignright">{% if show_prev %}<a href="/page/{{ pageindex|add:"-1" }}">Newer Entries &raquo;</a>{%endif%}</div>
 <div class="cleared"></div>
 </div>
+
+{% include "disqus_comment_count.html" %}
+
 	
 {% endblock %}
 
