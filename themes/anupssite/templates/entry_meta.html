@@ -1,0 +1,30 @@
+
+<h6><p class="font_author">by 
+<b>{{entry.author_name}}</b>
+on {{entry.date|datetz:"F jS, Y"}}
+{% if entry.categories %}
+	, under 
+	<i>
+	{%for cate in entry.categories%}
+	
+		{% if forloop.counter0 != 0 %}
+			,
+		{% endif %}
+		<a href="/category/{{cate.slug}}">
+		{{cate.name}}
+		</a> 
+	{%endfor%}
+	</i>
+{% endif %}
+<br/>
+{% if entry.strtags %}
+	{%for tag in entry.tags%}
+	<a href="/tag/{{tag|urlencode}}">#{{tag}}</a> 
+	{%endfor%}
+	&nbsp;&nbsp;  | &nbsp; &nbsp;
+{%endif%}
+<a class="font_comments" href="{{entry.link}}#disqus_thread">Comments</a>
+
+</p>
+</h6>
+

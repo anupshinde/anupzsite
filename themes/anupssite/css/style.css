@@ -124,8 +124,8 @@ p, .p3-1{margin-bottom:18px}
 .indent-left3-1{padding-left:18px;}
 .indent-bottom6{padding-bottom:30px;}
 .indent-bottom9{padding-bottom:45px;}
-.indent-bottom11{padding-bottom:55px;}
-.indent-bottom12{padding-bottom:60px;}
+.indent-bottom11{padding-bottom:25px;}
+.indent-bottom12{padding-bottom:30px;}
 /*-- Map ----*/
 #map iframe{width:310px; height:344px; float:left; margin-right:25px;}
 #map dl{width:100%; position:relative; overflow:hidden; margin-bottom:19px;}
@@ -199,6 +199,10 @@ margin-bottom: 15px;
 
 .font_author {
 font: 12px/18px "Lucida Grande", Arial, sans-serif;
+border-bottom: 1px solid #EBEBEB;
+border-top: 1px solid #EBEBEB;
+background: #F8F8F8;
+padding-left: 5px;
 }
 
 .font_comments {

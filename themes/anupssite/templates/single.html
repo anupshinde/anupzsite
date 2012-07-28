@@ -14,28 +14,13 @@
 			{{entry.title}}
 		</a>
 		</p>
-
-		<h6><p class="topMeta">by {{entry.author_name}} on {{entry.date|datetz:"F jS, Y"}}
-		
-		{% if entry.categories %}
-			, under 
-			{%for cate in entry.categories%} 
-			<a href="/category/{{cate.slug}}" class="link">
-			{{cate.name}}
-			</a> 
-			{%endfor%}
-		{% endif %}
-		
-		</p></h6>
+		{% include "entry_meta.html" %}
 	</div>
 	<div class="topContent">
 	{%mf entry_content %}
 	{{ entry.content|safe }}
 	{%endmf%}	
 	</div>
-	<div class="cleared"></div>
-	<div class="cleared"></div>
-	{% if entry.strtags %}<span class="topTags">{%for tag in entry.tags%}<a href="/tag/{{tag|urlencode}}">{{tag}}</a> {%endfor%}</span>{%endif%}
 	<div class="cleared"></div>
 </div> <!-- Closes topPost -->
 <br/><small>{%if self.is_admin%}<a href="{{entry.edit_url|safe}}">Edit</a>{%endif%}</small>
