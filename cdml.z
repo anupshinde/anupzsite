@@ -1,9 +1,43 @@
-application: yourappname
+application: appname
 version: 1
 runtime: python
 api_version: 1
 
 handlers:
+
+############################### OLD ARTICLES - YAML - START ############################################################
+- url: /index\.htm
+  static_files: old_site/index.htm
+  upload: /old_site/index\.htm
+
+- url: /images
+  static_dir: old_site/images
+
+- url: /menu
+  static_dir: old_site/menu
+
+# Adding exceptions for the existing links -- not found errors are pretty high 
+
+- url: /Articles/(.*)/
+  script: old_site.py
+
+- url: /articles/(.*)/
+  script: old_site.py
+
+  
+# End of adding exceptions
+
+- url: /Articles
+  static_dir: old_site/Articles
+  
+- url: /old
+  script: old_site.py
+
+- url: /old/.*
+  script: old_site.py
+
+############################### OLD ARTICLES - YAML - END ############################################################
+
 - url: /favicon\.ico
   static_files: static/images/favicon.ico
   upload: static/images/favicon.ico
@@ -51,7 +85,6 @@ handlers:
 - url: /remote_api
   script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
   login: admin
-
+    
 - url: /.*
   script: blog.py
-
