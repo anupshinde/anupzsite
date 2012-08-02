@@ -79,7 +79,13 @@
 		<link rel="stylesheet" href="css/ie.css"> 
 
 	<![endif]-->
-
+	<link href="/themes/{{ blog.theme_name }}/prettify/prettify.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="/themes/{{ blog.theme_name }}/prettify/prettify.js"></script>
+	<script>
+		$(window).load(function(){
+			prettyPrint();
+		})
+	</script>
 	<script type="text/javascript">
 
 	  var _gaq = _gaq || [];
@@ -94,9 +100,13 @@
 	  })();
 
 	</script>
+	
+	<style>
+	pre.prettyprint { padding: 2px; border: 1px solid #888; word-wrap: break-word }
+	</style>
 </head>
 
-<body>
+<body onload="prettyPrint();">
 
 	<div class="container_24">
 

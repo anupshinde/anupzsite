@@ -16,6 +16,13 @@
 		</p>
 		{% include "entry_meta.html" %}
 	</div>
+	{% if entry.image_link != "" %}
+	<figure class="img-indent5 img-indent-none-ml">
+
+		<img src="{{ entry.image_link }}" width="150" height="150" alt="{{entry.title}} logo">
+
+	</figure>
+	{% endif %}
 	<div class="topContent">
 	{%mf entry_content %}
 	{{ entry.content|safe }}

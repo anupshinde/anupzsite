@@ -173,7 +173,7 @@ footer{
 	#map dl{width:100%; margin-bottom:20px; float:none; margin-right:0;}
 }
 
-#footer_bottom { clear:both; text-align:center; }
+#footer_bottom { clear:both; text-align:left; }
 .alignright { float:right; margin:0 0 10px 10px; }
 .aligncenter { text-align:center; float:center; margin:0 0 10px 10px; }
 .ad_center { text-align:center; }
@@ -207,4 +207,9 @@ padding-left: 5px;
 
 .font_comments {
 font: bold 13px/19px Arial, Helvetica, sans-serif;
+}
+
+.header_soc_icons {
+	width: 32px;
+	height: 32 px;
 }
