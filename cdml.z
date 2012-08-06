@@ -27,7 +27,35 @@ handlers:
   
 # End of adding exceptions
 
+# Redirectors to new site
+
+- url: /Articles/GMan/index.html
+  script: old_site_redirect.py
+  
+- url: /Articles/WordInDotnet/index.html
+  script: old_site_redirect.py
+  
+- url: /Articles/OnionRouting/index.html
+  script: old_site_redirect.py
+  
+- url: /Articles/Hacking-The-World/Geo-locate-Emails/index.html
+  script: old_site_redirect.py
+  
+- url: /Articles/Hacking-The-World/Forcing-Mail-Receipts/index.html
+  script: old_site_redirect.py
+  
+- url: /Articles/quaked/index.html
+  script: old_site_redirect.py
+  
+- url: /Articles/LatentSemanticIndexing/Part1/index.html
+  script: old_site_redirect.py
+  
+# End of redirectors
+
 - url: /Articles
+  static_dir: old_site/Articles
+  
+- url: /OLDArticles
   static_dir: old_site/Articles
   
 - url: /old
