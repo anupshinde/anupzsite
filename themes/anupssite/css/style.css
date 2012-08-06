@@ -192,6 +192,12 @@ p {
 	background: none;
 }
 
+.pagination  li {
+	margin-bottom: 0px;
+	padding-left:0px;
+	background: none;
+}
+
 li{
 	font-family: Georgia, Times, Times New Roman, serif;
 	font-size: 13px;

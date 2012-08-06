@@ -11,7 +11,7 @@ class MainHandler(webapp.RequestHandler):
 
 class OLDLinkRedirectHandler(webapp.RequestHandler):
     def get(self):
-			self.redirect(self.request.url+"index.html2")
+			self.redirect(self.request.url+"index.html")
 
 class OLDLinkRedirectHandler2(webapp.RequestHandler):
     def get(self):
