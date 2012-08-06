@@ -219,3 +219,8 @@ font: bold 13px/19px Arial, Helvetica, sans-serif;
 	width: 32px;
 	height: 32 px;
 }
+
+.doScroll {
+	overflow: auto;
+	word-wrap: normal;
+}
