@@ -222,5 +222,5 @@ font: bold 13px/19px Arial, Helvetica, sans-serif;
 
 .doScroll {
 	overflow: auto;
-	word-wrap: normal;
+	word-wrap: normal !important;
 }
