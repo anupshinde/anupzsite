@@ -179,20 +179,26 @@ footer{
 .ad_center { text-align:center; }
 .list_header{font-weight:bold; color:#646464;}
 
-p {
-padding: 7px 0 0 0;
-font-family: Georgia, Times, Times New Roman, serif;
-font-size: 13px;
-}
 
 p {
-font-family: Georgia, Times, Times New Roman, serif;
-font-size: 15px;
-line-height: 22px;
-text-indent: -0.025em;
-margin-bottom: 15px;
+	font-family: Georgia, Times, Times New Roman, serif;
+	font-size: 15px;
+	line-height: 22px;
+	text-indent: -0.025em;
+	margin-bottom: 15px;
 }
 
+.menu li {
+	background: none;
+}
+
+li{
+	font-family: Georgia, Times, Times New Roman, serif;
+	font-size: 13px;
+	margin-bottom: 5px;
+	padding-left:13px;
+	background:url(../images/marker-2.png) 0 5px no-repeat;
+}
 .font-1 a {
   color:#1A1A1A;
 }
