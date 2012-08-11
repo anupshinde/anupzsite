@@ -15,6 +15,9 @@
 	{%endmf%}
 	</div>
 	<div class="cleared"></div>
+	<div class="extra-wrap">
+	{% include "share.html" %}
+	</div>
 </div> <!-- Closes topPost -->
 <br/><small>{%if self.is_admin%}<a href="{{entry.edit_url|safe}}">Edit</a>{%endif%}</small>
 
