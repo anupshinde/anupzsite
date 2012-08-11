@@ -1,6 +1,11 @@
+{% if entry.image_link != "" %}
+<meta property="og:image" content="{{ entry.image_link }}" />
+{% else %}
+<meta property="og:image" content="{{ blog.baseurl }}/themes/{{ blog.theme_name }}/images/logo.png" />
+{% endif %}
+
 <meta property="og:title" content="{{ entry.title }}" />
 <meta property="og:type" content="blog" />
 <meta property="og:url" content="{{ blog.baseurl }}/{{ entry.link }}" />
-<meta property="og:image" content="{{ blog.baseurl }}/themes/{{ blog.theme_name }}/images/logo.png" />
 <meta property="og:site_name" content="{{ blog.title}}" />
 <xxxxxmeta property="og:description" content="{{ entry.title }}" />
