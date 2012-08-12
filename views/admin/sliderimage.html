@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block h_message %}
+  {%if postback%}
+    <div class="info {%if not result%}error{%endif%}">{{msg|safe}}</div>
+  {%endif%}
+{% endblock %}
+ {% block content %}
+<form action="/admin/sliderimage" method="post" id="addsliderimage" name="addsliderimage">
+   <div class="wrap">
+      <h2>{%ifequal action 'edit'%}{%trans "Edit Slider"%}{%else%}{%trans "Add Slider"%} {%endifequal%}</h2>
+      <div id="poststuff">
+
+<div id="submitsliderimage" class="submitbox">
+
+<div id="previewview">
+</div>
+
+<div class="inside">
+<p>&nbsp;</p>
+</div>
+
+<p class="submit">
+<input type="submit" tabindex="4" value="{% trans "Save"%}" name="save" class="button button-highlighted"/>
+</p>
+
+<div class="side-info">
+<h5>{%trans "Related"%}</h5>
+
+<ul>
+<li><a href="/admin/sliderimages">{%trans "Manage All Sliders"%}</a></li>
+
+
+</ul>
+</div>
+</div>
+
+<div id="post-body">
+
+<div class="stuffbox" id="titlediv">
+<h3>{%trans "Title"%}</h3>
+<div class="inside">
+	<input type="text" id="sliderimage_title" value="{{sliderimage.title}}" tabindex="1" size="30" name="sliderimage_title"/><br/>
+	{%trans "Example: Quake.D"%}</div>
+</div>
+
+<div class="stuffbox" id="subtitlediv">
+<h3>{%trans "Sub title"%}</h3>
+<div class="inside">
+	<textarea type="text" id="sliderimage_subtitle"  tabindex="1" size="30" name="sliderimage_subtitle" rows ="5" cols="100">{{sliderimage.subtitle}}</textarea><br/>
+	{%trans "Example: Modifying Quake 3 - Another approach" %}</div>
+</div>
+
+<div class="stuffbox" id="posthrefdiv">
+<h3>{%trans "Post link/href"%}</h3>
+<div class="inside">
+	<input type="text" id="sliderimage_posthref" value="{{sliderimage.posthref}}" tabindex="1" size="30" name="sliderimage_posthref"/><br/>
+    {% blocktrans%}Example: <code>http://www.anupshinde.com/modifying-quake-3</code> - don't forget the <code>http://</code>{%endblocktrans%}</div>
+</div>
+
+<div class="stuffbox" id="imagehrefdiv">
+<h3>{%trans "Image link/href"%}</h3>
+<div class="inside">
+	<input type="text" id="sliderimage_imagehref" value="{{sliderimage.imagehref}}" tabindex="1" size="30" name="sliderimage_imagehref"/><br/>
+    {% blocktrans%}Example: <code>http://abc/quake_img.png</code> - don't forget the <code>http://</code>{%endblocktrans%}</div>
+</div>
+
+<div class="stuffbox" id="imagehrefdiv">
+<h3>{%trans "Active"%}</h3>
+<div class="inside">
+	<input type="checkbox" id="sliderimage_active" {% if sliderimage.active %} checked="checked" {%endif%}  tabindex="1" size="30" name="sliderimage_active"/><br/>
+    </div>
+</div>
+
+<input type="hidden" value="{{sliderimage.key.id}}" name="id"/>
+<input type="hidden" value="{{action}}" name="action"/>
+
+</div>
+</div>
+
+   </div>
+   </form>
+ {% endblock  %}

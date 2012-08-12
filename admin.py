@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import logging
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 from google.appengine.dist import use_library
@@ -624,6 +625,79 @@ class admin_categories(base.BaseRequestHandler):
         finally:
             self.redirect('/admin/categories')
 
+class admin_sliderimages(base.BaseRequestHandler):
+    @base.requires_admin
+    def get(self,slug=None):
+        self.render2('views/admin/sliderimages.html',
+         {
+          'current':'sliderimages',
+          'sliderimages':SliderImage.all()#.filter('linktype =','blogroll')#.order('-createdate')
+          }
+        )
+    @base.requires_admin
+    def post(self):
+        sliderimagecheck= self.request.get_all('sliderimagecheck')
+        for sliderimage_id in sliderimagecheck:
+            kid=int(sliderimage_id)
+            sliderimage_obj=SliderImage.get_by_id(kid)
+            sliderimage_obj.delete()
+        self.redirect('/admin/sliderimages')
+
+class admin_sliderimage(base.BaseRequestHandler):
+    @base.requires_admin
+    def get(self,slug=None):
+        action=self.param("action")
+        vals={'current':'sliderimage'}
+        if action and  action=='edit':
+                try:
+                    action_id=int(self.param('id'))
+                    sliderimage_obj=SliderImage.get_by_id(action_id)
+                    vals.update({'sliderimage':sliderimage_obj})
+                except:
+                    pass
+        else:
+            action='add'
+        vals.update({'action':action})
+
+        self.render2('views/admin/sliderimage.html',vals)
+
+    @base.requires_admin
+    def post(self):
+        action=self.param("action")
+        title=self.param("sliderimage_title")
+        subtitle=self.param("sliderimage_subtitle")
+        posthref=self.param("sliderimage_posthref")
+        imagehref=self.param("sliderimage_imagehref")
+        is_slider_active=self.param("sliderimage_active")=="on"
+        vals={'action':action,'postback':True,'current':'sliderimages'}
+        if not (title and imagehref):
+            vals.update({'result':False,'msg':_('Please input title and image link.')})
+            self.render2('views/admin/sliderimage.html',vals)
+        else:
+            if action=='add':
+               simg= SliderImage(title=title, subtitle=subtitle, posthref=posthref, imagehref=imagehref, active=is_slider_active)
+               simg.put()
+               vals.update({'result':True,'msg':'Saved ok'})
+               self.render2('views/admin/sliderimage.html',vals)
+            elif action=='edit':
+                try:
+                    action_id=int(self.param('id'))
+                    simg=SliderImage.get_by_id(action_id)
+                    simg.title = title
+                    simg.subtitle=subtitle
+                    simg.posthref=posthref
+                    simg.imagehref=imagehref
+                    simg.active=is_slider_active
+                    simg.put()
+                    #goto link manage page
+                    self.redirect('/admin/sliderimages')
+
+                except  Exception, err:
+                    logging.error(err);
+                    vals.update({'result':False,'msg':_('Error:Slider can''t been saved.')})
+                    self.render2('views/admin/sliderimage.html',vals)
+
+
 class admin_comments(base.BaseRequestHandler):
     @base.requires_admin
     def get(self,slug=None):
@@ -1093,6 +1167,8 @@ def main():
                     ('/admin/setup',admin_setup),
                     ('/admin/entries/(post|page)',admin_entries),
                     ('/admin/links',admin_links),
+                    ('/admin/sliderimages',admin_sliderimages),
+                    ('/admin/sliderimage',admin_sliderimage),
                     ('/admin/categories',admin_categories),
                     ('/admin/comments',admin_comments),
                     ('/admin/link',admin_link),

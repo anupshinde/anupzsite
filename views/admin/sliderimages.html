@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load i18n %}
+ {% block content %}
+ <form action="/admin/sliderimages" method="post" >
+   <div class="wrap">
+
+      <h2>{% trans "Manage Slider Images" %} (<a href="/admin/sliderimage?action=add">{%trans "add new"%}</a>)</h2>
+      <div class="clear"></div>
+
+	   <div class="tablenav">
+		  <div class="alignleft">
+		  <input type="submit" class="button-secondary delete" name="deleteit" value="{% trans "Delete"%}"/>
+		  </div>
+		<br class="clear"/>
+	   </div>
+	  <br class="clear"/>
+
+	   <table class="widefat">
+		<thead>
+			<tr>
+			<th class="check-column" scope="col"><input type="checkbox" onclick="$('input[name=sliderimagecheck]').attr('checked',this.checked);"/></th>
+		<th style="width: 15%;">{%trans "Title"%}</th>
+		<th>{%trans "Subtitle"%}</th>
+		<th>{%trans "Post link"%}</th>
+		<th>{%trans "Image"%}</th>
+			</tr>
+			</thead>
+			<tbody>
+            {%for sliderimage in sliderimages%}
+		<tr valign="middle" id="sliderimage-{{sliderimage.key.id}}">
+			<th class="check-column" scope="row"><input type="checkbox" value="{{sliderimage.key.id}}" name="sliderimagecheck"/></th>
+			<td><strong><a class="row-title" title='Edit "{{sliderimage.title}}"' href="/admin/sliderimage?id={{sliderimage.key.id}}&amp;action=edit">{{sliderimage.title}}</a></strong><br/></td>
+			<td>{{sliderimage.subtitle}}</td>
+			<td><a title="Visit {{sliderimage.title}}" href="{{sliderimage.posthref}}">{{sliderimage.posthref}}</a></td>
+			<td><a href="{{sliderimage.imagehref}}"><img width="250px" height="100px" src="{{sliderimage.imagehref}}" alt="{{sliderimage.title}} - image" ></img></a></td>
+		</tr>
+			{%endfor%}
+			</tbody>
+		</table>
+
+   </div>
+</form>
+ {% endblock  %}

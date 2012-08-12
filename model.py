@@ -787,6 +787,16 @@ class Media(db.Model):
     def size(self):
         return len(self.bits)
 
+class SliderImage(db.Model):
+    title = db.StringProperty(default='')
+    subtitle = db.StringProperty(default='', multiline=True)
+    posthref = db.StringProperty(default='')	# hrefs could be absolute or relative - donot use linkproperty
+    imagehref = db.StringProperty(default='') # hrefs could be absolute or relative - donot use linkproperty
+    createdate=db.DateTimeProperty(auto_now=True)
+    active=db.BooleanProperty(default=True)
+    order=db.IntegerProperty(default=999) #Order ascending - ranking
+
+
 class OptionSet(db.Model):
     name=db.StringProperty()
     value=db.TextProperty()
