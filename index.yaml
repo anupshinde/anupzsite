@@ -181,3 +181,8 @@ indexes:
   properties:
   - name: mtype
   - name: date
+
+- kind: SliderImage
+  properties:
+  - name: active
+  - name: order
