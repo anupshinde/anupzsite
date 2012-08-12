@@ -49,17 +49,17 @@ function navigateto(url) {
 		<div class="slide">
 			<img src="{{ simg.imagehref }}" alt="{{ simg.title }} - image" onclick="navigateto('{{ simg.posthref }}');">
 
-<a href="{{ simg.posthref }}">
 			<div class="caption">
-				<div class="text">
-					
-					<h3>{{ simg.title }}</h3>
+				<a href="{{ simg.posthref }}">
+					<div class="text">
+						
+						<h3>{{ simg.title }}</h3>
 
-					{{ simg.subtitle|safe }}
-					
-				</div>
+						{{ simg.subtitle|safe }}
+						
+					</div>
+				</a>
 			</div>
-</a>
 		</div>
 		{% endfor %}
 

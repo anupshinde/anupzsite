@@ -53,6 +53,9 @@
 	color:#a5a5a5;
 	text-align:center;
 }
+	.caption a {
+		color:#a5a5a5;
+	}
 	.caption .text{
 		position:absolute;
 		top:0;
