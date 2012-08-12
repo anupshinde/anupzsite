@@ -24,6 +24,7 @@
 		<th>{%trans "Post link"%}</th>
 		<th>{%trans "Image"%}</th>
 		<th>{%trans "Active/Inactive"%}</th>
+		<th>&nbsp;</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -35,6 +36,11 @@
 			<td><a title="Visit {{sliderimage.title}}" href="{{sliderimage.posthref}}">{{sliderimage.posthref}}</a></td>
 			<td><a href="{{sliderimage.imagehref}}"><img width="250px" height="100px" src="{{sliderimage.imagehref}}" alt="{{sliderimage.title}} - image" ></img></a></td>
 			<td>{% if sliderimage.active %} {%trans "Active"%} {%else%} {%trans "Inactive"%} {%endif%}</td>
+			<td>
+				<a href="/admin/sliderimages?action=up&id={{sliderimage.key.id}}">Up</a> / 
+				<a href="/admin/sliderimages?action=down&id={{sliderimage.key.id}}">Down</a>
+				<p>{{sliderimage.order}}</p>
+			</td>
 		</tr>
 			{%endfor%}
 			</tbody>

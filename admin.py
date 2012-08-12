@@ -41,15 +41,15 @@ class setlanguage(base.BaseRequestHandler):
             g_blog.save()
         self.redirect(next)
 
-##			if hasattr(request, 'session'):
-##				request.session['django_language'] = lang_code
-##			else:
+##            if hasattr(request, 'session'):
+##                request.session['django_language'] = lang_code
+##            else:
 
-##			cookiestr='django_language=%s;expires=%s;domain=%s;path=/'%( lang_code,
-##					   (datetime.now()+timedelta(days=100)).strftime("%a, %d-%b-%Y %H:%M:%S GMT"),
-##					   ''
-##					   )
-##			self.write(cookiestr)
+##            cookiestr='django_language=%s;expires=%s;domain=%s;path=/'%( lang_code,
+##                       (datetime.now()+timedelta(days=100)).strftime("%a, %d-%b-%Y %H:%M:%S GMT"),
+##                       ''
+##                       )
+##            self.write(cookiestr)
 
 ##          self.response.headers.add_header('Set-Cookie', cookiestr)
 
@@ -294,41 +294,41 @@ class admin_import(base.BaseRequestHandler):
         self.render2('views/admin/import.html',{'importitems':
             self.blog.plugins.filter('is_import_plugin',True)})
 
-##	def post(self):
-##		try:
-##			queue=taskqueue.Queue("import")
-##			wpfile=self.param('wpfile')
-##			#global imt
-##			imt=import_wordpress(wpfile)
-##			imt.parse()
-##			memcache.set("imt",imt)
+##    def post(self):
+##        try:
+##            queue=taskqueue.Queue("import")
+##            wpfile=self.param('wpfile')
+##            #global imt
+##            imt=import_wordpress(wpfile)
+##            imt.parse()
+##            memcache.set("imt",imt)
 ##
-####			import_data=OptionSet.get_or_insert(key_name="import_data")
-####			import_data.name="import_data"
-####			import_data.bigvalue=pickle.dumps(imt)
-####			import_data.put()
+####            import_data=OptionSet.get_or_insert(key_name="import_data")
+####            import_data.name="import_data"
+####            import_data.bigvalue=pickle.dumps(imt)
+####            import_data.put()
 ##
-##			queue.add(taskqueue.Task( url="/admin/import_next"))
-##			self.render2('views/admin/import.html',
-##						{'postback':True})
-##			return
-##			memcache.set("import_info",{'count':len(imt.entries),'msg':'Begin import...','index':1})
-##			#self.blog.import_info={'count':len(imt.entries),'msg':'Begin import...','index':1}
-##			if imt.categories:
-##				queue.add(taskqueue.Task( url="/admin/import_next",params={'cats': pickle.dumps(imt.categories),'index':1}))
+##            queue.add(taskqueue.Task( url="/admin/import_next"))
+##            self.render2('views/admin/import.html',
+##                        {'postback':True})
+##            return
+##            memcache.set("import_info",{'count':len(imt.entries),'msg':'Begin import...','index':1})
+##            #self.blog.import_info={'count':len(imt.entries),'msg':'Begin import...','index':1}
+##            if imt.categories:
+##                queue.add(taskqueue.Task( url="/admin/import_next",params={'cats': pickle.dumps(imt.categories),'index':1}))
 ##
-##			return
-##			index=0
-##			if imt.entries:
-##				for entry in imt.entries :
-##					try:
-##						index=index+1
-##						queue.add(taskqueue.Task(url="/admin/import_next",params={'entry':pickle.dumps(entry),'index':index}))
-##					except:
-##						pass
+##            return
+##            index=0
+##            if imt.entries:
+##                for entry in imt.entries :
+##                    try:
+##                        index=index+1
+##                        queue.add(taskqueue.Task(url="/admin/import_next",params={'entry':pickle.dumps(entry),'index':index}))
+##                    except:
+##                        pass
 ##
-##		except:
-##			self.render2('views/admin/import.html',{'error':'import faiure.'})
+##        except:
+##            self.render2('views/admin/import.html',{'error':'import faiure.'})
 
 class admin_setup(base.BaseRequestHandler):
     def __init__(self):
@@ -627,11 +627,50 @@ class admin_categories(base.BaseRequestHandler):
 
 class admin_sliderimages(base.BaseRequestHandler):
     @base.requires_admin
+
+    def getImg2ForOrdering(self,  filter, simg, sort):
+        simg2=None
+        results=SliderImage.all().filter(filter,simg.order).order(sort).fetch(2) # this is frustrating - Inequality Filters Are Allowed on One Property Only
+        for o in results:
+            if o.key().id != simg.key().id:
+                simg2=o
+                break
+        return simg2
+        
     def get(self,slug=None):
+        action = self.param("action")
+        action_id=self.param('id')
+        if(action_id is not None and action_id != ""):
+            new_order = -1
+            simg=SliderImage.get_by_id(int(action_id))
+            if action=="up":
+                simg2=self.getImg2ForOrdering('order <',simg, '-order')
+                if(simg2 is not None):
+                    if(simg2.order==new_order):
+                        new_order-=1
+                    new_order = simg2.order
+                    simg2.order = simg.order
+                    simg.order = new_order                    
+                    simg.put()
+                    simg2.put()
+            elif action=="down":
+                simg2=self.getImg2ForOrdering('order >',simg, 'order')
+                if(simg2 is not None):
+                    if(simg2.order==new_order):
+                        new_order+=1
+                    new_order = simg2.order
+                    simg2.order = simg.order
+                    simg.order = new_order                    
+                    simg.put()
+                    simg2.put()
+                    
+            if action!="":
+                self.redirect('/admin/sliderimages')
+
         self.render2('views/admin/sliderimages.html',
          {
           'current':'sliderimages',
-          'sliderimages':SliderImage.all()#.filter('linktype =','blogroll')#.order('-createdate')
+          'sliderimages':SliderImage.all().order('order')#.filter('linktype =','blogroll')#.order('-createdate')
           }
         )
     @base.requires_admin
@@ -965,7 +1004,7 @@ class admin_author(base.BaseRequestHandler):
             self.render2('views/admin/author.html',vals)
         else:
             if action=='add':
-               author= User(dispname=name,email=slug	)
+               author= User(dispname=name,email=slug    )
                author.user=db.users.User(slug)
                author.put()
                vals.update({'result':True,'msg':'Saved ok'})

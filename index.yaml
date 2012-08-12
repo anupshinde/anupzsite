@@ -186,3 +186,36 @@ indexes:
   properties:
   - name: active
   - name: order
+
+- kind: SliderImage
+  properties:
+  - name: key.id!=
+  - name: order<=
+  - name: order
+
+- kind: SliderImage
+  properties:
+  - name: key.ids!=
+  - name: order<=
+  - name: order
+
+- kind: SliderImage
+  properties:
+  - name: order!=
+  - name: order<=
+  - name: order
+
+- kind: SliderImage
+  properties:
+  - name: order<
+  - name: order
+
+- kind: SliderImage
+  properties:
+  - name: order<=
+  - name: order
+
+- kind: SliderImage
+  properties:
+  - name: order>=
+  - name: order
