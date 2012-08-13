@@ -16,6 +16,10 @@
 <meta name="msapplication-window" content="width=1024;height=768" />
 <meta name="msapplication-navbutton-color" content="black" />
 
+{% block metatag_desc_kw_block %}
+<meta name="description" content="{{ blog.subtitle}}">
+<meta name ="keywords" content="{{blog.title}}">
+{% endblock %}
 
 {% block meta_og_block %}
 	<meta property="og:title" content="{{ blog.title }}" />

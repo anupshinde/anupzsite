@@ -415,6 +415,7 @@ class admin_entry(base.BaseRequestHandler):
         tags=self.param("tags")
         cats=self.request.get_all('cats')
         key=self.param('key')
+        meta_keywords=self.param('meta_keywords')
         image_link=self.param('image_link')
         if self.param('publish')!='':
             published=True
@@ -457,6 +458,7 @@ class admin_entry(base.BaseRequestHandler):
                         'password':password,
                         'show_shareaholic':show_shareaholic,
                         'show_entrymeta':show_entrymeta,
+                        'meta_keywords':meta_keywords,
                         'sticky':sticky}
               }
 
@@ -485,6 +487,7 @@ class admin_entry(base.BaseRequestHandler):
                 entry.sticky=sticky
                 entry.ShowShareaholic=show_shareaholic
                 entry.ShowEntryMeta=show_entrymeta
+                entry.metaKeywords=meta_keywords
                 if cats:
 
                     for cate in cats:
@@ -526,6 +529,7 @@ class admin_entry(base.BaseRequestHandler):
                     entry.ShowShareaholic=show_shareaholic
                     entry.ShowEntryMeta=show_entrymeta
                     entry.sticky=sticky
+                    entry.metaKeywords=meta_keywords
                     newcates=[]
 
                     if cats:

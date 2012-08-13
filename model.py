@@ -378,6 +378,7 @@ class Entry(BaseModel):
     date = db.DateTimeProperty(auto_now_add=True)
     mod_date = db.DateTimeProperty(auto_now_add=True)
     tags = db.StringListProperty()
+    metaKeywords = db.StringProperty(default='')
     categorie_keys=db.ListProperty(db.Key)
     slug = db.StringProperty(default='')
     link= db.StringProperty(default='')

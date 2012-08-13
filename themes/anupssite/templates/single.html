@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% block title %} {{entry.title}} - {{blog.title}} {% endblock %}
 
+{% block metatag_desc_kw_block %}
+{% include "metatag_entry_desc_kw.html" %}	
+{% endblock %}
+
 {% block meta_og_block %}
 	{% include "meta_og.html" %}	
 {% endblock %}
