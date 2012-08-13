@@ -640,29 +640,29 @@ class admin_sliderimages(base.BaseRequestHandler):
     def get(self,slug=None):
         action = self.param("action")
         action_id=self.param('id')
+        toadd=0
         if(action_id is not None and action_id != ""):
             new_order = -1
             simg=SliderImage.get_by_id(int(action_id))
             if action=="up":
+                toadd=-1
                 simg2=self.getImg2ForOrdering('order <',simg, '-order')
-                if(simg2 is not None):
-                    if(simg2.order==new_order):
-                        new_order-=1
-                    new_order = simg2.order
-                    simg2.order = simg.order
-                    simg.order = new_order                    
-                    simg.put()
-                    simg2.put()
             elif action=="down":
+                toadd=1
                 simg2=self.getImg2ForOrdering('order >',simg, 'order')
-                if(simg2 is not None):
-                    if(simg2.order==new_order):
-                        new_order+=1
+
+            #not the best way - may not be well written code- but it works for time being since the default value will cause ordering conflicts
+			#-- update - have changed the add method to auto-increment number - this will not create ambiguous Order values - still keeping the code below
+			
+            if new_order==-1:
+                if simg2 is not None and simg.order != simg2.order:
                     new_order = simg2.order
                     simg2.order = simg.order
-                    simg.order = new_order                    
-                    simg.put()
                     simg2.put()
+                else:
+                    new_order=simg.order+toadd
+                simg.order = new_order                    
+                simg.put()
                     
             if action!="":
                 self.redirect('/admin/sliderimages')
@@ -715,6 +715,7 @@ class admin_sliderimage(base.BaseRequestHandler):
         else:
             if action=='add':
                simg= SliderImage(title=title, subtitle=subtitle, posthref=posthref, imagehref=imagehref, active=is_slider_active)
+               simg.order = SliderImage.all().order('-order').get().order+1
                simg.put()
                vals.update({'result':True,'msg':'Saved ok'})
                self.render2('views/admin/sliderimage.html',vals)
