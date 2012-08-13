@@ -11,11 +11,11 @@
 		<div class="wrapper">
 			<div class="extra-wrap">
 
-				<p class="font-1">
+				<h2 class="font-1">
 				<a href="/{{ entry.link }}" title="Permanent Link to {{entry.title}}">
 					{{entry.title}}
 				</a>
-				</p>
+				</h2>
 
 				{% include "entry_meta.html" %}
 				
@@ -27,8 +27,9 @@
 
 			</figure>
 			{% endif %}
-			<p class="p4">{{entry.content_excerpt|safe}}</p>
-
+			<div class="excerpt_wrapper">
+			<h3>{{entry.content_excerpt|safe}}</h3>
+			</div>
 
 			
 		</div>

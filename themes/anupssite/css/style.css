@@ -10,8 +10,8 @@ body{
 header{width:100%; padding:49px 0 33px;}
 #page1 header{padding:49px 0 0;}
 	header .indent-bottom{padding-bottom:33px;}
-h1{float:left; padding-left:10px;}
-	h1 a{
+header h1{float:left; padding-left:10px;}
+header h1 a{
 		display:block;
 		width:189px;
 		height:63px;
@@ -20,7 +20,7 @@ h1{float:left; padding-left:10px;}
 		text-indent:-999em;
 		white-space:nowrap;
 	}
-		h1 a:hover{text-decoration:none;}
+header h1 a:hover{text-decoration:none;}
 
 /********************************* Content **********************************/
 #content{width:100%;}
@@ -32,7 +32,6 @@ h1{float:left; padding-left:10px;}
 .last-item{margin-right:0 !important; margin-bottom:0 !important;} 
 .bold{font-weight:bold;}
 /* ---------- Tags ---------*/
-h3{font:normal 14px Arial, Helvetica, sans-serif; color:#3c3c3c;}
 h6{font:bold 13px/19px Arial, Helvetica, sans-serif; color:#575757;}
 	h6 a{color:#575757;}
 		h6 a:hover{text-decoration:none; color:#FF3333;}
@@ -210,16 +209,17 @@ li{
   line-height: 1;
 }
 
+
 .font_author {
-font: 12px/18px "Lucida Grande", Arial, sans-serif;
-border-bottom: 1px solid #EBEBEB;
-border-top: 1px solid #EBEBEB;
-background: #F8F8F8;
-padding-left: 5px;
+	font: 12px/18px "Lucida Grande", Arial, sans-serif;
+	border-bottom: 1px solid #EBEBEB;
+	border-top: 1px solid #EBEBEB;
+	background: #F8F8F8;
+	padding-left: 5px;
 }
 
 .font_comments {
-font: bold 13px/19px Arial, Helvetica, sans-serif;
+	font: bold 13px/19px Arial, Helvetica, sans-serif;
 }
 
 .header_soc_icons {
@@ -230,4 +230,18 @@ font: bold 13px/19px Arial, Helvetica, sans-serif;
 .doScroll {
 	overflow: auto;
 	word-wrap: normal !important;
+}
+
+.extra-wrap h2,h1{
+	line-height: 22px;
+	text-indent: -0.025em;
+	margin-bottom: 11px;
+}
+
+.excerpt_wrapper h3 {
+	font-weight: normal;
+	font-family: Georgia, Times, Times New Roman, serif;
+	font-size: 15px;
+	line-height: 22px;
+	text-indent: -0.025em;
 }
