@@ -1,4 +1,4 @@
-
+{% if entry.ShowShareaholic %}
 <div class="shr_class-{{ entry.key }} shareaholic-show-on-load">
 
 </div>
@@ -7,3 +7,4 @@ addToSHRSB_Settings("shr_class-{{ entry.key }}",
 								{"src":"/themes/{{ blog.theme_name }}/images/soc/share","link":"","service":"5,304,88,7,3,309,40,102,38,2","apikey":"0747414f47c2b684cf5480c36b2478689","localize":true,"shortener":"bitly","shortener_key":"","designer_toolTips":true,"tip_bg_color":"black","tip_text_color":"white","twitter_template":"${title} - ${short_link}","title": "{{entry.title}}","link": "{{ blog.baseurl }}/{{ entry.link }}"
 								});
 </script>
+{%endif%}

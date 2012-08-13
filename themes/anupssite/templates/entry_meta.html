@@ -1,4 +1,4 @@
-
+{% if entry.ShowEntryMeta %}
 <h6><p class="font_author">by 
 <b>{{entry.author_name}}</b>
 on {{entry.date|datetz:"F jS, Y"}}
@@ -23,8 +23,12 @@ on {{entry.date|datetz:"F jS, Y"}}
 	{%endfor%}
 	&nbsp;&nbsp;  | &nbsp; &nbsp;
 {%endif%}
+
+{% if entry.allow_comment %}
 <a class="font_comments" href="/{{entry.link}}#disqus_thread">Comments</a>
+{%endif%}
 
 </p>
 </h6>
+{%endif%}
 

@@ -406,6 +406,8 @@ class Entry(BaseModel):
 
     #keep in top
     sticky=db.BooleanProperty(default=False)
+    ShowShareaholic=db.BooleanProperty(default=True)
+    ShowEntryMeta=db.BooleanProperty(default=True)
 
     postname=''
     _relatepost=None

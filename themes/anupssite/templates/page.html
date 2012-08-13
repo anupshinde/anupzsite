@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 {% block title %} {{entry.title}} - {{blog.title}} {% endblock %}
+
+{% block meta_og_block %}
+	{% include "meta_og.html" %}	
+{% endblock %}
+
 {% block content%}
 
 <div id="main">
@@ -8,11 +13,25 @@
 {% if entry %}
 
 <div class="topPost">
-	<h2 class="topTitle"><a href="/{{ entry.link }}">{{entry.title}}</a></h2>
+	<div class="extra-wrap">
+		<p class="font-1">
+		<a href="/{{ entry.link }}" title="Permanent Link to {{entry.title}}">
+			{{entry.title}}
+		</a>
+		</p>
+		{% include "entry_meta.html" %}
+	</div>
+	{% if entry.image_link != "" %}
+	<figure class="img-indent5 img-indent-none-ml">
+
+		<img src="{{ entry.image_link }}" width="150" height="150" alt="{{entry.title}} logo">
+
+	</figure>
+	{% endif %}
 	<div class="topContent">
 	{%mf entry_content %}
 	{{ entry.content|safe }}
-	{%endmf%}
+	{%endmf%}	
 	</div>
 	<div class="cleared"></div>
 	<div class="extra-wrap">

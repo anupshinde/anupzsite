@@ -431,6 +431,8 @@ class admin_entry(base.BaseRequestHandler):
         entry_excerpt=self.param('excerpt').replace('\n','<br />')
         password=self.param('password')
         sticky=self.parambool('sticky')
+        show_shareaholic=self.parambool('show_shareaholic')
+        show_entrymeta=self.parambool('show_entrymeta')
 
         is_external_page=self.parambool('is_external_page')
         target=self.param('target')
@@ -453,6 +455,8 @@ class admin_entry(base.BaseRequestHandler):
                         'target':target,
                         'external_page_address':external_page_address,
                         'password':password,
+                        'show_shareaholic':show_shareaholic,
+                        'show_entrymeta':show_entrymeta,
                         'sticky':sticky}
               }
 
@@ -479,6 +483,8 @@ class admin_entry(base.BaseRequestHandler):
                 entry.author_name=self.author.dispname
                 entry.password=password
                 entry.sticky=sticky
+                entry.ShowShareaholic=show_shareaholic
+                entry.ShowEntryMeta=show_entrymeta
                 if cats:
 
                     for cate in cats:
@@ -517,6 +523,8 @@ class admin_entry(base.BaseRequestHandler):
                     entry.author=self.author.user
                     entry.author_name=self.author.dispname
                     entry.password=password
+                    entry.ShowShareaholic=show_shareaholic
+                    entry.ShowEntryMeta=show_entrymeta
                     entry.sticky=sticky
                     newcates=[]
 
@@ -652,8 +660,8 @@ class admin_sliderimages(base.BaseRequestHandler):
                 simg2=self.getImg2ForOrdering('order >',simg, 'order')
 
             #not the best way - may not be well written code- but it works for time being since the default value will cause ordering conflicts
-			#-- update - have changed the add method to auto-increment number - this will not create ambiguous Order values - still keeping the code below
-			
+            #-- update - have changed the add method to auto-increment number - this will not create ambiguous Order values - still keeping the code below
+            
             if new_order==-1:
                 if simg2 is not None and simg.order != simg2.order:
                     new_order = simg2.order

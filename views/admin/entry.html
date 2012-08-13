@@ -180,9 +180,14 @@
   <p>
 	<input type="checkbox" style="margin-left:10px;" id="sticky" {%if entry.sticky%} checked="checked" {%endif%}  name="sticky"/><label for="sticky">{% trans "Sticky it." %}</label>
 <br>
-  <input type="checkbox" style="margin-left:10px;" tabindex="4" id="allow_comment" name="allow_comment" class="button button-highlighted" {%if entry.allow_comment%}checked="checked"{%endif%} {%if not entry%}checked="checked"{%endif%}/><label for="allow_comment">{% trans "allow comment" %}</label>
+  <input type="checkbox" style="margin-left:10px;" tabindex="4" id="allow_comment" name="allow_comment" class="button button-highlighted" {%if entry.allow_comment%}checked="checked"{%endif%} {%if not entry%}checked="checked"{%endif%}/><label for="allow_comment">{% trans "Allow comment" %}</label>
     <br>
-  <input type="checkbox" style="margin-left:10px;" tabindex="4" id="allow_trackback" name="allow_trackback" class="button button-highlighted"  {%if not blog.allow_trackback%}disabled="disabled"{%else%}{%if entry.allow_trackback%}checked="checked"{%endif%} {%if not entry%}checked="checked"{%endif%} {%endif%} /><label for="allow_trackback">{% trans "allow trackback" %}</label>
+  <input type="checkbox" style="margin-left:10px;" tabindex="4" id="allow_trackback" name="allow_trackback" class="button button-highlighted"  {%if not blog.allow_trackback%}disabled="disabled"{%else%}{%if entry.allow_trackback%}checked="checked"{%endif%} {%if not entry%}checked="checked"{%endif%} {%endif%} /><label for="allow_trackback">{% trans "Allow trackback" %}</label>
+<br>
+	<input type="checkbox" style="margin-left:10px;" id="show_shareaholic" {%if entry.ShowShareaholic%} checked="checked" {%endif%}  name="show_shareaholic"/><label for="show_shareaholic">{% trans "Show Shareaholic" %}</label>
+<br>
+	<input type="checkbox" style="margin-left:10px;" id="show_entrymeta" {%if entry.ShowEntryMeta%} checked="checked" {%endif%}  name="show_entrymeta"/><label for="show_entrymeta">{% trans "Show Entry Meta" %}</label>
+
   </p>
 </div>
 <div class="side-info">
