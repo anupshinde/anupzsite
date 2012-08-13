@@ -429,7 +429,7 @@ class admin_entry(base.BaseRequestHandler):
         entry_slug=self.param('slug')
         entry_parent=self.paramint('entry_parent')
         menu_order=self.paramint('menu_order')
-        entry_excerpt=self.param('excerpt').replace('\n','<br />')
+        entry_excerpt=self.param('excerpt')#.replace('\n','<br />')
         password=self.param('password')
         sticky=self.parambool('sticky')
         show_shareaholic=self.parambool('show_shareaholic')
