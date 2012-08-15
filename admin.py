@@ -721,6 +721,7 @@ class admin_sliderimage(base.BaseRequestHandler):
         imagehref=self.param("sliderimage_imagehref")
         is_slider_active=self.param("sliderimage_active")=="on"
         vals={'action':action,'postback':True,'current':'sliderimages'}
+        target=self.param('linktarget')
         if not (title and imagehref):
             vals.update({'result':False,'msg':_('Please input title and image link.')})
             self.render2('views/admin/sliderimage.html',vals)
@@ -740,6 +741,7 @@ class admin_sliderimage(base.BaseRequestHandler):
                     simg.posthref=posthref
                     simg.imagehref=imagehref
                     simg.active=is_slider_active
+                    simg.target=target
                     simg.put()
                     #goto link manage page
                     self.redirect('/admin/sliderimages')

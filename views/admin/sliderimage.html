@@ -65,6 +65,17 @@
     {% blocktrans%}Example: <code>http://abc/quake_img.png</code> - don't forget the <code>http://</code>{%endblocktrans%}</div>
 </div>
 
+<div class="stuffbox" id="linktargetdiv">
+<h3>{%trans "Link target" %}</h3> 
+{{ entry.target }}
+<div style="padding:5px;" >
+	&nbsp;<input type="radio" name="linktarget" id="linktarget_self" value="_self" {%ifequal sliderimage.target "_self" %} checked="checked"{%endifequal%}><label for="linktarget_self">_self</label>
+	
+	<input type="radio" name="linktarget" id="linktarget_blank" value="_blank" {%ifequal sliderimage.target "_blank" %} checked="checked"{%endifequal%}><label for="linktarget_blank">_blank</label>
+</div>
+</div>
+
+
 <div class="stuffbox" id="imagehrefdiv">
 <h3>{%trans "Active"%}</h3>
 <div class="inside">

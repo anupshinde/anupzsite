@@ -797,6 +797,7 @@ class SliderImage(db.Model):
     imagehref = db.StringProperty(default='') # hrefs could be absolute or relative - donot use linkproperty
     createdate=db.DateTimeProperty(auto_now=True)
     active=db.BooleanProperty(default=True)
+    target=db.StringProperty(default="_self")
     order=db.IntegerProperty(default=999) #Order ascending - ranking
 
 
