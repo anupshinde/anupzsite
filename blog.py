@@ -654,6 +654,32 @@ class ContactMeHandler(BaseRequestHandler):
         
         #self.render('contactme',{})
         self.response.out.write("Thank you!")
+
+class AuthorPreview(BasePublicPage):
+    def get(self):
+        entry_id = self.param("id")
+        self.response.out.write('>>PREVIEW>>')
+        entry=None
+        if entry_id:
+            try:
+                entry_id=int(entry_id)
+                entry = Entry.get_by_id(entry_id)
+            except:
+                return self.error(404)
+        
+        if entry is None:
+            return self.error(404)
+
+        self.entry=entry
+
+        dct = dict(entry=entry, relateposts={}, comments={}, user_name={},
+                             user_email={}, user_url={}, checknum1=random.randint(1, 10),
+                             checknum2=random.randint(1, 10), comments_nav={})
+
+        if entry.entrytype=='post':
+            self.render('single',dct)
+        else:
+            self.render('page',dict)
         
 class CheckCode(BaseRequestHandler):
     def get(self):
@@ -686,6 +712,7 @@ def main():
     webapp.template.register_template_library('app.recurse')
     urls=    [('/media/([^/]*)/{0,1}.*',getMedia),
             ('/checkimg/', CheckImg),
+            ('/author_preview', AuthorPreview),
             ('/contact-me', ContactMeHandler),
             ('/contact-me/', ContactMeHandler),
             ('/checkcode/', CheckCode),
