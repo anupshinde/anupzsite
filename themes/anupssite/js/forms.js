@@ -1,4 +1,4 @@
-//forms
+
 ;(function($){
 	$.fn.forms=function(o){
 		return this.each(function(){
@@ -10,8 +10,8 @@
 					notRequiredCl:'notRequired',
 					successCl:'success',
 					successShow:'4000',
-					mailHandlerURL:'/mailHandler',
-					ownerEmail:'support@anupshinde.com',
+					mailHandlerURL:'/contact-me',
+					ownerEmail:'support@abcshinde.com',
 					stripHTML:true,
 					smtpMailServer:'localhost',
 					targets:'input,textarea',
@@ -105,10 +105,10 @@
 									name:_.getValFromLabel($('.name',_.form)),
 									email:_.getValFromLabel($('.email',_.form)),
 									phone:_.getValFromLabel($('.phone',_.form)),
-									fax:_.getValFromLabel($('.fax',_.form)),
-									state:_.getValFromLabel($('.state',_.form)),
+									//fax:_.getValFromLabel($('.fax',_.form)),
+									//state:_.getValFromLabel($('.state',_.form)),
 									message:_.getValFromLabel($('.message',_.form)),
-									owner_email:_.ownerEmail,
+									//owner_email:_.ownerEmail,
 									stripHTML:_.stripHTML
 								},
 								success: function(){

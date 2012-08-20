@@ -1,3 +1,4 @@
+SHRSB_Settings={}
 $(window).load(function(){
 	(function() {
 		var sb = document.createElement("script"); sb.type = "text/javascript";sb.async = true;

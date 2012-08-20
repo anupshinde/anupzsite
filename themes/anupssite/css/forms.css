@@ -1,4 +1,5 @@
-/***** contact form *****/
+/* contact me form  */
+
 #contact-form {
 	position:relative;
 	vertical-align:top;
@@ -21,7 +22,7 @@
 			#contact-form .area .error {float:none;}
 			#contact-form textarea {
 				height:156px;
-				resize:none;
+				/*resize:none;*/
 				overflow:auto;
 			}
 			#contact-form .success {display:none; margin-bottom:15px;}

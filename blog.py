@@ -17,6 +17,7 @@ from app.gmemsess import Session
 from base import *
 from model import *
 from django.utils.translation import ugettext as _
+from google.appengine.api import mail
 
 ##os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 ##from django.utils.translation import  activate
@@ -108,7 +109,7 @@ class MainPage(BasePublicPage):
         max_page = entrycount / g_blog.posts_per_page + ( entrycount % g_blog.posts_per_page and 1 or 0 )
 
         if page < 1 or page > max_page:
-                return	self.error(404)
+                return    self.error(404)
 
         entries = Entry.all().filter('entrytype =','post').\
                 filter("published =", True).order('-sticky').order('-date').\
@@ -122,7 +123,7 @@ class MainPage(BasePublicPage):
 
         return self.render('index',
                            dict(entries=entries, show_prev=show_prev, show_next=show_next, pageindex=page, ishome=True,
-								pagecount=max_page, postscounts=entrycount, sliderimages=sliderimages))
+                                pagecount=max_page, postscounts=entrycount, sliderimages=sliderimages))
 
 class entriesByCategory(BasePublicPage):
     @cache()
@@ -209,10 +210,10 @@ class SinglePost(BasePublicPage):
 
         comments=entry.get_comments_by_page(mp,self.blog.comments_per_page)
 
-##		commentuser=self.request.cookies.get('comment_user', '')
-##		if commentuser:
-##			commentuser=commentuser.split('#@#')
-##		else:
+##        commentuser=self.request.cookies.get('comment_user', '')
+##        if commentuser:
+##            commentuser=commentuser.split('#@#')
+##        else:
         commentuser=['','','']
 
         comments_nav=self.get_comments_nav(mp,entry.purecomments().count())
@@ -287,19 +288,19 @@ class SinglePost(BasePublicPage):
         #wait for half second in case otherside hasn't been published
         time.sleep(0.5)
 
-##		#also checking the coming url is valid and contains our link
-##		#this is not standard trackback behavior
-##		try:
+##        #also checking the coming url is valid and contains our link
+##        #this is not standard trackback behavior
+##        try:
 ##
-##			result = urlfetch.fetch(coming_url)
-##			if result.status_code != 200 :
-##				#or ((g_blog.baseurl + '/' + slug) not in result.content.decode('ascii','ignore')):
-##				self.response.out.write(error % "probably spam")
-##				return
-##		except Exception, e:
-##			logging.info("urlfetch error")
-##			self.response.out.write(error % "urlfetch error")
-##			return
+##            result = urlfetch.fetch(coming_url)
+##            if result.status_code != 200 :
+##                #or ((g_blog.baseurl + '/' + slug) not in result.content.decode('ascii','ignore')):
+##                self.response.out.write(error % "probably spam")
+##                return
+##        except Exception, e:
+##            logging.info("urlfetch error")
+##            self.response.out.write(error % "urlfetch error")
+##            return
 
         comment = Comment.all().filter("entry =", entry).filter("weburl =", coming_url).get()
         if comment:
@@ -391,7 +392,7 @@ class SitemapHandler(BaseRequestHandler):
         def addurl(loc,lastmod=None,changefreq=None,priority=None):
             url_info = {
                 'location':   loc,
-                'lastmod':	lastmod,
+                'lastmod':    lastmod,
                 'changefreq': changefreq,
                 'priority':   priority
             }
@@ -418,7 +419,7 @@ class SitemapHandler(BaseRequestHandler):
                 addurl(loc,None,'weekly',0.5)
 
 
-##		self.response.headers['Content-Type'] = 'application/atom+xml'
+##        self.response.headers['Content-Type'] = 'application/atom+xml'
         self.render2('views/sitemap.xml',{'urlset':urls})
 
 
@@ -628,7 +629,30 @@ class CheckImg(BaseRequestHandler):
         self.response.headers['Content-Type'] = "image/png"
         self.response.out.write(imgdata)
 
-
+class ContactMeHandler(BaseRequestHandler):
+    def get(self):
+        self.render('contactme',{})
+    def post(self):
+        from_email = self.param("email")
+        from_name = self.param("name")
+        from_phone = self.param("phone")
+        message = self.param("message")
+        message += " Phone: " + from_phone
+        subject = "Message from {0}  - Contact Me ".format(from_name)
+        
+        to = 'moc.liamg@ednihspuna' # trying to not leak out email address to robots via github
+        to = to[::-1]
+        
+        sender ="{0} <{1}>".format(from_name, from_email)
+        mail.send_mail(sender=sender,
+              to=to,
+              subject=subject,
+              body=message
+            )
+        
+        #self.render('contactme',{})
+        self.response.out.write("Thank you!")
+        
 class CheckCode(BaseRequestHandler):
     def get(self):
         sess=Session(self,timeout=900)
@@ -658,8 +682,10 @@ def getZipHandler(**args):
 def main():
     webapp.template.register_template_library('app.filter')
     webapp.template.register_template_library('app.recurse')
-    urls=	[('/media/([^/]*)/{0,1}.*',getMedia),
+    urls=    [('/media/([^/]*)/{0,1}.*',getMedia),
             ('/checkimg/', CheckImg),
+            ('/contact-me', ContactMeHandler),
+            ('/contact-me/', ContactMeHandler),
             ('/checkcode/', CheckCode),
             ('/skin',ChangeTheme),
             ('/feed', FeedHandler),
