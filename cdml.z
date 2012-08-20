@@ -114,5 +114,9 @@ handlers:
   script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
   login: admin
     
+- url: /author_preview
+  script: blog.py
+  login: required
+  
 - url: /.*
   script: blog.py
