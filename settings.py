@@ -3,7 +3,7 @@
 DEBUG = False
 TEMPLATE_DEBUG = False
 
-##LANGUAGE_CODE = 'zh-CN'
+##LANGUAGE_CODE = en-US'
 ##LANGUAGE_CODE = 'fr'
 LOCALE_PATHS = 'locale'
 USE_I18N = True

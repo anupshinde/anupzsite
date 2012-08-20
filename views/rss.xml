@@ -14,7 +14,7 @@
 	<link>{{ blog.baseurl }}</link>
 	<description>{{ blog.subtitle|escape }}</description>
 	<lastBuildDate>{{last_updated}}</lastBuildDate>
-	<language>zh-cn</language>
+	<language>en-us</language>
 	<sy:updatePeriod>daily</sy:updatePeriod>
 	<sy:updateFrequency>1</sy:updateFrequency>
 	<generator>Anup Shinde {{blog.version}}</generator>
@@ -31,13 +31,13 @@
 		<description><![CDATA[{{entry.excerpt|escape}}]]></description>
 			<content:encoded><![CDATA[{{entry.content|safe}}
 {%if entry.relateposts%}
-<h4>相关阅读</h4>
+<h4>Anup Shinde</h4>
 <ul>
     {%for post in entry.relateposts%}
     <li><a href="{{blog.baseurl}}/{{post.link|escape}}">{{post.title|escape}}</a></li>
     {%endfor%}
 </ul>{%endif%}
-<p>本文网址:<a href="{{blog.baseurl}}/{{entry.link|escape}}">{{blog.baseurl}}/{{entry.link|escape}}</a></p>
+<p>Anup Shinde:<a href="{{blog.baseurl}}/{{entry.link|escape}}">{{blog.baseurl}}/{{entry.link|escape}}</a></p>
 ]]></content:encoded>
 			<wfw:commentRss>{{ blog.feedurl }}/comments</wfw:commentRss>
 		<slash:comments>{{entry.commentcount}}</slash:comments>
