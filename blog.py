@@ -637,13 +637,15 @@ class ContactMeHandler(BaseRequestHandler):
         from_name = self.param("name")
         from_phone = self.param("phone")
         message = self.param("message")
+        message += "\r\n...>>From: %s <%s>"%(from_name, from_email)
         message += " Phone: " + from_phone
-        subject = "Message from {0}  - Contact Me ".format(from_name)
+        subject = "Message from %s  - Contact Me "%(from_name)
         
         to = 'moc.liamg@ednihspuna' # trying to not leak out email address to robots via github
         to = to[::-1]
         
-        sender ="{0} <{1}>".format(from_name, from_email)
+        sender = "moc.ednihspuna@ednihspuna"
+        sender = sender[::-1]
         mail.send_mail(sender=sender,
               to=to,
               subject=subject,
