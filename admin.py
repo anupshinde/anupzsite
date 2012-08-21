@@ -728,7 +728,10 @@ class admin_sliderimage(base.BaseRequestHandler):
         else:
             if action=='add':
                simg= SliderImage(title=title, subtitle=subtitle, posthref=posthref, imagehref=imagehref, active=is_slider_active)
-               simg.order = SliderImage.all().order('-order').get().order+1
+               try:
+                    simg.order = SliderImage.all().order('-order').get().order+1
+               except:
+                    pass
                simg.put()
                vals.update({'result':True,'msg':'Saved ok'})
                self.render2('views/admin/sliderimage.html',vals)
