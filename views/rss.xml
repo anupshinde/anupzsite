@@ -38,6 +38,7 @@
     {%endfor%}
 </ul>{%endif%}
 <p>Anup Shinde:<a href="{{blog.baseurl}}/{{entry.link|escape}}">{{blog.baseurl}}/{{entry.link|escape}}</a></p>
+<a href="http://www.codeproject.com" rel="tag" style="display:none">CodeProject</a>
 ]]></content:encoded>
 			<wfw:commentRss>{{ blog.feedurl }}/comments</wfw:commentRss>
 		<slash:comments>{{entry.commentcount}}</slash:comments>
