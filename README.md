@@ -1,5 +1,4 @@
 # www-anupshinde-com
-
 ---
 
 This is the source for anupshinde.com
