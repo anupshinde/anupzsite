@@ -1,0 +1,67 @@
+---
+title: Blogging on Google App Engine
+tags: app engine, python
+meta: google app engine, gae, python, blogging
+abstract: Google App Engine can be used as a host for your blog. This site is currently hosted on App Engine. Out of the multiple options available over the internet (related to blogging on GAE), I found only a couple that were near my requirements and easily customizable. In this post, I discuss the options that I found and the one that I chose and the changes related to this site.
+date: 2013-01-27
+---
+<p>
+Google App Engine can be used as a host for your blog. This site is currently hosted on App Engine. Out of the multiple options available over the internet (related to blogging on GAE), I found only a couple that were near my requirements and easily customizable.&nbsp;
+</p>
+<p>
+<span style="">I moved on from a shared-hosting solution to GAE's infrastructure. Apart from GAE's excellent infrastructure - we also save on monthly/yearly hosting charges. Domain mapping to GAE is simple with the instructions and so is moving to the GMail for email@mydomain.com .&nbsp;</span>
+</p>
+<p>
+
+Being a developer, it is also a good learning experience about creating and maintaining GAE applications. And (as a developer) it is easier to add tightly integrated functionality on your site without having to create plugins or do any kind of cross-site integration. Obviously you miss out on some or most of the out-of-the-box functionality that is available with most blogging engines like Wordpress.
+</p>
+<p>
+
+While looking for a blogging on app-engine solution - I got down to two options that could be used as the base-code to begin customization
+<ol>
+	<li><a href="http://blog.notdot.net/2009/10/Writing-a-blog-system-on-App-Engine" target="_blank">Nick's blog</a></li>
+	<li><a href="https://github.com/xuming/micolog" target="_blank">Micolog</a></li>
+</ol>
+</p>
+<p>
+
+Nick's blog (the first option) looked simplistic and fast. I definitely learnt a lot from that blog and the articles over there. But when it came to my requirements and ease of customization, the second option Micolog felt much better.
+</p>
+<p>
+
+If I had to redo everything again - I would use Nick's blog code as a template for three reasons:
+<ul>
+	<li>Customizations / enhancements on Micolog ended up to be the same as I would do in Nick's blog-code.</li>
+	<li>Nick's blog is on a higher version of Python</li>
+	<li>And I have gotten more comfortable with GAE development</li>
+</ul>
+</p>
+<p>
+
+One of the better things about Micolog is its Wordpress tyoe of python implementation on GAE. Most of my early customizaitons were at creating a new theme. The secondary customizations were related to the core stuff that included some db-model changes.
+</p>
+<p>
+
+You can find the source-code at <a href="https://github.com/anupshinde/anupzsite" target="_blank">GitHub</a>
+
+</p>
+<p>
+Some of the enhancements made to this:
+<ol>
+	<li>New theme specific to this site</li>
+	<li>Added a slider db-module for managing the &nbsp;home page slider images.</li>
+	<li>Added contact-me page</li>
+	<li>Using Google-Code-Prettify to highlight syntax</li>
+	<li>Updated&nbsp;WYSIWYG editor - TinyMCE updated</li>
+	<li>Added Shareaholic links to blog posts</li>
+	<li>Added support for thumbnail images for blog posts (not so nice to use - but it works)</li>
+	<li>Replaced the commenting with Disqus</li>
+</ol>
+</p>
+<p>
+<span>Source-code at&nbsp;</span><a href="https://github.com/anupshinde/anupzsite" target="_blank">GitHub</a>
+</p>
+<p>
+
+In case you wish to run this, make sure you rename "cdml.z" to "app.yaml", and rename application name to yours.
+</p>

@@ -1,0 +1,164 @@
+---
+title: A simple Form builder using jQueryUI and Bootstrap - Part 2
+meta: jquery, jqueryUI, formbuilder, form builder, javascript, customization, bootstrap, twitter, drag, drop
+abstract: In the first part, we saw how to create a basic multi-colum drag-drop interface for form fields. In this second and final part, we will be using the same concepts - instead using Twitter Bootstrap for UI and controls. 
+thumbnail: form-builder-part2-thumbnail.png
+tags: jquery, form builder, javascript, twitter, bootstrap
+date: 2013-04-27
+---
+
+<p>
+	In the <a title="Form builder Part 1" href="/posts/form-builder-part-1/" target="_blank">first part</a>, we saw how to create a basic multi-colum drag-drop interface for form fields. In this second and final part, we will be using the same concepts - instead using Twitter Bootstrap for UI and controls.&nbsp;
+
+</p>
+
+<p>
+	<a title="Form Builder Part 2 " href="http://demos.anupshinde.com/form-builder-part2/index.html" target="_blank"><img title="Form Builder part 2" src="images/form-builder-part2-img1.png"  class="dropShadow" alt="Form Builder part 2" /></a>
+</p>
+
+<p>
+
+	<hr /><a title="Form Builder Part 2 Demo" href="http://demos.anupshinde.com/form-builder-part2/index.html" target="_blank"><strong>Demo here</strong></a>
+
+	<a title="Form Builder Part 2 (GitHub)" href="https://github.com/anupshinde/demos/tree/gh-pages/form-builder-part2" target="_blank"><strong>Source@GitHub here</strong></a>
+
+</p>
+
+<p>
+
+	First we will be defining the controls that can be used for customization. In the first part, these fields were rendered using JavaScript, while here we keep these simple for the demo and render within the HTML. We use Bootstrap Tabs to have three different sets of controls. Each control DIV has a class ctrl-&lt;xyz&gt;, where &lt;xyz&gt; would be the unique identifier for the type of control. &nbsp;
+</p>
+
+
+<p>
+<pre class="prettyprint"> &lt;div class="tabbable"&gt;
+&lt;!-- List of controls rendered into Bootstrap Tabs --&gt;
+&lt;ul class="nav nav-tabs"&gt;
+	&lt;li class="active"&gt;
+		&lt;a href="#simple" data-toggle="tab"&gt;Simple input&lt;/a&gt;
+	&lt;/li&gt;
+	&lt;li&gt;
+		&lt;a href="#multiple" data-toggle="tab"&gt;Radio/Checkbox/List&lt;/a&gt;
+	&lt;/li&gt;
+	&lt;li&gt;
+		&lt;a href="#btns" data-toggle="tab" &gt;Buttons&lt;/a&gt;
+	&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="row-fluid"&gt;
+&lt;div id="listOfFields" class="span3 well tab-content"&gt;
+  &lt;div class="tab-pane active" id="simple"&gt;
+	&lt;div class='selectorField draggableField'&gt;
+		&lt;label class="control-label"&gt;Text Input&lt;/label&gt;
+		&lt;input type="text" placeholder="Text here..." class="ctrl-textbox"&gt;&lt;/input&gt;
+	&lt;/div&gt;
+	......</pre>
+</p>
+<p>
+	Each control is contained within a DIV with class "selectorField". These DIVs are made draggable with the line:
+</p>
+
+<p>
+	<pre class="prettyprint">$(".selectorField").draggable({ helper: "clone",stack: "div",cursor: "move", cancel: null &nbsp;});</pre>
+</p>
+
+<p>
+Next we define the droppables with the class "droppedFields". For this demo we have 2 droppable columns for inputs with span5 and one droppable action bar for buttons with span10. This is shown below:
+</p>
+<p>
+<pre class="prettyprint">  &lt;div class="row-fluid"&gt;
+    &lt;div id="selected-column-1" class="span5 well droppedFields"&gt;&lt;/div&gt;
+    &lt;div id="selected-column-2" class="span5 well droppedFields"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- Action bar - Suited for buttons on form --&gt;
+  &lt;div class="row-fluid"&gt;
+    &lt;div id="selected-action-column" class="span10 well action-bar droppedFields" style="min-height:80px;"&gt;&lt;/div&gt;
+  &lt;/div&gt;</pre>
+&nbsp;
+</p>
+<p>
+
+To allow repositioning within droppables, we apply Sortable with "connectWith" option on the dropped fields
+</p>
+<p>
+<pre class="prettyprint">$( ".droppedFields" ).sortable({
+    cancel: null, // Cancel the default events on the controls
+    connectWith: ".droppedFields"
+}).disableSelection();</pre>
+</p>
+<p>
+Next, to make the dropped controls customizable - we attach a click handler on the dropped control.&nbsp;<span style="">We use handlerbar templates (with some kind of template-inheritance) and Bootstrap Modal dialog. </span>
+</p>
+
+<p>
+<pre class="prettyprint">&lt;script id="control-customize-template" type="text/x-handlebars-template"&gt;
+  &lt;div class="modal-header"&gt;
+    &lt;h3&gt;{{header}}&lt;/h3&gt;
+  &lt;/div&gt;
+  &lt;div class="modal-body"&gt;
+    &lt;form id="theForm" class="form-horizontal"&gt;
+      &lt;input type="hidden" value="{{type}}" name="type"&gt;&lt;/input&gt;
+      &lt;input type="hidden" value="{{forCtrl}}" name="forCtrl"&gt;&lt;/input&gt;
+      &lt;p&gt;&lt;label class="control-label"&gt;Label&lt;/label&gt; &lt;input type="text" name="label" value=""&gt;&lt;/input&gt;&lt;/p&gt;
+      &lt;p&gt;&lt;label class="control-label"&gt;Name&lt;/label&gt; &lt;input type="text" value="" name="name"&gt;&lt;/input&gt;&lt;/p&gt;
+      {{{content}}}
+    &lt;/form&gt;
+  &lt;/div&gt;
+  &lt;div class="modal-footer"&gt;
+    &lt;button class="btn btn-primary" data-dismiss="modal" onclick='save_customize_changes()'&gt;Save changes&lt;/button&gt;
+    &lt;button class="btn" data-dismiss="modal" aria-hidden="true"&gt;Close&lt;/button&gt;
+    &lt;button class="btn btn-danger" data-dismiss="modal" aria-hidden="true" onclick='delete_ctrl()'&gt;Delete&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/script&gt;
+
+&lt;script id="textbox-template" type="text/x-handlebars-template"&gt;
+  &lt;p&gt;&lt;label class="control-label"&gt;Placeholder&lt;/label&gt; &lt;input type="text" name="placeholder" value=""&gt;&lt;/input&gt;&lt;/p&gt;
+&lt;/script&gt;</pre>
+</p>
+
+<p>
+<span style="">The methods in objects load_values.common and save_changes.common are implemented to load the values into the modal form and save changes &nbsp;to control from it.&nbsp;</span><span style="">The "common" methods call the specific methods for the specific control, if any.</span>
+</p>
+<p>
+<pre class="prettyprint">/* Common method to save changes to a control - This also calls the specific methods */
+
+save_changes.common = function(values) {
+  var div_ctrl = $("#"+values.forCtrl);
+  div_ctrl.find('.control-label').text(values.label);
+  var specific_save_method = save_changes[values.type];
+  if(typeof(specific_save_method)!='undefined') {
+    specific_save_method(values);
+  }
+}
+
+/* Common method for all controls with Label and Name */
+load_values.common = function(ctrl_type, ctrl_id) {
+  var form = $("#theForm");
+  var div_ctrl = $("#"+ctrl_id);
+
+  form.find("[name=label]").val(div_ctrl.find('.control-label').text())
+  var specific_load_method = load_values[ctrl_type];
+  if(typeof(specific_load_method)!='undefined') {
+    specific_load_method(ctrl_type, ctrl_id);
+  }
+}</pre>
+</p>
+
+
+<p>
+<em><span style="">** Template inheritance, control abstraction/customization could have been written in a better way - I encourage readers to explore better designs for production code</span></em>
+</p>
+<p>
+
+<span style="">&nbsp;For a preview, we simply generate and render HTML to a new window. In this process we remove the classes used for customization</span>
+
+&nbsp;If you found this useful, please share/rate it or leave a comment/question/suggestion below. Happy coding&nbsp;<img title="Smile" src="/static/images/smiley-smile.gif" alt="Smile" border="0" />
+</p>
+
+<p>
+
+<strong><a title="Form Builder Part 2 Demo" href="http://demos.anupshinde.com/form-builder-part2/index.html" target="_blank">Demo here</a></strong>
+</p>
+
+<p>
+<strong><a title="Form Builder Part 2 (GitHub)" href="https://github.com/anupshinde/demos/tree/gh-pages/form-builder-part2" target="_blank">Source@GitHub here</a></strong><strong style=""><a title="Form Builder Part 2 Demo" href="http://demos.anupshinde.com/form-builder-part2/index.html">&nbsp;</a></strong>
+</p>

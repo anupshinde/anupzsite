@@ -1,0 +1,61 @@
+---
+title: Tips on compiling Quake III source code with VC++ 6.0
+tags: quake3, compile, vc++, vc6
+meta:
+abstract: In the post  "Modifying Quake3", I have explained how to compile the Quake III source code. In case you are not using Visual Studio 2003 but using developer studio for VC++ 6.0, here are some tips to compile using that. Please read further...
+thumbnail: 
+date: 2007-04-11T00:01
+---
+<p>
+<a style="font-weight: bold;" href="/posts/modifying-quake3/">&lt; Continued from Part 1: &nbsp;Compiling Quake 3 source code</a>
+
+</p>
+<p>
+
+In the post &nbsp;"Modifying Quake3", I have explained how to compile the Quake III source code. In case you are not using Visual Studio 2003 but using developer studio for VC++ 6.0, here are some tips to compile using that. Please read further...
+
+</p>
+<p>
+If you are using VC++6, download the tool : prjconverter (search at google and you'll find it)
+
+</p>
+<p>
+Copy that in your Quake 3 code sub-directory.
+
+</p>
+<p>
+Open up a command window. Change directory to Quake 3 code sub-directory and type.
+
+</p>
+<p>
+<pre class="prettyprint">prjconverter quake3.sln</pre>
+
+</p>
+<p>
+It should make some project files.
+
+</p>
+<p>
+Now load up Quake 3 code in VC++. Click on Projects --&gt; Active Configurations. Change it to Win32-Release.
+
+</p>
+<p>
+Unload the UI Project, it can create problems while compiling. Make sure that the Quake 3 project has botlib and renderer as its depedencies.
+
+</p>
+<p>
+
+<a style="font-weight: bold;" href="/posts/modifying-quake3/">&lt; Continued from Part 1: &nbsp;Compiling Quake 3 source code</a>
+
+</p>
+<p>
+<strong>Further...</strong>
+
+</p>
+<p>
+<a href="/posts/modifying-quake3-part-2/"><strong>Part 2: - Gamer inputs .... Continue reading &gt;&nbsp;</strong></a>
+
+</p>
+<p>
+<a href="/posts/modifying-quake3-part-3/"><strong>Part 3: - Missile behavior .... Continue reading &gt;&nbsp;</strong></a>
+</p>

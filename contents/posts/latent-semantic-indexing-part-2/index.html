@@ -1,0 +1,102 @@
+---
+title: Latent Semantic Indexing - part 2 - Indexing
+tags:
+meta:
+abstract: This is a continuation in the series of LSI (Latent Semantic Indexing) implementation. In this post, we will walk through the implementation of creating an Index.
+thumbnail: 
+date: 2012-08-16
+---
+<p>
+<a title="Understanding LSI" href="/posts/latent-semantic-indexing/"><strong>&lt; Continued from Part 1: &nbsp;Undestanding LSI (tutorial, demo, code, references)</strong></a>
+
+</p>
+<p>
+In the previous post we saw what LSI is and references to its tutorial. In this post, we will walk through the steps required for creating an index from the the list of text documents. In the code we are currently using one single directory to fetch all the plain text documents.
+
+</p>
+<p>
+The steps below is a walkthrough and you should be able to find similar steps as comments in attached code.
+
+</p>
+<p>
+<p>
+<strong>Step 1</strong> - Fetch contect from documents in a directory
+<p style="margin-left: 30px;">Create a list of documents - List of valid file-names to be considered.&nbsp;</p>
+<p style="margin-left: 60px;">Mapping a numeric ID to the file name - numeric needed for calculations</p>
+<p style="margin-left: 30px;">Create a list of words</p>
+<p style="margin-left: 30px;">For each document</p>
+<p style="margin-left: 60px;">Read the words from document</p>
+<p style="margin-left: 60px;">Filter out the stop-words from a stopword list</p>
+<p style="margin-left: 60px;">For each word:</p>
+<p style="margin-left: 90px;">Apply stemming for each word using PorterStemmer algorithm (The Stemmer class transforms a word into its root form)</p>
+<p style="margin-left: 90px;">Add the stemmed-word to word list</p>
+<p style="margin-left: 90px;">Map a numeric word ID to the word - numeric needed for calculations</p>
+<p style="margin-left: 90px;">Create a Document - Word relation</p>
+<p style="margin-left: 90px;">DocumentID and WordID (integer)</p>
+<p style="margin-left: 90px;">&nbsp;</p>
+</p>
+<p>
+<strong>Step &nbsp;2</strong> - Create a Term Document Matrix
+<p style="margin-left: 90px;">i.e create the Word to Document matrix as shown below</p>
+<p style="margin-left: 90px;"><img title="Term Document Matrix" src="images/term-document-matrix.gif" alt="Term Document Matrix" class="dropShadow"/></p>
+<p style="margin-left: 90px;"><em>(image taken from miislita.com, check references)</em></p>
+<strong>&nbsp;</strong>
+
+</p>
+<p>
+<strong>Step &nbsp;3</strong> - (Optional) Save the Term Document Matrix - this is good in a situation where you would want to use the matrix again and again when there are no changes to the documents
+
+<strong>&nbsp;</strong>
+
+</p>
+<p>
+<strong>Step &nbsp;4</strong> - Calculate Term weights
+<p style="margin-left: 90px;">Calculate the local term weights</p>
+<p style="margin-left: 90px;">Calculate the global term weights</p>
+<strong>&nbsp;</strong>
+
+</p>
+<p>
+<strong>Step &nbsp;5</strong> - Calculate the Normalization factors for documents (Code use cosine-normailization)
+<p style="margin-left: 90px;">I remember that we could use other normalization techniques, but this one was used in this code. Understand the concepts - it's complicated but intriguing too</p>
+<strong>&nbsp;</strong>
+
+</p>
+<p>
+<strong>Step &nbsp;6</strong> - Generate the Weighted term document matrix
+
+<strong>&nbsp;</strong>
+
+</p>
+<p>
+<strong>Step &nbsp;7</strong> - Compute SVD (singular value decomposition).
+<p style="margin-left: 90px;">Fortunately, this is done by DotNetMatrix component - this saved a lot of time for me along with other matrix calculations (references at end of document)</p>
+<strong>&nbsp;</strong>
+
+</p>
+<p>
+<strong>Step &nbsp;8</strong> - Now we have U, S and V matrices from above. Calculate U(k) and S(k). K is the rank here and it is current user-provided. After applying rank-approximation we get what is referred to &ldquo;reduced SVD&rdquo;
+<p style="margin-left: 90px;">As mentioned in the referenced articles: "We keep the first k columns of U, the first k rows of V(transpose) and the first k rows and columns of S; that is, the first k singular values. This removes noisy dimensions and exposes the effect of the largest k singular values on the original data."</p>
+<p style="margin-left: 90px;"><img title="Reduced SVD" src="images/reduced-svd.gif" alt="Reduced SVD" class="dropShadow" /></p>
+<p style="margin-left: 90px;"><em>(image taken from miislita.com, check references)</em></p>
+<p style="margin-left: 90px;">Rank Approximation is an important part of the process. A good value of K will determine the effectiveness of the index. Here we are manually providing it, but in real-world cases where people keep adding documents - this is not necessarily possible. There are some techniques like &ldquo;pivot-based&rdquo;, &ldquo;neural-net&rdquo; based, etc - but I&rsquo;ll leave it to the reader to explore those further.</p>
+<strong>&nbsp;</strong>
+
+</p>
+<p>
+<strong>Step &nbsp;9</strong> - Calculate S(k)- inverse and U(k)
+
+</p>
+<p>
+<strong>Step 10</strong> - &nbsp;Save these calculations to a file &ldquo;index.bin&rdquo; for use while searching.
+</p>
+
+</p>
+<p>
+
+In the next part, we will see how to execute queries based on this Index.
+
+</p>
+<p>
+<a title="Searching with LSI index" href="/posts/latent-semantic-indexing-part-3/"><strong>Part 3: - Searching with LSI Index .... Continue reading &gt;</strong></a>
+</p>

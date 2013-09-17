@@ -1,0 +1,309 @@
+---
+title: Modifying Quake 3 - part 3 - Missile behavior
+tags:
+meta:
+abstract: In the earlier posts we saw how to compile Quake 3 source code and how to accept user-inputs. In this final post, we'll see how to change the behavior of a rocket to convert it into a homing missile and few variations for this homing missile.
+thumbnail: 
+date: 2007-04-11T00:04
+---
+<p>
+<a style="font-weight: bold;" href="/posts/modifying-quake3-part-2/">&lt; Continued from Part 2: &nbsp;Gamer inputs</a>
+
+</p>
+<p>
+<strong>Changing the behavior of the new missile</strong>
+
+</p>
+<p>
+Now once we are done with accepting input, we need to change the behavior of the missile based on this value. As discussed before, to achieve this we will have create a new think function that will have the necessary code to exhibit different behavior.
+
+</p>
+<p>
+Re-stating: if you see the <em>fire_rocket</em> method in <em>g_missile.c</em> under the game project you will find lines stating:
+
+</p>
+<p>
+<pre class="prettyprint">bolt-&gt;nextthink = level.time + 15000;
+bolt-&gt;think = G_ExplodeMissile; //Game time here is in milliseconds.</pre>
+&nbsp;
+
+</p>
+<p>
+<em>G_ExplodeMissile </em>is a think function for the rocket. This means that after 15 seconds the rocket will explode. 15 seconds is the next think time here.
+
+</p>
+<p>
+We will point it to a different think function <em>missile_think</em>. Also a homing missile needs to move a bit slower initially. This is shown below:
+
+</p>
+<p>
+<pre class="prettyprint doScroll">gentity_t *fire_rocket (gentity_t *self, vec3_t start, vec3_t dir) {
+	gentity_t	*bolt;
+
+	............
+
+	bolt-&gt;classname = "rocket";
+
+	//0 -&gt; off
+	//1 -&gt; Constant speed
+	//2 -&gt; Variable speed
+	//3 -&gt; Fireworks with varible speed
+	if(self-&gt;client-&gt;pers.homingMissle == 1)
+	{
+		bolt-&gt;think = missile_think;
+		bolt-&gt;nextthink = level.time + 1;
+	}
+	else if(self-&gt;client-&gt;pers.homingMissle == 2)
+	{
+		bolt-&gt;think = missile_think_variable_speed;
+		bolt-&gt;nextthink = level.time + 1;
+	}
+	else if(self-&gt;client-&gt;pers.homingMissle == 3
+             || self-&gt;client-&gt;pers.homingMissle == 4
+             || self-&gt;client-&gt;pers.homingMissle == 5)
+	{
+		bolt-&gt;think = missile_think_variable_speed_fireworks;
+		bolt-&gt;nextthink = level.time + 1;
+	}
+	else
+	{
+		bolt-&gt;nextthink = level.time + 15000;
+		bolt-&gt;think = G_ExplodeMissile;
+	}
+
+	............
+	............
+
+	bolt-&gt;s.pos.trType = TR_LINEAR;
+
+	// move a bit on the very first frame
+	bolt-&gt;s.pos.trTime = level.time - MISSILE_PRESTEP_TIME;
+	VectorCopy( start, bolt-&gt;s.pos.trBase );
+
+	if (self-&gt;client-&gt;pers.homingMissle == 1)
+	{
+		// Initial speed of homing missile has to be less
+		VectorScale( dir, 500, bolt-&gt;s.pos.trDelta );
+	}
+	else
+	{
+		VectorScale( dir, 900, bolt-&gt;s.pos.trDelta );
+	}
+
+	// save net bandwidth
+	SnapVector( bolt-&gt;s.pos.trDelta );
+	VectorCopy (start, bolt-&gt;r.currentOrigin);
+
+	return bolt;
+}</pre>
+</p>
+<p>
+
+The speed is initially set to 500. In my code, the speed increases once target is found, but I feel it is completely personal choice.
+
+</p>
+<p>
+Now that we have pointed to another think function, we must define it. Before defining the function, let me explain the behavior that the think function will exhibit in the game environment.
+
+</p>
+<p>
+Defining: The homing missile will select a nearest target, steer towards it and blast into it.
+
+</p>
+<p>
+When the missile is fired and travelling straight, it should scan all the entities in its visibility distance and visual cone. The visual cone limits the visibility of missile and allows it to become more realistic, else it can just take a 180 degree turn and hit some target behind.
+
+</p>
+<p>
+It should only select other player entities and should not select the firing-player and his team members (in case of team match).
+
+</p>
+<p>
+The target should be directly visible. Since this is a virtual world, the visual cone mathematics does not solve this problem. We need to address it bit differently.
+
+</p>
+<p>
+The code for this think function is also placed in <em>g_missile.c</em> just under the line <em>"#define MISSILE_PRESTEP_TIME 50"</em>. It is shown below.
+
+</p>
+<p>
+<pre class="prettyprint doScroll">#define    MISSILE_PRESTEP_TIME    50
+
+gentity_t *findNearestTargetInRadius (gentity_t *ent, float rad, vec3_t *pTargetDirectionVector,
+                                      vec3_t missileNormalizedForwardDirection, double fVisionCone)
+{
+    gentity_t *pEntity = NULL;
+    gentity_t *pTarget = NULL;
+    vec3_t pEntityMidBodyVector;
+    vec_t fEntityMidBodyVectorLengh=0;
+    vec_t fTargetDistance=0;
+    vec3_t temp_vector;
+
+    trace_t trace;
+
+    // Check for all the entities and find atleast one in radius
+    for (pEntity = g_entities; pEntity &lt; &amp;g_entities[level.num_entities]; pEntity++)      {
+            if (!pEntity-&gt;inuse) // If not on map, continue
+            continue;
+
+            // Hit the player in the body and not in feet
+            // Add the mins and maxs. Then divide by two.
+            // Add the current origin to it.
+            // That would yeild the middle of the body (bounding box atleast)
+            VectorAdd(pEntity-&gt;r.mins,pEntity-&gt;r.maxs,pEntityMidBodyVector);
+            VectorScale(pEntityMidBodyVector,0.5,pEntityMidBodyVector);
+            VectorAdd(pEntity-&gt;r.currentOrigin,pEntityMidBodyVector,pEntityMidBodyVector); 
+
+            // Now subtract to get a proper direction.
+            VectorSubtract(pEntityMidBodyVector,ent-&gt;r.currentOrigin,pEntityMidBodyVector);
+
+            // We calculated the distance vector above. So this is the distance to entity.
+            fEntityMidBodyVectorLengh = VectorLength(pEntityMidBodyVector); 
+
+            // If the distance is greater than the given radius, leave it.
+            if (fEntityMidBodyVectorLengh &gt; rad)
+                continue;
+
+            // Check the entity for different conditions.
+            if(pEntity!=NULL)
+            {
+                if (!pEntity-&gt;client)
+                    continue;
+                if (pEntity == ent-&gt;parent)
+                    continue;
+                if (pEntity-&gt;health &lt;= 0) continue;
+                if (pEntity-&gt;client-&gt;sess.sessionTeam == TEAM_SPECTATOR)
+                    continue;
+                if ( OnSameTeam( pEntity, ent-&gt;parent ) )
+                    continue;
+
+                // Normalize the direction vector
+                VectorCopy(pEntityMidBodyVector,temp_vector);
+                VectorNormalize(temp_vector);
+
+                // Lesser the value of vision cone, wider it will be.
+                // Value 1 will narrow down the cone.
+                if ( fVisionCone &gt; 0.01
+                     &amp;&amp;
+                     DotProduct(missileNormalizedForwardDirection, temp_vector) &lt; fVisionCone )  continue;  // Check if visible
+
+                trap_Trace (&amp;trace, ent-&gt;s.pos.trBase, NULL, NULL,
+                                      pEntity-&gt;s.pos.trBase, ent-&gt;s.number, MASK_SHOT );
+
+                if ( trace.contents &amp; CONTENTS_SOLID ) // If not visible, then continue
+                    continue;
+
+                // Passed all the tests, it is a possible target.
+                // Check if there is closer target.
+                // Added 100 so that missle does not change targets
+                // frequently in case of players close to each other
+                if ((pTarget == NULL) || (fEntityMidBodyVectorLengh &lt; fTargetDistance+100))
+                {
+                    pTarget=pEntity;
+                    // Copy the direction vector for the think function.
+                    // We dont need to recalculate it there.
+                    VectorCopy(pEntityMidBodyVector, (*pTargetDirectionVector));
+                    fTargetDistance = fEntityMidBodyVectorLengh;
+                }
+            }
+    }
+
+    return pTarget;
+}
+
+void missile_think( gentity_t *ent ) {
+
+    gentity_t *pTarget = NULL;
+
+    vec3_t targetdir,forward;
+    int speed=900;
+
+    VectorCopy(ent-&gt;s.pos.trDelta, forward);
+    VectorNormalize(forward);
+    pTarget = findNearestTargetInRadius(ent,5000,&amp;targetdir, forward,0.7);
+
+    if(pTarget!=NULL)
+    {
+        // Steer the missile to the target.
+        // Lower the value in place of 0.05, larger the turning circle.
+        VectorMA(forward, 0.05, targetdir, targetdir);
+        VectorNormalize(targetdir);
+        VectorScale(targetdir, speed, ent-&gt;s.pos.trDelta);
+    }
+
+    // These two lines are used to smoothen the missile trajectory.
+    // Removing these will exhibit jerky movement.
+    VectorCopy(  ent-&gt;r.currentOrigin ,ent-&gt;s.pos.trBase );
+    ent-&gt;s.pos.trTime = level.time;
+
+    ent-&gt;nextthink = level.time + 1;
+}</pre>
+</p>
+<p>
+
+I feel the comments placed above are self-explanatory, so not discussing the same. In the attached code, you will find multiple missile_think functions and in total five different homing modes. Here's a brief on those:
+
+</p>
+<p>
+
+<em>Homing Missiles with constant speed:</em>
+
+</p>
+<p>
+These are the ones shown above. Once launched the missile steers towards the target at same speed.
+
+</p>
+<p>
+<em>Homing Missiles with variable speed:</em>
+
+</p>
+<p>
+I like these one the most and designed for higher precision to hit the target. If the target is far enough, the missile will increase its speed to come close to it. Once it is quite closer, it takes a relative measurement of the angle between itself and target. &nbsp;If angle is too less, missile will again increase its speed and hit the target before it moves out of sight. It is capable of shooting a target in mid-air almost every time.
+
+</p>
+<p>
+<em>Homing Missiles with variable speed and fireworks:</em>
+
+</p>
+<p>
+Well this idea came from the epic and one time everybody's favorite tele-serial Ramayan, where, in the wars one arrow fired would spawn multiple arrows. Similarly this function facilitates spawning of non-homing rockets when the target is closer. Absolutely no way to escape. Not much interesting to play with. But you'll get to see some great fireworks.
+
+</p>
+<p>
+<em>Homing Missiles with variable speed, fireworks and wide angle:</em>
+
+</p>
+<p>
+The visual cone is much spread out. Rest is same as above
+
+</p>
+<p>
+<em>Homing Missiles with variable speed, fireworks and all view:</em>
+
+</p>
+<p>
+Same as above. The visual cone is completely open. Expect the missile to take hair-pin turns when using this.
+
+</p>
+<p>
+
+<strong>Concluding...</strong>
+
+</p>
+<p>
+Here, in the code, I have set some values in code, for the homing missile, such that it works with high precision and the target cannot escape. Now that's a kind of military scenario. In game playing, that will be a real tough scenario and will not be interesting. I leave it upto you to change the code so that the fun part in gaming is not lost.
+
+</p>
+<p>
+Learning Quake 3 can be real fun. Some day it can be used to teach you game development, simulation, 3D geometry and vector mathematics. And besides playing games, its engine can be quite useful for creating 3D UI applications, researching on building architectures,etc.
+
+</p>
+<p>
+<em>At many places I have wrongly spelled "Missile" as "Missle". Please excuse that. May be I was hungry for "i" when writing this.</em>
+
+</p>
+<p>
+
+Happy coding!
+
+</p>

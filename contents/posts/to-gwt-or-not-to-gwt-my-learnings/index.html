@@ -1,0 +1,94 @@
+---
+title: To GWT or not to GWT
+tags:
+meta: GWT, SmartClient, SmartGWT, ExtJS, ExtGWT, Java, Javascript, Backbone.js, jQuery, RIA, Rich internet application, form builder, builder, GAE, google app engine, app, engine
+abstract: This post is about my experiences on GWT when I wrote this post and learning more on the framework. Here I also discuss ExtGWT, SmartGWT, SmartClient and references to practices on building larger GWT apps.
+thumbnail: 
+date: 2011-02-06
+---
+<p>
+Since few days,I have been analyzing on how to write a rendering engine that uses the XML that comes from the server and renders a webpage-form or part of it. Well that should be simple &hellip;right? Define the XML, parse the XML and create DOM elements using one of the RIA libs like Ext, YUI, SmartClient &hellip;.
+
+</p>
+<p>
+What if you are creating a lib for production ready applications with good or reasonable performance. The range of frameworks available kept confusing me for a while on what to use. I can write JavaScript code, but had to decide on the library to use. Finally it came down to two &ndash; Ext and SC(Smartclient-free-LGPL).. I like jQuery too, but it did not fit in very well in the core. I prefer SC over Ext due to its licensing and arguably its better performance while dealing with lots of data. (fyi&hellip; I am an Ext developer too)
+
+</p>
+<p>
+When I started with SC, I needed a lot of patience to work with it. Getting started is difficult. The documentation isn&rsquo;t so clear. I usually don&rsquo;t read text but skim through it, so if there is some important point in the corner or in middle of lots of text, I would miss it. Additionally community interaction is more on smart-gwt (SC-GWT)&hellip; Mapping that gwt code to JavaScript code was sometimes painful. In the process, I always wanted to jump back to Ext. But later the patience paid off. In the end I came out more biased towards SC and still am. If you explore the not-free server features of SC, you&rsquo;ll be further amazed.
+
+</p>
+<p>
+So I decided on SC. But what about GWT, why not use it? I am not a java developer and in fact a better JavaScript dev. So the basic idea of writing java code to generate JavaScript eludes me. Plus java really means unnecessary lines of code to me. I am a .NET dev and then a fan of Ruby (and Rails) and then Python &mdash; so now you know what I mean. With those parameters, GWT wasn&rsquo;t an attractive for me earlier.
+</p>
+<p>
+
+That said, GWT isn&rsquo;t just java to JavaScript. It goes well beyond that ..in minimizing multi-browser issues. Its easier to implement some of the best practices for Web 2.0. Its easier to unit-test too. Further, the road-map looks good too. But the UI is dull. I learnt that Google has hired good designers to make GWT look good and that further we may see better out-of-the-box UI. That&rsquo;s future&hellip;so for now, I am looking into SC-GWT (smartgwt-LGPL)
+
+</p>
+<p>
+Hey &hellip; wait &hellip; you might say&hellip; GWT has introduced UI binder which is almost similar to the thing you am trying to do&hellip;. so why re-invent the wheel? The answer for now is simple. GWT compiles the UI binder xmls and these are not available at runtime &ndash; i.e. the JavaScript does not deal with the xmls. One possible way to re-use it is to figure out a way to re-use the GWT compilation mechanism at runtime &mdash; it should be possible, but I haven&rsquo;t tried it yet. And obviously GWT compilation is in itself a time-consuming process to be performed at runtime.
+
+</p>
+<p>
+GWT obviously brings in few benefits but one big inconvenience for me&hellip;. writing lots of lines in java code and not using JavaScript and losing some of its flexibility. You can always mix stuff, but I think that should be avoided when possible.
+
+</p>
+<p>
+You can achieve all the goodness of GWT in JavaScript (and beyond that) if you maintain good javascripting discipline&hellip;.. how hard would it be?&hellip;.really a lot harder when working in a team&hellip; If you have worked on writing enterpise web2.0 apps with large teams&hellip;everybody writing JavaScript at some point of time&hellip; where its hard to expect everybody to understand javascripting very well &hellip;. you&rsquo;d know the scripting-disaster that comes with it&hellip;.I think in that scenario, GWT helps minimizing the problem&hellip;obviously GWT cannot prevent somebody from writing bad code.
+
+</p>
+<p>
+Another thing I like about GWT is its integrated development with Google App Engine. Although I am pretty new to both, I think it would result into better developer productivity. When I mention Google-app-engine, I must say that its easy to get lost into the different persistence techniques that come with it and you are likely to ask &ldquo;Why? Google, Why?&rdquo;. That&rsquo;s when I miss the simplicity and certainty with MS technologies.. even if it means dealing with sub-standard at times.
+
+</p>
+<p>
+<em><strong>(Update)</strong></em>: After spending a lot of time on GWT, I am of the opinion that GWT is good for people who are better in Java and not JavaScript. It extends their ability. But myself being a fan of dynamic-interpreted languages - with little experience in Java - GWT is not a good fit there. I am better off writing JavaScript in combination with <a title="jQuery" href="http://jquery.com/" target="_blank">jQuery</a>,<a title="jQuery UI" href="http://jqueryui.com/" target="_blank"> jQueryUI</a>, <a title="Backbone JS" href="http://backbonejs.org/" target="_blank">Backbone.js</a>,<a title="HTML 5" href="http://www.html5rocks.com/" target="_blank">HTML5</a>, &nbsp;<a title="Python 2.7 / Google App Engine" href="https://developers.google.com/appengine/docs/python/gettingstartedpython27/" target="_blank">Python for Google App Engine</a>...
+</p>
+<p>
+
+<strong>References:</strong>
+
+</p>
+<p>
+To get started with GWT, you can check the article below&hellip; it covers up a lot of stuff and I hope I knew about it earlier&hellip;
+
+</p>
+<p>
+<a href="http://www.vogella.de/articles/GWT/article.html" target="_blank">http://www.vogella.de/articles/GWT/article.html</a>
+
+</p>
+<p>
+
+To get started with SmartGWT) and AppEngine, check this video:
+
+</p>
+<p>
+<iframe src="http://www.youtube.com/embed/XIfeLaYxNts" frameborder="0" width="420" height="315"></iframe>
+
+</p>
+<p>
+Article: <a href="http://jumanor.blogspot.com/2010/12/primeros-pasos-con-smartgwt.html" target="_blank">http://jumanor.blogspot.com/2010/12/primeros-pasos-con-smartgwt.html</a> (The article is in Spanish &hellip; &nbsp;use Chrome/Google translate for English)
+
+</p>
+<p>
+
+In case you are interested more in architecting real world GWT apps&hellip; i.e. something beyond &ldquo;Hello World&rdquo; apps&hellip; check out these videos from Google IO:
+
+</p>
+<p>
+<strong>Best Practices for Architecting GWT App</strong>
+
+</p>
+<p>
+<iframe src="http://www.youtube.com/embed/PDuhR18-EdM" frameborder="0" width="420" height="315"></iframe>
+
+</p>
+<p>
+<strong>Architecting GWT apps</strong>
+
+</p>
+<p>
+<iframe src="http://www.youtube.com/embed/M5x6E6ze1x8" frameborder="0" width="560" height="315"></iframe>
+
+</p>

@@ -1,0 +1,98 @@
+---
+title: Latent Semantic Indexing - part 3 - Searching
+tags:
+meta:
+abstract: This is a continuation in the series of LSI (Latent Semantic Indexing) implementation. In this post, we will walk through the implementation of searching an index based on user's query
+thumbnail: 
+date: 2012-08-16T00:02
+---
+<p>
+<a title="Creating index" href="/posts/latent-semantic-indexing-part-2/"><strong>&lt; Continued from Part 2: &nbsp;Creating Index</strong></a>
+</p>
+<p>
+In the earlier post, we saw how to create an index from the list of documents. In this post, we will see how to search the index created earlier. This is only a walkthrough of the code - you should be able to map these steps to the code based on the inline comments.
+
+</p>
+<p>
+
+After the user types in a query and clicks Search, the following is performed
+
+</p>
+<p>
+
+<p>
+
+<strong>Step &nbsp;1</strong> - Fetch the data from the Index that we stored. In this case, it is the Documents list, Word list, S(k)-inverse, U(k), WTDM (weighted-term-document-matrix)
+</p>
+<p>
+
+<strong>&nbsp;</strong>
+</p>
+<p>
+
+<strong>Step &nbsp;2</strong><span>&nbsp;-&nbsp;</span>Fetch the query text and filter stop words and apply stemming on this vector. Stemming is done using the same mechanism that we used above.
+
+</p>
+<p>
+<strong>&nbsp;</strong>
+</p>
+<p>
+
+<strong>Step &nbsp;3</strong><span>&nbsp;-&nbsp;</span>Create a vector using words list - called [q(transpose) - qT].
+<p style="margin-left: 90px;">This is used to create the query vector</p>
+<strong>&nbsp;</strong>
+</p>
+<p>
+
+<strong>Step &nbsp;4</strong><span>&nbsp;-&nbsp;</span>Normalize qT (simple normalization).
+</p>
+<p>
+
+</p>
+<p>
+<strong>&nbsp;</strong>
+</p>
+<p>
+
+<strong>Step &nbsp;5</strong><span>&nbsp;-&nbsp;</span>Compute the query-vector q = qT <strong>x</strong> U(k) <strong>x</strong> S(k)(inverse)
+
+</p>
+
+<strong>Step &nbsp;6</strong><span>&nbsp;-&nbsp;</span>Now that we have the query vector, create a document vector for comparison with the query vector
+<p style="margin-left: 90px;"><em>(I think this document vector creation could be done in Indexing part)</em></p>
+<p style="margin-left: 90px;">For each document:</p>
+<p style="margin-left: 120px;">Create a vector dT - transpose of document</p>
+<p style="margin-left: 120px;">Compute document vector d = dT <strong>x</strong> U(k) <strong>x</strong> S(k)(inverse)</p>
+<p style="margin-left: 120px;">&nbsp;</p>
+<strong>Step &nbsp;7</strong><span>&nbsp;-&nbsp;</span>Now finally, we compute the similarities in query and document.
+<p style="margin-left: 90px;">Initialize results - &nbsp;list of similarityArray - (it's just a variable name which can be changed)</p>
+<p style="margin-left: 90px;">For each document:</p>
+<p style="margin-left: 120px;">Fetch the document vector &ldquo;d&rdquo;</p>
+<p style="margin-left: 120px;">Compute cosine similarity between query vector &ldquo;q&rdquo; and vector &ldquo;d&rdquo;</p>
+<p style="margin-left: 120px;">similarityArray[document-ID] = similarity(from above)</p>
+&nbsp;
+
+</p>
+<p>
+We then display the similarityArray in a descending order.
+
+</p>
+<p>
+<em>Not covering the UI part here. I think its pretty simple to understand the UI created for this</em>
+</p>
+<p>
+
+I hope you found this series useful.&nbsp;If you like this series and/or if it was helpful to you, please do rate it and leave a comment below.
+</p>
+<p>
+
+Happy researching!
+</p>
+<p>
+
+<a title="Understanding LSI" href="/posts/latent-semantic-indexing/"><strong>&lt; Part 1: &nbsp;Undestanding LSI (tutorial, demo, code, references)</strong></a>
+</p>
+<p>
+
+<a title="Creating index" href="/posts/latent-semantic-indexing-part-2/"><strong>&lt; Part 2: &nbsp;Creating Index</strong></a>
+</p>

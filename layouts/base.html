@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<title>
+		{% block page_title %}
+		{{Site.title}}
+		{% endblock %}
+	</title>
+
+	<link href='http://fonts.googleapis.com/css?family=Seaweed+Script' rel='stylesheet' type='text/css' />
+	<link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css' />	
+	
+	<link rel="stylesheet" href="/static/bootstrap/custom/bootstrap.min.flatly.css"  media="screen"/>
+	<link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="/static/index.css" />
+	
+	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+	<link rel="stylesheet" href="/static/prettify/prettify-theme.css">
+
+
+	{% include "sharethis_head_tag.html" %}
+</head>
+<body>
+	<nav class="navbar  navbar-default navbar-fixed-top" role="navigation">
+	  <!-- Brand and toggle get grouped for better mobile display -->
+	  <div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="/">Anup Shinde</a>
+	  </div>
+
+	  <!-- Collect the nav links, forms, and other content for toggling -->
+	  <div class="collapse navbar-collapse navbar-ex1-collapse">
+		<ul class="nav navbar-nav navbar-right">
+		  <li class="active0"><a href="/">Home</a></li>
+		  <li><a href="/about-me">About</a></li>
+		  <li><a href="https://twitter.com/Anup_Shinde" target="_blank_twitter"><i class="icon-twitter icon-2x"></i></a></li>
+		  <li><a href="https://github.com/anupshinde" target="_blank_github"><i class="icon-github icon-2x"></i></a></li>
+		  <li><a href="https://www.gittip.com/anupshinde/" target="_blank_gittip"><i class="icon-gittip icon-2x"></i></a></li>
+		</ul>
+	  </div><!-- /.navbar-collapse -->
+	</nav>
+
+	<div class="jumbotron jumbo_mod">
+		<div class="container">
+			{% if not remove_ads %}
+				{% block top_bar_ad_content %}
+					{% include "ad_top_bar_responsive.html" %} 
+				{% endblock %}
+			{% endif %}
+		</div>
+	</div>
+	<div class="container">
+		{% block container_content %}
+			
+			<div class="row">
+				<div class="col-md-9">
+					{% block content %}
+						{{ content }}
+					{% endblock %}
+				</div>
+				<div class="col-md-1">
+					&nbsp;
+				</div>
+				<div class="col-md-2">
+					{% if not remove_ads %}
+						{% block side_ad_content %}
+							<div class="row" style="height:550px; width:10px; border: 0"> </div>
+							{% block side_ad_content_first %}
+								<div class="row ad"> {% include "ad_side_bar_300_600.html" %} </div>
+							{% endblock %}
+						{% endblock %}
+					{% endif %}
+				</div>
+			</div>
+		{% endblock %}
+		
+		{% block ad_bottom_content %}
+			<div class="row ad text-center col-md-9">
+				{% include "ad_sidebar_unit_first.html" %}
+			</div>
+		{% endblock %}
+		<div class="row text-center col-md-9">
+			<hr/>
+			<p>&copy; Copyright Anup Shinde. All rights reserved. &nbsp;&nbsp; | &nbsp;&nbsp; 
+			<a href="/privacy-policy">Privacy Policy</a>
+			</p>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="/static/jquery/jquery-2.0.3.min.js"></script>
+	<script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-665946-1']);
+		  _gaq.push(['_setDomainName', 'anupshinde.com']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+	</script>
+
+	{% include "disqus_comment_count.html" %}
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+---
+title: Integrating MS-Word in .NET
+tags:
+meta:
+abstract: This article will explain how we can use Microsoft Word in your .NET application.  This will enable you to use your favorite word-processor within your .NET application. For some cases, you will find that most of the document that you create is redundant work and only few things need to be filled up. E.g. the Client's ID, Current Date, Record Number, etc. 
+thumbnail: 
+date: 2005-09-30
+---
+<p>
+<img src="images/WordInDotNet.jpg" class="dropShadow" />
+
+</p>
+<p>
+This article will explain how we can use Microsoft Word in your .NET application. &nbsp;This will enable you to use your favorite word-processor within your .NET application.
+</p>
+<p>
+<ul>
+	<li><a href="code/WordInDotNet_release.zip">Download demo project - 246 Kb</a></li>
+	<li><a href="code/WordInDotNet_src.zip">Download source - 487 Kb</a></li>
+</ul>
+</p>
+<p>
+
+<span style="font-weight: bold;">Background</span>
+
+</p>
+<p>
+I needed a MS-Word control similar to the HTML editor that can become a part of the application. Unfortunately, there was no such way to do that at that time.
+
+</p>
+<p>
+While searching at Google, I came across the project which shows the trick of making any window the part of your application.
+
+</p>
+<p>
+This article is based on the article posted at <a href="http://www.codeproject.com/cs/miscctrl/winwordcontrol.asp" target="_blank">http://www.codeproject.com/cs/miscctrl/winwordcontrol.asp</a>. I would HIGHLY RECOMMEND reading this article too.
+
+</p>
+<p>
+Just when I was writing this article, I found one more article suggesting this trick at: <a href="http://www.codeproject.com/vb/net/ByPassAutomation.asp" target="_blank">http://www.codeproject.com/vb/net/ByPassAutomation.asp</a>
+
+</p>
+<p>
+<strong>Using the code</strong>
+
+</p>
+<p>
+When we contain a window within our application, we do not want that the window should be allowed to close through its Close (X) button. Similarly, we do not want the Minimize, Maximize and Restore buttons to work.&nbsp;
+
+</p>
+<p>
+One way to solve the problem is to hide the title bar itself. This can be done using the SystemInformation class, as shown below
+
+</p>
+<p>
+<pre class="prettyprint">int borderWidth = SystemInformation.Border3DSize.Width;
+int borderHeight = SystemInformation.Border3DSize.Height;
+int captionHeight = SystemInformation.CaptionHeight;
+int statusHeight = SystemInformation.ToolWindowCaptionHeight;
+
+// Move the window in the container so that the container borders hide the window's title bar.
+MoveWindow(
+	wordWnd,
+	-2*borderWidth,
+	-2*borderHeight - captionHeight,
+	this.Bounds.Width + 4*borderWidth,
+	this.Bounds.Height + captionHeight + 4*borderHeight + statusHeight,
+	true);</pre>
+</p>
+<p>
+But what would happen if the user presses "Alt+Spacebar"? This will open up the System Menu for the user, where the user can select Restore, Minimize, Close, etc. We don't even want that to happen. We can disable this System Menu using the Windows API. This is shown below:
+
+</p>
+<p>
+<pre class="prettyprint">// We want to remove the system menu also.
+// The title bar is not visible, but we want to avoid
+// accidental minimize, maximize, etc ..by
+// disabling the system menu (Alt+Space)
+int hMenu = GetSystemMenu(wordWnd,false);
+
+if(hMenu&gt;0)
+{
+  int menuItemCount	= GetMenuItemCount(hMenu);
+  RemoveMenu(hMenu, menuItemCount - 1, MF_REMOVE	| MF_BYPOSITION);
+  RemoveMenu(hMenu, menuItemCount - 2, MF_REMOVE	| MF_BYPOSITION);
+  RemoveMenu(hMenu, menuItemCount - 3, MF_REMOVE	| MF_BYPOSITION);
+  RemoveMenu(hMenu, menuItemCount - 4, MF_REMOVE	| MF_BYPOSITION);
+  RemoveMenu(hMenu, menuItemCount - 5, MF_REMOVE	| MF_BYPOSITION);
+  RemoveMenu(hMenu, menuItemCount - 6, MF_REMOVE	| MF_BYPOSITION);
+  RemoveMenu(hMenu, menuItemCount - 7, MF_REMOVE	| MF_BYPOSITION);
+  RemoveMenu(hMenu, menuItemCount - 8, MF_REMOVE	| MF_BYPOSITION);
+  DrawMenuBar(wordWnd);
+}</pre>
+</p>
+<p>
+
+You may also want to have only some command bars in the MS-Word window. E.g. you may not want the "Menu Bar" (which is also a command bar in MS-Word). This is shown below.
+</p>
+<p>
+<pre class="prettyprint">objWinWordControl.document.ActiveWindow.Application.CommandBars["Menu Bar"].Enabled=false;</pre>
+</p>
+<p>
+The "Standard" command bar in MS-Word has the "New" and "Open" buttons also. We wanted to disable those buttons also. We did that as shown below
+</p>
+<p>
+<pre class="prettyprint">wd.ActiveWindow.Application.CommandBars["Standard"].Controls[1].Enabled=false;
+wd.ActiveWindow.Application.CommandBars["Standard"].Controls[2].Enabled=false;</pre>
+</p>
+<p>
+In some cases, you will need to have the "Menu Bar", but not all the sub-menu options. You can disable those options by using the CommandBarPopUp class
+</p>
+<p>
+<pre class="prettyprint">Office.CommandBarPopup c;
+c = (Office.CommandBarPopup)wd.ActiveWindow.Application.CommandBars["Menu Bar"].Controls[0];
+c.Controls["Close Window"].Enabled=false;</pre>
+</p>
+<p>
+
+<strong>Attached code</strong>
+
+</p>
+<p>
+The code attached is part of the larger transcription workflow. It is developed using .NET 1.1 framework and MS-Word 2000.
+
+</p>
+<p>
+In most transcription applications, you will have a scenario like "Transcription --&gt; QA1 --&gt; QA2....." In these cases, you will have to give an error-marking facility to the QAs. I have just shown a demo in a very basic manner. Say, when a transcript goes from QA1 to QA2, the errors marked by QA2 should not be shown. Therefore we need to remove the error-marking before displaying the transcript to QA2.
+
+</p>
+<p>
+We need to have specific kind of templates for different clients of the transcription division. These templates can be pre-configured and used to create new documents (through the "LoadDocument" method). An example of this is shown through the "Load Document" button.
+
+</p>
+<p>
+In most cases, you will require that the part of the document being transcribe is automatically filled up. E.g. the Client's ID, Current Date, Record Number, etc. This kind of information will come from the database, therefore must be automatically filled up. I have accomplished this using "Bookmarks" in the word document. A sample can be seen using the "Sample.dot" file.
+
+</p>
+<p>
+You can do much more than what is shown in the attached code. Please find more about Microsoft Word Automation and Windows APIs at MSDN.
+
+</p>
+<p>
+<strong>Enhancements</strong>
+
+</p>
+<p>
+While this application just integrates (contains) MS-Word in .NET application, it was quite interesting to do so with other applications also. We did that with an audio player and found that the concept of containing windows was really useful the second time too.
+
+</p>
+<p>
+Happy coding!
+</p>

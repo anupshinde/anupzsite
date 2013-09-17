@@ -1,0 +1,113 @@
+---
+layout: base
+ApplyTemplateToContent: true
+---
+
+-->>code>>--
+
+scope.getPosts = function() {
+ var _ = scope._;
+ var posts = scope._
+				.chain(scope.Meta.posts.Directories)
+				.filter(function(dir) {
+					// Filter out directories not having index file
+					return !scope._.isUndefined(dir.index);
+				})
+				.sortBy(function(dir) {
+					if(scope._.isUndefined(dir.index.date)) {
+						return -(new Date());
+					}
+					return -Date.parse(dir.index.date);
+				})
+				.map(function(item) {
+					var post = item.index;
+					if(!scope._.isUndefined(post.tags) && post.tags !=null ) {
+						post.tags = post.tags.split(",");
+						for(var i=0;i < post.tags.length; i++) {         /*>*/
+							post.tags[i]= post.tags[i].trim();
+							if(_.contains(post.tags[i]," ")) {
+								//console.log("WARNING: Tag contains white-space: ", post.tags[i]);
+							}
+						}
+						
+					}
+					return post;
+				}).compact()
+				.filter(function(item) {
+					return !item.isDraft;
+				})
+				.value();
+	
+  return posts;
+}
+
+
+scope.GetTags = function(post) {
+	var r = scope._.chain(post.tags.split(",")).each(function(item) {
+		return item.trim();
+	}).value();
+	
+	console.log(r);
+	return r;
+}
+
+scope.paginate(scope.getPosts(), {
+	zpageSize: 30
+});
+
+	
+-->>code>>--
+
+{% for post in PageInfo.Elements %}
+
+	<div class="post">
+		<h2>
+			<a href="posts/{{post._filemeta.urlInfo.dirName}}/" class="post_title">
+				{{ post.title  }} 
+			</a>
+		</h2>
+		
+		<p>
+			{% if post.thumbnail %}
+				<figure class="img-indent5 img-indent-none-ml" style="float:left; padding-right:20px;">
+
+					<img src="posts/{{post._filemeta.urlInfo.dirName}}/images/{{ post.thumbnail }}" 
+						width="150" height="150" alt="{{entry.title}} logo" />
+
+				</figure>
+			{% endif %}
+			{{ post.abstract }}
+		</p>
+		<p>
+			<em>
+			<i class="icon-time"></i> &nbsp;&nbsp;{{moment(post.date).format("D MMMM YYYY")}}</em>
+			{% if not post.disallow_comments %}
+				, &nbsp;&nbsp;
+				<a class="font_comments" href="posts/{{post._filemeta.urlInfo.dirName}}/#disqus_thread">Comments</a>
+			{%endif%}
+
+			<br/>
+			{% if post.tags %}
+			<p class="font_author">
+				{% for tag in post.tags %}
+					<a href="/tag/{{ tag.toLowerCase().split(' ').join('-').split('#').join('-sharp') }}">
+					<i class="icon-tag"></i> {{tag}}
+					</a> 
+					&nbsp;&nbsp;
+				{% endfor %}
+			</p>
+			{% endif %}
+		</p>
+	</div>
+{% endfor %}
+	
+
+<ul class="pager">
+{% if PageInfo.HasPrev %}
+	<li class="previous"><a href="{{PageInfo.PrevPage.RelURL}}">&larr; Newer</a></li>
+{% endif %}
+{% if PageInfo.HasNext %}
+	<li class="next"><a href="{{PageInfo.NextPage.RelURL}}">Older &rarr;</a></li>
+{% endif %}
+</ul>
+

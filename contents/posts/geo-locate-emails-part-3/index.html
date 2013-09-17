@@ -1,0 +1,70 @@
+---
+title: Geo-locate Emails part-3 - Concluding...
+tags:
+meta:
+abstract: In earlier posts we saw how to capture sender's IP and then use that IP to locate the person. Although, that works many times - it may not be always correct. Here, we will see how these exceptions can occur.
+thumbnail: 
+date: 2006-09-26T00:04
+---
+<div><strong>Is the answer, found in this way, always correct?&nbsp;</strong></div>
+<div>&nbsp;</div>
+<div>Depends. It need not be always correct. But most of the time, I have found this information to be incorrect in the following cases.&nbsp;</div>
+<div>&nbsp;</div>
+<div>
+<ul>
+	<li>Somebody knows this technique and intentionally sends the mail through entirely different connection. (I have not yet been able to trace such people through mail headers)&nbsp;</li>
+	<li>A mail is routed through many internal networks about which the external world has no information. Example. In a large organization, with offices in different parts of a country, they might be using a single server placed at the head office to send the mails. In that case you will only get the head-office location every time.</li>
+	<li>The mail providers like GMail hide this information from the receiver in some cases.&nbsp;</li>
+</ul>
+</div>
+<div>&nbsp;</div>
+<div><em><span style="text-decoration: underline;">Warning: </span></em>The information about the geographical location for an IP is available from the Internet IP registration authorities (this is not what these authorities are actually called). If the registration information is incomplete or incorrect or hidden, this method will yield incorrect results.&nbsp;</div>
+<div>&nbsp;</div>
+<div>Well this ends the usage part - those who are interested in knowing answers to somewhat technical stuff may read further.</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>
+<div><strong>How to change the outgoing information?&nbsp;</strong></div>
+<div>&nbsp;</div>
+<div>Basically you cannot change the IP in the email headers until you use some kind of IP spoofing. But you can make use of an entirely different connection. How? Use the public proxies. When the mails are sent using public proxies, they originate from that public proxy IP address and therefore not possible to track directly (except when the heavy use is monitored and statistically analyzed conclusions are derived)&nbsp;</div>
+<div>&nbsp;</div>
+<div>A concept called &ldquo;Onion Routing&rdquo; disallows such analysis attacks too. Though at some advanced networking level, you may like to see <a href="http://www.onion-router.net/">http://www.onion-router.net/&nbsp;</a></div>
+<div>&nbsp;</div>
+<div>A not-so-well written article (by me) may allow you people to perform &ldquo;<a href="/posts/tunneling-and-onion-routing/">Onion Routing</a>&rdquo;</div>
+</div>
+<div>&nbsp;</div>
+<div>
+<div><strong>What happens when mail is routed within the organization before being sent?&nbsp;</strong></div>
+<div>&nbsp;</div>
+<div>Again taking the example of the big organization &ldquo;Infosys&rdquo;. This company has a development center at Pune, India. Any mails coming from its Pune development center are sent to the Internet through their Bangalore facility.&nbsp;</div>
+</div>
+<div>&nbsp;</div>
+<div><a href="images/PunITP-Details.JPG" target="_blank"><img src="images/small-PunITP-Details.JPG" class="dropShadow" alt="" /></a></div>
+<div>
+<div><em>Fig 4 - Image from PUNITP, Infosys</em></div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>As seen from the above header, there are many &ldquo;Received from&rdquo; headers, but last two of them are unreachable from the Internet, because they are internal to the organization. So we use the third last IP, which resolved to Bangalore India. That is incorrect. The mail is from Pune, but still we cannot use this method to find out the real location of the sender. But from the naming conventions like &ldquo;PUNITPMSG09.ad.infosys.com&rdquo;, we can assume that the IP is from Pune. Assumptions may be wrong, but fortunately in this case it was correct.&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div><strong>How GMail is preventing geo-location?&nbsp;</strong></div>
+<div>&nbsp;</div>
+<div>Not exactly preventing all such mails. But I found that mails sent from one GMail to another GMail account does not have the &ldquo;Received From&rdquo; headers. This makes it really difficult to trace the sender. Only GMail authorities would be capable of doing so.&nbsp;</div>
+<div>It is possible that I am wrong in this case. Correct me if so.&nbsp;</div>
+<div>&nbsp;</div>
+<div>The image below shows how GMail blocks &ldquo;Received from&rdquo; headers:&nbsp;</div>
+</div>
+<div>&nbsp;</div>
+<div>
+<div><a href="images/GMail-To-GMail-Header.JPG" target="_blank"><img src="images/small-GMail-To-GMail-Header.JPG"  class="dropShadow" alt="" /></a></div>
+<div><span style="font-style: italic;">Fig 5 - Image from GMail to GMail headers</span></div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div><em>Note:&nbsp;</em></div>
+<div><em>Any example used in this article has scrambled data at many places.&nbsp;</em></div>
+<div><em>References to the organization "Infosys" are purely co-incidental.&nbsp;</em></div>
+</div>
+<div><em>&nbsp;</em></div>
+<div><strong><a href="/posts/geo-locate-emails/">&lt; &nbsp;Part 1: &nbsp;Geo-locate Emails</a></strong></div>
+<div><a href="/posts/geo-locate-emails-part-2/"><strong>&lt; &nbsp;Part 2: &nbsp;Geo-locate IP</strong></a></div>
+<div>&nbsp;</div>

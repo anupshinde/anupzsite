@@ -1,0 +1,95 @@
+---
+title: Geo-locate Emails - part-2 - Locating IP
+tags:
+meta:
+abstract: This is continued article on Geo-locating emails. In the earlier post we saw how to locate the senders IP address and now we will be using that IP Address to find the location of the sender. In this example, I'll be using two sites that enable us to geo-locate IP.
+thumbnail: 
+date: 2006-09-26T00:02
+---
+<p>
+<a href="/posts/geo-locate-emails/"><strong>&lt; Continued from Part 1: &nbsp;Geo-locate Emails</strong></a>
+
+</p>
+<p>
+Here, I would not be explaining the exact technical process for this. Instead I will be showing how to geo-locate the IP address.&nbsp;I have been using two sites for the same.&nbsp;
+
+</p>
+<p>
+VisualRoute -&nbsp;<a href="http://www.visualroute.com/" target="_blank">http://www.visualroute.com/</a>
+
+</p>
+<p>
+GeoIPTool -&nbsp;<a href="http://www.geoiptool.com/" target="_blank">http://www.geoiptool.com/</a>
+
+</p>
+<p>
+First we will take up the latter one [<a href="http://www.geoiptool.com" target="_blank">GeoIPTool - http://www.geoiptool.com/</a>]. This is easy to use and only for locating the IP address&rsquo;s geographical location.&nbsp;
+
+</p>
+<p>
+Just input the IP address that you found into the &ldquo;Host/IP&rdquo; field in the form and click &ldquo;View Info&rdquo;. It will show you the geographical location where IP belongs.&nbsp;
+
+</p>
+<p>
+Suppose I found the Sender&rsquo;s IP address as &ldquo;61.95.162.76&rdquo;. The following shows me the information about the IP address.&nbsp;
+
+</p>
+<p>
+<span style="font-style: italic;"><a href="images/Geo-IP-Tool-Shot.JPG" target="_blank"><img src="images/small-Geo-IP-Tool-Shot.JPG" alt="" class="dropShadow" /></a></span>
+
+</p>
+<p>
+<span style="font-style: italic;">Fig 2 - Image from GeoIPTool</span>
+
+</p>
+<p>
+<strong>&nbsp;</strong>
+
+</p>
+<p>
+<strong>Still not satisfied!</strong>
+
+</p>
+<p>
+Well, GeoIPTool does not satisfy my requirements enough. Why? As shown in the image above, it gives me information like the IP address comes from the city Bangalore in Karnataka, India. But then Bangalore is a big city. Briefly speaking, it just does not help me too much.&nbsp;
+
+</p>
+<p>
+Therefore I turned to an old method of tracing it through &ldquo;Visualware&rsquo;s VisualRoute&rdquo;.&nbsp;
+
+</p>
+<p>
+Currently, the website gives a live demo at VisualRoute-&nbsp;<a href="http://visualroute.visualware.com/">http://visualroute.visualware.com/</a>
+
+</p>
+<p>
+<a href="images/VisualRoute-Shot.JPG" target="_blank"><img src="images/small-VisualRoute-Shot.JPG" class="dropShadow" /></a>
+
+</p>
+<p>
+<span style="font-style: italic;">Fig 3 - Image from VisualRoute&nbsp;</span>
+
+</p>
+<p>
+As the above image shows, the IP address is from &ldquo;Infosys Technologies Ltd, Bangalore&rdquo;
+
+</p>
+<p>
+But along with it, the tool also gives other not-so-important-for-us information like&nbsp;
+
+</p>
+<p>
+How the IP is reached? The complete path from the VisualRoute servers to that IP address.&nbsp;
+
+</p>
+<p>
+&nbsp;It also mentions &ldquo;Bharti Infotel Ltd&rdquo;. It means that the company &ldquo;Infosys, Bangalore&rdquo; uses a connection line from &ldquo;Bharti Infotel Ltd&rdquo;. Well, this doesn&rsquo;t mean that it is the only connection provider, but then strategically it is one of the 2 or may be at most 3 providers.&nbsp;
+
+</p>
+<p>
+It mentions &ldquo;Singtel Exchange&rdquo;. Well, this is one of the major Internet line providers for India. But the entry here shows that &ldquo;Bharti Infotel Ltd&rdquo; mainly uses the &ldquo;Singtel line&rdquo; for the &ldquo;WAN IP pool for Bangalore&rdquo;. &nbsp;The &ldquo;Snap&rdquo; button in the demo allows you to see the text-only report.
+
+</p>
+<p>
+<a href="/posts/geo-locate-emails-part-3/"><strong>Part 3: - Conclusion ....&nbsp;</strong><span style="font-weight: bold;">Continue reading &gt;</span><span style="font-weight: bold;">&nbsp;</span></a>
+</p>

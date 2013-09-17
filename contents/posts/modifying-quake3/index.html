@@ -1,0 +1,163 @@
+---
+title: Modifying Quake 3 - The Homing Missile Approach
+abstract: In this series of articles I'll explain how to compile and modify the Quake 3 source code to create a Homing Missile mod. This article is intended for beginners. You will find many websites with bits and pieces of information for compiling and modifying Quake 3 source. Inadequate or incorrect information’s leads to frustration most of the time as it was the case with me. Understanding and tweaking the code given here is also a good way of learning some basics about this game.
+thumbnail: homing_var.gif
+tags:
+meta:
+date: 2007-04-11
+---
+
+<p>
+In this article I'll explain how to compile and modify the Quake 3 source code to create a Homing Missile. This article is intended for beginners.
+
+</p>
+<p>
+<strong>Background</strong>
+
+</p>
+<p>
+Quake III was released few years back (somewhere in 2001-2002 if I am not wrong). At the same time, I was looking forward to buy a new PC and while researching for the same, I got a computer magazine with Quake III demo. That's when I decided that Quake III was going to be my benchmark for the new PC. Excellent game and my favorite till date. Now let me stop telling stories and get back to the point.
+
+</p>
+<p>
+<strong>Source code</strong>
+</p>
+<p>
+<ul>
+	<li><a href="http://www.idsoftware.com/" target="_blank"><strong>Quake3 base code</strong></a>&nbsp;-&nbsp;You can download it from&nbsp;<a href="http://www.idsoftware.com/" target="_blank">Id Software's website</a></li>
+	<li><a href="others/q3_mod_code.zip"><strong>Source files</strong></a>&nbsp;(changes only)</li>
+	<li><a href="others/q3ModDll.zip"><strong>Compile Mods</strong></a></li>
+</ul>
+</p>
+<p>
+Quake3's source code was launched some time after its release. The code does not have a lot of comments, but its very readable and understandable. You must know C and a bit of 3D vector mathematics. Mathematics I suppose can be learnt in case you don't have that background. At times you might get stuck in understanding the code due to vector operations performed. Just take a pen and paper and calculate it down, life will be much easier with those two objects.
+
+</p>
+<p>
+The entire source code has not been released. Though I don't know which part, a major part like the rendering engine could be under cover.
+
+</p>
+<p>
+Quake3's 3D engine has been proven as one of the best 3D engines made and some people have also said that nobody can write better code than the one written for this engine. Recently I also had a chance to go through the Microsoft Techfest, in which, one of the demonstrated research project was based on Quake III. FYI: It was regarding improving multiplayer gaming performance over a low bandwidth network around 100kbps. So, there is a lot of potential in reusing its code if your research/application requirements fit the same.
+
+</p>
+<p>
+<span style="text-decoration: underline;">NOTE:</span> Quake 3's source code is free does not mean that its game data is free. And you cannot play game without the game data (maps, sounds, music, bot models, etc.)That's why you still need to buy an original Quake 3 CD.
+
+</p>
+<p>
+<strong>Why am I re-writing this?</strong>
+
+</p>
+<p>
+You will find many websites with bits and pieces of information for compiling and modifying Quake 3 source. Inadequate or incorrect information leads to frustration most of the time as it was the case with me. It took a lot of time for me to finally compile and run quake 3 from the compiled code. Creating mods (relatively means modifying source) is another story, but that was fun. The code-change illustrated here again took a lot of time. Understanding and tweaking the code given here is also a good way of learning some basics about this game.
+
+</p>
+<p>
+<span style="font-weight: bold;">Compiling the source code</span>
+
+</p>
+<p>
+Before you start, it is also important to check the following:
+
+</p>
+<p>
+You have a full version of Quake 3 already installed. (Demo version won't work for us)
+
+</p>
+<p>
+Download Quake 3 point release 1.32 from the website and install it to your Quake 3 game directory.
+
+</p>
+<p>
+Check that you have Visual Studio 2003 installed on your machine. If you don't have VS2k3 and use VC++6.0, life's a bit difficult. Please see if this helps.
+
+</p>
+<p>
+Now follow the steps given below to complie the source code.
+</p>
+<p>
+<ul>
+	<li>Download the Quake 3 source from ID software and extract it to some directory.</li>
+	<li>Under the Code subdirectory, load the solution file quake3.sln in VS 2003. ( In case of VC++6.0 see the above mentioned link).</li>
+	<li>It is a source control bound code; therefore it will give some errors and ask for some source control server. Just click Cancel when it asks for the source control and just unbind all the projects from source control. (I don't know why Q3 team didn't do this).</li>
+	<li>Select Release from Build -&gt; Configuration Manager and build the solution. It should build without any errors. Verify the files created in the Code-&gt;Release. It should build without any errors. Verify the files created in the Code-&gt;Release.</li>
+	<li>Go to the directory where you have installed Quake 3. Within that, create a new directory &ldquo;Mod&rdquo; (of course without the quotes).</li>
+	<li>Go back to the Release directory and copy all the DLLs and EXEs (only one EXE: quake3.exe exists). Paste these files in the newly created Mod directory.</li>
+	<li>Now go to the Quake 3 directory. Here again you will find Quake3.exe. This is the one that was installed from your Quake 3 CD. Rename it to Quake3.exe.backup.</li>
+	<li>Move the Quake3.exe from Mod directory to the current Quake 3 directory. (If you are confused with same kind of names, please re-read.)</li>
+	<li>Go back to the Mod directory and create a new batch file "runrelease.bat" and write following lines in it.</li>
+</ul>
+</p>
+<p>
+<pre class="prettyprint">cd..
+quake3 +set fs_game Mod</pre>
+</p>
+<p>
+This tells the quake3 executable to load the game with our code.
+
+</p>
+<p>
+Now to run the game with your compiled code, just double-click the batch file, and you are ready to play. An important step has been covered by this time.
+
+</p>
+<p>
+<span style="text-decoration: underline;">NOTE</span>: Debugging is (as usual) possible in Quake 3 too. That is not covered in this article.
+
+</p>
+<p>
+<span style="text-decoration: underline;">NOTE</span>: Actually you don&rsquo;t need to change the exe until you want some changes in the quake3 EXE project code. But I recommend this since I have noticed sometimes the original EXE takes a lot of time to load when we implement our modifications.
+
+</p>
+<p>
+<span style="text-decoration: underline;">WARNING</span>: While making your modifications it is recommended to run Quake 3 in windowed mode ( and not the normal full screen mode). You can switch to windowed mode by the pressing Alt+Enter. Quake 3 remembers the configuration (atleast on my PC) while loading the next time. Runtime errors may hang up your inputs in full screen mode and thereby forcing you to restart without proper shutdown.
+
+</p>
+<p>
+
+<strong>Screenshots of what we are going to develop in this series</strong>
+
+</p>
+<p>
+<strong>Along the way, there will be lots of reading and coding.... here are some screenshots</strong>
+
+</p>
+<p>
+<strong><img title="Grunt being chased by the homing missile" src="images/homing_var.gif" alt="Grunt being chased by the homing missile" class="dropShadow" /></strong>
+
+</p>
+<p>
+<em>Above:&nbsp;</em>Grunt being chased by the homing missile
+
+</p>
+<p>
+<img title="Grunt under fire (Homing missile with fireworks)" src="images/homing_fire1.gif" alt="Grunt under fire (Homing missile with fireworks)" class="dropShadow" />
+
+</p>
+<p>
+<em>Above</em>: Grunt under fire (Homing missile with fireworks).
+
+</p>
+<p>
+<em>Below</em>: Grunt has a narrow escape. Missiles scatter in air.
+
+</p>
+<p>
+<img title="Grunt has a narrow escape. Missiles scatter in air." src="images/homing_fire2.gif" alt="Grunt has a narrow escape. Missiles scatter in air" class="dropShadow" />
+
+</p>
+<p>
+<strong>Further...</strong>
+
+</p>
+<p>
+<a href="/posts/quake3-compile-vc++/"><strong>Tips on compiling Quake III source code with VC++ 6.0</strong></a>
+
+</p>
+<p>
+<a href="/posts/modifying-quake3-part-2/"><strong>Part 2: - Gamer inputs .... Continue reading &gt;&nbsp;</strong></a>
+
+</p>
+<p>
+<a href="/posts/modifying-quake3-part-3/"><strong>Part 3: - Missile behavior .... Continue reading &gt;&nbsp;</strong></a>
+</p>

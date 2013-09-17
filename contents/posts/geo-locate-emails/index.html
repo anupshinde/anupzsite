@@ -1,0 +1,96 @@
+---
+title: Geo-locate Emails
+tags:
+meta:
+abstract: I would just like to share a trick that has been very useful to me in past few years, especially for superficially scrutinizing cyber-strangers. There is much software out there that will allow you to geo-locate the incoming mails and thereby making this task much easier to perform. For those who want to use this information only casually, the following is the simple procedure. 
+thumbnail: 
+date: 2006-09-26
+---
+<p>
+I would just like to share a trick that has been very useful to me in past few years, especially for superficially scrutinizing cyber-strangers. There is much software out there that will allow you to geo-locate the incoming mails and thereby making this task much easier to perform. For those who want to use this information only casually, the following is the simple procedure.&nbsp;
+
+</p>
+<p>
+
+<strong>How it works:</strong>
+
+</p>
+<p>
+Geo-location is not a very complex process superficially and it consists of two basic steps.&nbsp;
+</p>
+<p>
+<ol>
+	<li><strong>Find out the IP address</strong> (Internet protocol address) from where the mail originated.&nbsp;</li>
+	<li><strong>Geo-locate the IP</strong>. -This is a technical process and if not difficult, it is a bit cumbersome to do manually, but developers have made free easy-to-use utilities for these.&nbsp;</li>
+</ol>
+</p>
+<p>
+
+<strong>Let's start:</strong>
+
+</p>
+<p>
+First you need to get the headers of the mail. These headers are usually hidden by almost all the mail reading applications whether it is web-based or a desktop application.
+
+</p>
+<p>
+<strong>To get the headers:</strong>
+
+</p>
+<p>
+Here I will be explaining these only for the web-based mail applications like Yahoo and GMail.&nbsp;
+</p>
+<p>
+<ul>
+	<li>In GMail when you open the mail, select &ldquo;More options&rdquo; and click &ldquo;Show original&rdquo;&nbsp;</li>
+	<li>In Yahoo Mail, it has a link &ldquo;Full Headers&rdquo; at the bottom right of the mail.</li>
+</ul>
+</p>
+<p>
+All mails have similar headers, except the way that they are shown. Here I would be taking an example of a mail received in GMail account. It shows the original mail in a simple text-only format&nbsp;
+
+</p>
+<p>
+<strong>Searching the sender&rsquo;s IP&nbsp;</strong>
+
+</p>
+<p>
+The following is the header as shown in the text format.&nbsp;
+
+</p>
+<p>
+<a href="images/Highlight-Headers.JPG" target="_blank"><img src="images/small-Highlight-Headers.JPG" class="dropShadow" align="middle" /></a>
+
+<p>
+<em>Fig 1 - Image highlighting the headers</em>
+</p>
+</p>
+
+<p>
+The header is highlighted inside a green box. This header has many fields. Even I do not understand all of those. What is important to us is the &ldquo;Received field&rdquo;. Basically our first step is to find out the IP address of the sender. Therefore we just need to the see the Headers saying, &ldquo;Received From&rdquo;.&nbsp;
+
+</p>
+<p>
+As you can see in the image, there are two such &ldquo;received from&rdquo; lines. Which one is correct? Actually both are correct. This mail was sent from a Yahoo mail account to a GMail account. It has been received two times. First the sender sent it to the Yahoo Mail Service and then it was sent from the Yahoo Mail service to the GMail service. Well, this is the same as the postal service applying their stamps at different places when the paper mails are routed to the destination.&nbsp;
+
+</p>
+<p>
+But we are interested in the originating IP address only. And that is the IP address from where the yahoo service received the mail. Here it is &ldquo;172.21.100.79&rdquo; as underlined in the image.&nbsp;
+
+</p>
+<p>
+Note: Take the IP from the last &ldquo;Received From&rdquo; header and use that IP for geo-location as explained in steps further. If that IP gives some kind of error while geo-locating use the IP from the second last &ldquo;Received from&rdquo; header and so on. But then any IP other than last one may not give completely correct results.&nbsp;
+
+</p>
+<p>
+Display of mail headers may differ slightly in different services. A bit of search within the header can lead you to the correct IP address. (This again only if the application allows display of such data).&nbsp;
+
+</p>
+<p>
+So we have completed the first step. Now we need to geo-locate the IP to its destination.&nbsp;
+</p>
+<p>
+
+<a href="/posts/geo-locate-emails-part-2/"><strong>Part 2: - Geo-locating the IP ....&nbsp;</strong><span style="font-weight: bold;">Continue reading &gt;</span><span style="font-weight: bold;">&nbsp;</span></a>
+
+</p>

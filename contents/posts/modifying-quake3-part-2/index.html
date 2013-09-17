@@ -1,0 +1,205 @@
+---
+title: Modifying Quake 3 - part 2- Gamer inputs
+tags:
+meta:
+abstract: In the previous post, we saw how to compile and Q3 source code and some of details on Q3. In this post, I'll explain some basics on how Q3 works and we will create a mechanism to accept user input. In the last post, we will define the behavior of the homing-missile.
+thumbnail: 
+date: 2007-04-11T00:02
+---
+<p>
+<a style="font-weight: bold;" href="/posts/modifying-quake3/">&lt; Continued from Part 1: &nbsp;Compiling Quake 3 source code</a>
+
+</p>
+<p>
+
+<span style="font-weight: bold;">Before you modify the code (some basics)</span>
+
+<p>
+It is important to understand some concepts of Quake 3 before you modify the code. Here I am defining only very small part required to understand the code illustrated here. There are lots of things that you will find out once you have started doing more than what's presented here.
+
+</p>
+<p>
+Anything that is created in the game is called an entity. Every entity created in Quake 3 has an associated think function. The think function defines the kind of behavior the entity will exhibit at various times in the game.
+
+</p>
+<p>
+For example if you see the fire_rocket method in g_missile.c under the game project (under quake3.sln), you will find lines stating:
+</p>
+<p>
+<pre class="prettyprint">bolt-&gt;nextthink = level.time + 15000;
+bolt-&gt;think = G_ExplodeMissile; //Game time here is in milliseconds.</pre>
+</p>
+<p>
+
+G_ExplodeMissle is a think function for the rocket. This means that after 15 seconds the rocket will explode. Let us call this time frame as the Next Think time.
+</p>
+<p>
+
+We can have our own think function that will define what the rocket will do after a time specified. By default a missile entity doesn&rsquo;t require processing once released, but depending on the entity type and its behavior , the next think time can be different.
+
+</p>
+<p>
+
+</p>
+<p>
+<strong>The Homing Missile</strong>
+
+</p>
+<p>
+By definition, homing missile is a kind of missile which when fired will find a nearest target and steer itself towards it and finally blast into the target.
+
+</p>
+<p>
+In Quake 3, we will enable firing of <em>homing missile</em> from the <em>rocket launcher</em> itself. A player can select whether he wants to fire a simple rocket or homing missile (same rocket behaving differently).
+
+</p>
+<p>
+We can divide this task into two parts:
+<ul>
+	<li>Taking inputs from the player on what kind of rocket to use (homing or simple)</li>
+	<li>Creating a think function to change the behavior of missile.</li>
+</ul>
+</p>
+<p>
+
+<em><strong>Taking inputs from the player</strong></em>
+
+</p>
+<p>
+First we must have a place where we can store the input of the player. Therefore, we insert a variable homingMissle in clientPersistant_t typed structure. This structure is declared in the file g_local.h under the game project. The changed structure is shown below.
+</p>
+<p>
+<pre class="prettyprint  doScroll">// client data that stays across multiple respawns, but is cleared
+// on each level change or team change at ClientBegin()
+typedef struct {
+	clientConnected_t	connected;
+	usercmd_t		cmd;			// we would lose angles if not persistant
+	qboolean		localClient;		// true if "ip" info key is "localhost"
+	qboolean		initialSpawn;		// the first spawn should be at a cool location
+	qboolean		predictItemPickup;	// based on cg_predictItems userinfo
+	qboolean		pmoveFixed;		//
+	char			netname[MAX_NETNAME];
+	int			maxHealth;		// for handicapping
+	int			enterTime;		// level.time the client entered the game
+	playerTeamState_t 	teamState;		// status in teamplay games
+	int			voteCount;		// to prevent people from constantly calling votes
+	int			teamVoteCount;		// to prevent people from constantly calling votes
+	qboolean		teamInfo;		// send team overlay updates?
+	<strong>int			homingMissle;		// is homing missle on for the client</strong>
+
+} clientPersistant_t;</pre>
+</p>
+<p>
+
+You must be wondering why I am using int when I can use a boolean. That's because in the code I am also introducing different types of homing missiles. Their think functions are different. I will be explaining only the basic homing missile code here.
+</p>
+<p>
+
+</p>
+<p>
+Once we have placed a varible here, we must initialize it with a default value whenever a new player is created. This is done in function<em> ClientBegin(...)</em> in file <em>g_client.c</em> as shown below.
+</p>
+<p>
+<pre class="prettyprint">void ClientBegin( int clientNum ) {
+	gentity_t	*ent;
+	...........
+	ent-&gt;client = client;
+
+	<strong>client-&gt;pers.homingMissle = 0;</strong>
+	client-&gt;pers.connected = CON_CONNECTED;
+	client-&gt;pers.enterTime = level.time;
+
+	...........
+	// count current clients and rank for scoreboard
+	CalculateRanks();
+}</pre>
+</p>
+<p>
+
+Now, we have to take input from the player during the game and set it to the homingMissile variable. If you have played Quake 3, you will know that commands can be given by the sequence "Press '~'. Then give command as<em> "/CommandName command-parameters(if any)</em>". So lets say our command name is homing.
+
+</p>
+<p>
+We will not be using any parameters with the command. So this variable can be toggled within its value-range. The range used in this code is from 0 to 5. i.e. When the player intiates game the value is 0. Then when player gives homing command, the value is 1. Thereafter, 2,3,4,5 and finally after 5 it will be back to 0.
+
+</p>
+<p>
+To achieve such functionality, we will have to introduce our command in the file<em> g_cmds.c</em>.This we do by modifying the method <em>ClientCommand(...) </em>in this file.
+
+</p>
+<p>
+<pre class="prettyprint">void ClientCommand( int clientNum ) {
+	gentity_t *ent;
+	............
+	else if (Q_stricmp (cmd, "stats") == 0)
+		Cmd_Stats_f( ent );
+	else if (Q_stricmp (cmd, "homing") == 0)
+		Cmd_SetHoming_f (ent);
+	else
+		trap_SendServerCommand( clientNum, va("print \"unknown cmd %s\n\"", cmd ) );
+}</pre>
+</p>
+<p>
+As you can see we also used a new method <em>Cmd_SetHoming_f(...)</em>. This is declared as shown below
+</p>
+<p>
+<pre class="prettyprint doScroll">//New method added
+void Cmd_SetHoming_f (gentity_t *ent)
+{
+	//0 -&gt; off
+	//1 -&gt; Constant speed
+	//2 -&gt; Variable speed
+	//3 -&gt; Fireworks with varible speed
+	//4 -&gt; Fireworks with varible speed and wide angle
+	//5 -&gt; Fireworks with varible speed and all view
+
+	if (ent-&gt;client-&gt;pers.homingMissle == 0)
+	{
+		trap_SendServerCommand( ent-g_entities, va("print \"Homing Missiles with constant speed
+		                                                    are on.\n\""));
+		ent-&gt;client-&gt;pers.homingMissle = 1;
+	}
+	else if (ent-&gt;client-&gt;pers.homingMissle == 1)
+	{
+		trap_SendServerCommand( ent-g_entities, va("print \"Homing Missiles with variable speed
+		                                                    are on.\n\""));
+		ent-&gt;client-&gt;pers.homingMissle = 2;
+	}
+	else if (ent-&gt;client-&gt;pers.homingMissle == 2)
+	{
+		trap_SendServerCommand( ent-g_entities, va("print \"Homing Missiles with variable speed
+		                                                    and fireworks are on.\n\""));
+		ent-&gt;client-&gt;pers.homingMissle = 3;
+	}
+	else if (ent-&gt;client-&gt;pers.homingMissle == 3)
+	{
+		trap_SendServerCommand( ent-g_entities, va("print \"Homing Missiles with variable speed,
+		                                                    fireworks and wide angle are on.\n\""));
+		ent-&gt;client-&gt;pers.homingMissle = 4;
+	}
+	else if (ent-&gt;client-&gt;pers.homingMissle == 4)
+	{
+		trap_SendServerCommand( ent-g_entities, va("print \"Homing Missiles with variable speed,
+		                                                    fireworks and all view are on.\n\""));
+		ent-&gt;client-&gt;pers.homingMissle = 5;
+	}
+	else
+	{
+		trap_SendServerCommand( ent-g_entities, va("print \"Homing Missiles are off.\n\""));
+		ent-&gt;client-&gt;pers.homingMissle = 0;
+	}
+}</pre>
+</p>
+<p>
+
+So now whenever the player gives command <em>"/homing"</em>, the values will be toggled within the range and appropriate behavior will be exhibited by the missiles. You can also bind some key say <em>'h'</em> to the homing command. Give the command <em>/bind h homing</em>
+
+</p>
+<p>
+As you can see, different values have different behaviors stated. The behavior for <em>value=1</em> will be explained here, the rest will be briefly stated later.&nbsp; &nbsp; &nbsp;
+
+</p>
+<p>
+<a href="/posts/modifying-quake3-part-3/"><strong>Part 3: - Missile behavior .... Continue reading &gt;&nbsp;</strong></a>
+
+</p>

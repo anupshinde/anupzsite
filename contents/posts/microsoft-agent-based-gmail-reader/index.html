@@ -1,0 +1,270 @@
+---
+title: Microsoft Agent based Gmail reader
+tags:
+meta:
+abstract: This article will explain how to create your own Gmail Notifier kind of application that checks the new mails using recently introduced Gmail Atom Feeds and speaks the details of the mail using Microsoft Agent and SAPI interface
+thumbnail: 
+date: 2005-09-12
+---
+<p>
+This article will show you how to create your own Gmail Notifier kind of application that checks the new mails using recently introduced Gmail Atom Feeds and speaks the details of the mail using Microsoft Agent.
+
+</p>
+<p>
+<img src="images/gman.jpg" class="dropShadow" />
+
+</p>
+<p>
+<strong>Source Code:</strong>
+</p>
+<p>
+<ul>
+	<li><a title="Download demo project" href="code/GMan_release.zip">Download demo project - 69 Kb</a></li>
+	<li><a title="Download source" href="code/GMan_src.zip">Download source - 55 Kb</a></li>
+</ul>
+</p>
+<p>
+
+<strong>Using Google ATOM feeds</strong>
+
+</p>
+<p>
+Google has recently introduced feature that allows you to get an abstract of the mails using ATOM feed reader.
+
+</p>
+<p>
+We use the WebRequest object to get the ATOM feeds.
+
+</p>
+<p>
+We can connect to the GMail site at:&nbsp;<a href="https://mail.google.com/mail/feed/atom" target="_blank">https://mail.google.com/mail/feed/atom</a>&nbsp;
+
+</p>
+<p>
+This site requires basic authorization that we send in the request headers.
+
+</p>
+<p>
+The following code shows how to send the request and receive the atom feed. You may have to connect through a proxy. (The code for the proxy usage is not explained here)
+
+</p>
+<p>
+<pre class="prettyprint doScroll">wrGETURL = WebRequest.Create("https://mail.google.com/mail/feed/atom"); 
+
+if(clsMain.g_UseProxy)
+{
+	wrGETURL.Proxy = clsMain.GetProxy();
+}
+
+bytes = Encoding.ASCII.GetBytes(txtUserName.Text.Trim() + ":" + txtUserPassword.Text.Trim());
+
+wrGETURL.Headers.Add("Authorization", "Basic " + Convert.ToBase64String(bytes));
+
+Stream feedStream = wrGETURL.GetResponse().GetResponseStream();</pre>
+</p>
+<p>
+
+NOTE: Differing from the site stated above, the site stated by Google is 'https://gmail.google.com/gmail/feed/atom'. I was not able to connect to this using this code. May be some other kind of authorization is required.
+
+</p>
+<p>
+The response that you get is in XML Format as shown below:
+</p>
+<p>
+<pre class="prettyprint doScroll">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;feed version="0.3" xmlns="http://purl.org/atom/ns#"&gt;
+	&lt;title&gt;Gmail - Inbox for anupshinde&lt;/title&gt;
+	&lt;tagline&gt;New messages in your Gmail Inbox&lt;/tagline&gt;
+	&lt;fullcount&gt;38&lt;/fullcount&gt;
+	&lt;link rel="alternate" href="http://mail.google.com/mail" type="text/html"/&gt;
+	&lt;modified&gt;2005-09-11T14:01:39Z&lt;/modified&gt;
+
+	&lt;entry&gt;
+		&lt;title&gt;New result arrived&lt;/title&gt;
+		&lt;summary&gt;Dear Sir,
+                A new result has arrived for the following candidate: Name: Anup Shinde
+                RemoteIP &amp;hellip;&lt;/summary&gt;
+		&lt;link rel="alternate" href="http://mail.google.com/mail" type="text/html"/&gt;
+		&lt;modified&gt;2005-09-11T13:58:15Z&lt;/modified&gt;
+		&lt;issued&gt;2005-09-11T13:58:15Z&lt;/issued&gt;
+		&lt;id&gt;tag:gmail.google.com,2004:1181165390179818642&lt;/id&gt;
+		&lt;author&gt;
+			&lt;name&gt;anup&lt;/name&gt;
+			&lt;email&gt;anup@micromacs.com&lt;/email&gt;
+		&lt;/author&gt;
+	&lt;/entry&gt;
+
+	.....
+
+	.....
+
+	.....
+
+&lt;/feed&gt;</pre>
+</p>
+<p>
+
+</p>
+<p>
+<strong>Parsing the ATOM feeds</strong>
+
+</p>
+<p>
+Atom feeds can be parsed yourself, or you can used a ready made Atom feed parser. Not to take too much trouble creating that, I have used the "Atom.NET" libraries available from the open-source library at <a href="http://atomnet.sourceforge.net/" target="_blank">http://atomnet.sourceforge.net/</a>
+
+</p>
+<p>
+Just download the "Atom.NET.dll" and add a reference to the project. &nbsp;If we are not using proxy, we need not create the web-request as Atom.NET libraries can automatically create it for us. Unfortunately, Atom.Net libraries do not have a support for proxy. So we need to get the response by ourselves and send this response stream to Atom.NET library. Once we create the instance of the Atom feed, we can loop through the entries as shown below.
+</p>
+<p>
+<pre class="prettyprint doScroll">Stream feedStream = wrGETURL.GetResponse().GetResponseStream();
+
+Atom.Core.AtomFeed myFeed;
+
+myFeed = Atom.Core.AtomFeed.Load(feedStream);
+
+// Get the date and time of the feed.
+strFeedTime = myFeed.Modified.DateTime.Day.ToString() + "-"
+              + myFeed.Modified.DateTime.ToString("MMM") + "-"
+              + myFeed.Modified.DateTime.Year.ToString() + " "
+              +  myFeed.Modified.DateTime.TimeOfDay.ToString();
+
+feedTime= DateTime.Parse(strFeedTime);
+
+Atom.Core.Collections.AtomEntryCollection ents = myFeed.Entries;
+
+foreach(Atom.Core.AtomEntry ent in ents)
+{				{
+	FromName = ent.Author.Name;
+	Title = ent.Title.Content;
+	Content = ent.Summary.Content;
+	//Do something else
+}</pre>
+</p>
+<p>
+
+<strong>Using Microsoft Agent 2.0</strong>
+
+</p>
+<p>
+Once the feeds have been downloaded and parsed, you can do literally anything with it. Our purpose is to speak these feeds for the user using Microsoft Agent 2.0.
+
+</p>
+<p>
+Most probably you will have the Microsoft Agent installed. Stating the requirements is out of the scope of this article. Please see the Microsoft Agent sites stated below
+
+</p>
+<p>
+Developers, please see the home page at: <a href="http://www.microsoft.com/MSAGENT/default.asp" target="_blank">http://www.microsoft.com/MSAGENT/default.asp</a>
+
+</p>
+<p>
+The end user downloads can be found at: <a href="http://www.microsoft.com/MSAGENT/downloads/user.asp" target="_blank">http://www.microsoft.com/MSAGENT/downloads/user.asp</a>
+
+</p>
+<p>
+I found an interesting site that offers Microsoft Agent Character downloads. Please see <a href="http://www.e-clips.com.au" target="_blank">http://www.e-clips.com.au</a>
+
+</p>
+<p>
+We will receive feeds in text format, which need to be converted to speech. Don't worry. Microsoft Agent has a simple Speak(text) method, which can be used for this. MS-Agent works using SAPI 4.0. Therefore you will also have to download SAPI 4.0 runtime available from the links above. Windows XP/2000 users will already have these. Without the SAPI 4, you will not be able to hear voice.
+
+</p>
+<p>
+<span style="text-decoration: underline;">NOTE</span>: SAPI 5.0 TTS is much better than SAPI4 TTS. It is possible to connect MS-Agent with SAPI5.0 TTS, but that is out of the scope of this article.
+
+</p>
+<p>
+To use Microsoft Agent in your project, go to the Toolbox and open "Add/Remove Items". Select "Microsoft Agent Control 2.0"(AgentCtl.dll) from COM components and click OK. You can see a component with a "Spy" like icon in the toolbox. You need to place this on the form.
+
+</p>
+<p>
+The code for using the character is shown below:
+</p>
+<p>
+<pre class="prettyprint doScroll">// Load the character. Here we did not specify the file path.
+// The character will be searched at the default path(s).
+
+agentMain.Characters.Load("agentAssistant", "merlin.acs");
+agentRef = agentMain.Characters.Character("agentAssistant");
+
+// Assign a position for the character
+agentRef.Left = (short)(this.Left + this.Width + 10);
+agentRef.Top = (short)(this.Top + this.Height + 10);
+
+// Show and introduce the character.
+agentRef.Show(false);
+agentRef.Play("Greet");
+agentRef.Play("Explain");
+agentRef.Speak("Hi. I will be fetching your Google Mails","");
+agentRef.Play("Acknowledge");
+agentRef.Speak("You can activate me whenever you want.","");
+agentRef.Speak("Bye bye.","");
+agentRef.Play("Wave");
+agentRef.Hide(false);</pre>
+</p>
+<p>
+<strong>Attached code</strong>
+
+</p>
+<p>
+In the attached project, there is a method LoadAgent(String AgentFileName) which takes the file name from which the agent has to be loaded. This makes it easier to load multiple agents. To login to the GMail server, I have used a window's form "frmMain" that also asks for saving the username and password. The entire configuration is stored in a file "vals.conf". Since, it is insecure to save un-encrypted username and password; I have converted both of them to Base64 string before saving it to the conf file. (But that is not enough).&nbsp;
+
+</p>
+<p>
+There are two methods for reading and writing configuration, namely "WriteOptions()" and "ReadOptions". Not some hi-fi coding, but very basic one. I am planning to implement "Application Configuration Blocks" from the Enterprise Library -Patterns and practices for this application.
+
+</p>
+<p>
+Also there is a timer whose interval is hard-coded to 5 minutes. At every 5 minutes, the application will check for any new mails. To distinguish new mails from the previously "spoken" mails, the last accessed/checked time is stored. Only the mails that came after the "last accessed time" will be spoken. This is demonstrated in the code below.
+</p>
+<p>
+<pre class="prettyprint doScroll">// last_accessed_DateTime is initialized with 1st January, 1900
+
+myFeed = Atom.Core.AtomFeed.Load(feedStream);
+
+strFeedTime = myFeed.Modified.DateTime.Day.ToString() + "-"
+              + myFeed.Modified.DateTime.ToString("MMM") + "-"
+              + myFeed.Modified.DateTime.Year.ToString() + " "
+              + myFeed.Modified.DateTime.TimeOfDay.ToString();
+
+feedTime= DateTime.Parse(strFeedTime);
+if( feedTime &lt;= DateTime.Parse(last_accessed_DateTime)) { return; }
+foreach(Atom.Core.AtomEntry ent in ents) {
+        if(i&gt;=max_reads) break;
+
+	FromName = ent.Author.Name;
+	Title = ent.Title.Content;
+	Content = ent.Summary.Content;
+
+	strFeedTime = ent.Modified.DateTime.Day.ToString() + "-"
+                     + ent.Modified.DateTime.ToString("MMM") + "-"
+                     + ent.Modified.DateTime.Year.ToString() + " "
+                     + ent.Modified.DateTime.TimeOfDay.ToString();
+
+	entfeedTime= DateTime.Parse(strFeedTime);
+	if(entfeedTime &lt;= DateTime.Parse(last_accessed_DateTime))
+	{
+		i++;
+		continue;
+	}
+
+	//Do something else
+
+	i++;
+}
+
+last_accessed_DateTime = feedTime.Day.ToString() + "-"
+                         + feedTime.ToString("MMM") + "-"
+                         + feedTime.Year.ToString() + " "
+                         +  feedTime.TimeOfDay.ToString();</pre>
+</p>
+<p>
+
+The number of mails spoken is also hard-coded to 10. Gmail returns 20 feeds at maximum.
+
+</p>
+<p>
+Enjoy!!! and happy coding! Please leave your feedback below
+
+</p>

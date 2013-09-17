@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+	{{ title }} | {{Site.title}}
+{% endblock %}
+
+{% block container_content %}
+
+	<div class="row">
+		<div class="col-md-9">
+			{% block content %}
+				{{ content }}
+			{% endblock %}
+		</div>
+		<div class="col-md-1">
+			&nbsp;
+		</div>
+		<div class="col-md-2">
+			{% if not remove_ads %}
+				{% block side_ad_content %}
+					<div class="row ad"> {% include "ad_right_side_long_unit.html" %} </div>
+				{% endblock %}
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

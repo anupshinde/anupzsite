@@ -1,0 +1,175 @@
+---
+title: Force.com Developer tip- Writing faster JavaScript / CSS
+tags: force.com, productivity, javascript, visualforce
+meta: force.com productivity fast javascript CSS visualforce sfdc
+abstract: If you are a Force.com developer who has to write Visualforce pages and some bit of javascript, you surely would get frustrated with the slow "file-save" timings that you find with Force.com Eclipse IDE. Further if you use compressed static resources to host all your static js/css files,  it gets more painful to edit such static resources. In this post, I will show you a technique that I use to be more productive while writing javascript with Visualforce/APEX on Force.com platform.
+date: 2013-01-31
+
+---
+<p>
+
+If you are a Force.com developer who has to write Visualforce pages and some bit of <span>JavaScript</span>, you surely would get frustrated with the slow "file-save" timings that you find with Force.com Eclipse IDE. While it is powerful, it also gets slow and irritating - especially when its not even compiling anything on the JavaScript resource. And to fix a missed "comma" and it can take 10 to 30 seconds to save it&nbsp;<img title="Frown" src="/static/images/smiley-frown.gif" alt="Frown" border="0" />
+</p>
+<p>
+
+<img class="dropShadow" title="Eclipse IDE Force.com" src="images/dev-tip-force-com-eclipse-slow.png" alt="Eclipse IDE Force.com"  />
+
+</p>
+<p>
+
+Additionally, like me, &nbsp;you may not like writing javascript in Force.com IDE at all - it may not be the best JS editor - or &nbsp;for some other reason.
+</p>
+<p>
+
+Also if you have quite a few &nbsp;javascript or css files, its better to use compressed resources. But one of the reasons people don&rsquo;t create a compressed static resource in Force.com is that it&rsquo;s a bit of a pain in the neck to edit their contents.&nbsp;<span style="">One way out is to use the </span><a style="" title="Eclipse Zip Editor" href="http://sourceforge.net/projects/zipeditor/" target="_blank">ZipEditor plugin</a><span style="">&nbsp;but this tends to the save-stuff even slower. And if you have a compressed resource for styles &amp; heavy images - it gets way too slow to save a single CSS file.</span>
+
+</p>
+<p>
+Since its a pain to edit the static resources, many developers &nbsp;start writing code JS and CSS in Visualforce pages... And end up with mixed up JS CSS VF code all in one Visualforce... something like below which is separated at a later point of time and requires extra time and effort.
+</p>
+<p>
+<pre class="prettyprint">&lt;apex:page &gt;
+&lt;style&gt;
+    .formCheckbox{
+       vertical-align:bottom;
+    }
+    .tableCellSpace {
+        padding-bottom:10px;
+    }
+&lt;/style&gt;
+&lt;script&gt;
+  function foo() {
+	var label = '{!$Label.SomeLabel}'
+
+	/* And some code like
+                (Indented with new lines only to fit correctly) */
+	document
+         .getElementById('{!$Component.someApexForm.someApexElementID}')
+           .value = 'something'; 
+
+	/* And sometimes people write horrible hard-to-separate code .
+	 -- this I consider as bad abuse of template language... */
+	var i=0;
+	var arr = new Array();
+	&lt;apex:repeat value="{!list}" var="listItem" &gt;
+	    arr[i] = new Array(2);
+	    arr[i++][0]='{!listItem}';
+	&lt;/apex:repeat&gt;
+  }
+&lt;/script&gt;
+.......
+&lt;/apex:page &gt;</pre>
+</p>
+<p>
+It is good to keep JS and CSS stuff separated right from the beginning to avoid such cases.&nbsp;
+</p>
+<p>
+
+One of the productive technique that works best for me, even when working with large javascript code bases, is to use a local server to host the JS file. &nbsp;i.e using "http://localhost:NNNN/...".
+</p>
+<p>
+
+<span style="font-size: small;"><em>I did not try "file://" since that has too many restrictions and removing those restrictions can particularly make my general browsing unsafe.</em></span>
+</p>
+<p>
+
+This local server may be anything - Tomcat/IIS/etc..&nbsp;<span style="">Or it could be <a title="Download the Google App Engine SDK" href="https://developers.google.com/appengine/downloads" target="_blank">Google App Engine SDK</a> that is simpler to install runs a localserver for you &nbsp;Or a <a title="CherryPy - A Minimalist Python Web Framework" href="http://www.cherrypy.org/" target="_blank">CherryPy </a>server that I use.</span>
+</p>
+<p>
+
+<pre class="prettyprint">&lt;script src="{!$Resource.foo}"  type="text/javascript"&gt;&lt;/script&gt;
+&lt;!-- It will be {!$Resource.foo}/sample.js  - in case of compressed resources --&gt;</pre>
+<span style="">So now instead of accessing your JS file from Force.com (shown above), you can access it from the local machine - shown below</span>
+<pre class="prettyprint">&lt;script src="http://localhost:8080/static/sample.js" &nbsp;type="text/javascript"&gt;&lt;/script&gt;</pre>
+</p>
+<p>
+
+<span style="">And you cannot completely do away with script stuff on the Visualforce tab - but can minimize it to accessing server side resources.</span>
+</p>
+<p>
+<pre class="prettyprint">&lt;script&gt;
+	var labels = {
+		MyLabel: {!$Label.Mylabel}
+	}
+	/* Usage in js file --  labels.MyLabel */
+&lt;/script&gt;</pre>
+</p>
+<p>
+
+<span style="">Now you can use any editor like Notepad++ or TextMate, save the JS file instantaneously locally and refresh the page.&nbsp;</span>
+
+</p>
+<p>
+If you use Google Chrome , you will get the "content blocked" error.
+
+</p>
+<p>
+<img title="Chrome - local content blocked" src="images/dev-tip-force-com-chrome-blocked.png" alt="Chrome - local content blocked" />
+
+</p>
+<p>
+To deal with this, you will need to start Chrome with "--allow-running-insecure-content" flag. This is required because your page URL would be secure "https://..." while the local server uses "http://". This flag is not required if you are using Firefox (tested on v18). &nbsp;You can simply create a batch file for launching Chrome when developing:
+</p>
+<p>
+<pre class="prettyprint"># chrome_insecure.bat
+c:\path-to-chrome-exe&gt;&gt;\chrome.exe --allow-running-insecure-content</pre>
+</p>
+<p>
+&nbsp;Now Chrome will display a warning in console and continue
+</p>
+<p>
+
+&nbsp;<img title="Chrome warning" src="images/dev-tip-force-com-chrome-warning.png" alt="Chrome warning" />
+
+</p>
+<p>
+
+If you intend to use CherryPy server, the code for the applicaiton hosting these static files is simple
+
+</p>
+<p>
+You can download the python <a title="Download the python code here." href="code/jsloader.py" target="_blank">code here</a>
+</p>
+<p>
+<pre class="prettyprint"># jsLoader.py -- Simple CherryPy server that serves static content
+# http://localhost:8080/static/
+# Port may change and will be shown in command window
+#!/usr/bin/python
+
+import cherrypy
+import os
+
+class HelloWorld(object):
+
+	@cherrypy.expose
+	def index(self, **params):
+		return "Hello World!"
+config = {'/static':
+                {'tools.staticdir.on': True,
+                 'tools.staticdir.dir': os.path.dirname(os.path.abspath(__file__))+'/static',
+                }
+        }
+cherrypy.quickstart(HelloWorld(), '/', config=config)</pre>
+</p>
+<p>
+
+If you want to use Google &nbsp;App Engine SDK, simply create a new application and add static_dir handlers to app.yaml, shown below. For more information visit<a title="Google App Engine - Using Static Files" href="https://developers.google.com/appengine/docs/python/gettingstarted/staticfiles" target="_blank"> Getting Started for App Engine</a>
+</p>
+<p>
+<pre class="prettyprint">.....
+handlers:
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
+
+- url: /static
+  static_dir: static
+
+- url: .*
+  script: main.app
+.....</pre>
+</p>
+<p>
+
+Hope this post was helpful - If you like it please share/like/comment on this.&nbsp;
+</p>

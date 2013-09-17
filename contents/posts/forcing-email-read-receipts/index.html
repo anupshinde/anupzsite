@@ -1,0 +1,233 @@
+---
+title: Forcing Email Read-Receipts 
+tags:
+meta:
+abstract: Ever had a need to verify if the other-person indeed checked your email? Without waiting for them to send a read-receipt. In this article, I'll explain a method that will allow you to inject some tags that combined with a server will allow to receive read-receipts as soon as the user opens the email.
+thumbnail: 
+date: 2006-11-08
+---
+<p>
+<strong>The basics&nbsp;</strong>
+
+</p>
+<p>
+Many email spam programs use this technique frequently to create effective spam. The article is completely meant for technical people, but I would try to ease it for the non-technical people, as much as possible.&nbsp;
+
+</p>
+<p>
+Note: This technique is not the one used by &ldquo;Outlook Express&rdquo; or other software that have an option to request a mail read receipt. In this case we are not requesting the client to send a receipt, but we are attempting our best to force a read receipt.&nbsp;
+
+</p>
+<p>
+<strong>Code used in this article</strong>
+
+</p>
+<p>
+The <a href="code/ReceiptMailSrc.zip">ASP.NET 2.0 based source code</a> can be found <a href="code/ReceiptMailSrc.zip">here</a>. This technique is not restricted to any technology.
+
+</p>
+<p>
+<strong>Background&nbsp;</strong>
+
+</p>
+<p>
+This technique is basically based on the HTML. Hypertext Markup Language, the coding language used to create hypertext documents for the World Wide Web. In HTML, a block of text can be surrounded with tags that indicate how it should appear (for example, in bold face or italics). This allows electronic publishers to display rich or formatted text/information on the Internet. Therefore, it creates a great substitute for the plain-text content.&nbsp;
+
+</p>
+<p>
+HTML being a standard for web publishing and having rich-text functionality, today most E-mail editors allows you to send HTML mails instead of plain text mails. Similarly most of email software allows you to read HTML emails.&nbsp;
+
+</p>
+<p>
+The technique that we are going to use here is based on a specific feature of HTML. In HTML a word, a block of text, or an image can be linked to another file on the Web. That another file could be on the same web or from another webpage.&nbsp;
+
+</p>
+<p>
+This way the HTML email readers are expected to behave in the same way like the web-browsers.&nbsp;
+
+</p>
+<p>
+<strong>The method</strong>
+
+</p>
+<p>
+The HTML email readers will show all the content that the HTML specifies. Therefore it will also show the external content if the HTML specifies it. Now the point here is that the external content is shown. This external content can be anything, including anything we link it to.&nbsp;
+
+</p>
+<p>
+So if I specified an image into the HTML mail with its source from my site as:&nbsp;
+
+</p>
+<p>
+<em>&lt;img src = &ldquo;http://myserver.com/my_picture.jpg&rdquo; /&gt;</em>
+
+</p>
+<p>
+It would directly show the image as if it was embedded inside the mail, though it came from outside.&nbsp;
+
+</p>
+<p>
+Suppose I want a receipt for the mail written to my colleague Keane. How would I do it?&nbsp;
+
+</p>
+<p>
+As you see, the &ldquo;&lt;IMG&gt;&rdquo; &nbsp;tag points to an image on my server. But what if I do not point the source to an image, but to some scripted dynamic page that takes the shortened subject of the mail as a parameter. Whenever the mail is opened, the page will get accessed.&nbsp;
+
+</p>
+<p>
+We can script this page to perform some activities like sending a mail receipt to us. Since we do not want the image to expose the trick, we reduce its size to &ldquo; 1x1 pixels&rdquo;&nbsp;
+
+</p>
+<p>
+&lt;IMG src="http://myserver.com/receipt.aspx?id=HelloKeane" height = "1px" width="1px" /&gt;
+
+</p>
+<p>
+<em><span style="text-decoration: underline;">So we can briefly say that:</span></em> Whenever the HTML email is displayed; the image source will be accessed. And whenever the image-source is accessed, we get a mail saying that the subjected mail has been read.&nbsp;
+
+</p>
+<p>
+<strong>How to plant a &ldquo;force-receipt&rdquo; image?&nbsp;</strong>
+
+</p>
+<p>
+I will explain a very raw method of doing this.&nbsp;
+
+</p>
+<p>
+--&gt; First create a &ldquo;.html&rdquo; page. Say &ldquo;somereceipt.html&rdquo;.
+
+</p>
+<p>
+--&gt; Open it with notepad and put the following line into it.&nbsp;
+
+</p>
+<p>
+&nbsp; &nbsp; &lt;IMG src="http://myserver.com/receipt.aspx?id=HelloKeane" height = "1px" width="1px" /&gt;&nbsp;
+
+</p>
+<p>
+--&gt; Save the file and close it.&nbsp;
+
+</p>
+<p>
+<img  class="dropShadow"  src="images/Plant-Image-HTML.JPG" alt="" />
+
+</p>
+<p>
+
+--&gt; Double-click and open the HTML file (in IE or other browser).&nbsp;
+
+</p>
+<p>
+--&gt; Press &ldquo;Ctrl + A&rdquo; (Select All) and then &ldquo;Ctrl + C&rdquo; (Copy).
+
+</p>
+<p>
+
+<img class="dropShadow" src="images/Plant-Image-Copy.JPG" alt="" />
+
+</p>
+<p>
+
+Open your HTML email editor (Outlook or GMail&hellip;anything) and at the end of the mail press &ldquo;Ctrl + V&rdquo;. This will plant the receipt image into the mail. You can send that mail whenever you want.&nbsp;
+
+</p>
+<p>
+
+<img  class="dropShadow" src="images/Plant-Image-GMail.JPG" alt="" />
+
+</p>
+<p>
+The problem with the &ldquo;raw&rdquo; method is that you will yourself trigger the mail receipt while opening the HTML page and while pasting it in your email editor. You&rsquo;ll just need to ignore these.&nbsp;
+
+</p>
+<p>
+People who want to use it regularly can use the services from &ldquo;<strong>DidTheyReadIt </strong>or <strong>ReadNotify</strong>&rdquo;. These services make the procedure very simple.&nbsp;
+
+</p>
+<p>
+<strong>Sending a read-receipt mail and other details (Using ASP.NET 2.0)&nbsp;</strong>
+
+</p>
+<p>
+Here comes the more technical part. I am writing a page in ASP.NET 2.0, but you can use any other platform.&nbsp;
+
+</p>
+<p>
+As discussed above, we are a passing a query-string parameter to the page. Here, this query string contains the subject that we wrote in the email. You could have other parameter(s) as required.&nbsp;
+
+</p>
+<p>
+As soon as the web page (that we scripted) receives these parameters, it sends us the mail that the subjected mail was read.&nbsp;
+
+</p>
+<p>
+<strong>What all information can we get?</strong>
+
+</p>
+<p>
+Since the browser/mail reader is indirectly accessing our page, we can get all the information that the browser can provide. For example: IP Address, Browser/Machine information. But there is much more that the browser can give away.&nbsp;
+
+</p>
+<p>
+Get your browser spied at <a href="http://gemal.dk/browserspy/" target="_blank">http://gemal.dk/browserspy/</a>.&nbsp;
+
+</p>
+<p>
+The pages in the above link give a lot of information about your browser and machine.
+
+</p>
+<p>
+Here the attached sample code will send a mail receipt along with some easily accessible browser information. This sample creates a HTML mail, to show the information in a formatted manner.
+
+</p>
+<p>
+To gather the information about the browser we can use the &ldquo;Request.Browser.Capabilities&rdquo; dictionary object available in .NET 2.0.
+
+</p>
+<p>
+To get some other information the code uses the following:
+<ul>
+	<li>Request.UserHostAddress</li>
+	<li>Request.UserHostName</li>
+	<li>Request.AcceptTypes</li>
+	<li>Request.UserLanguages</li>
+</ul>
+</p>
+<p>
+Details of these classes can be found at MSDN.
+
+</p>
+<p>
+In the &ldquo;Page_Load&rdquo; event itself, we are creating the HTML mail to be sent to us. The &ldquo;Request.Browser.Capabilities&rdquo; object gives us a &ldquo;System.Collections.IDictionary&rdquo; type. We iterate through the &ldquo;Key, value&rdquo; pair in the dictionary and display the information, as shown below.
+</p>
+<p>
+<pre class="prettyprint">System.Collections.IDictionary oDictionary = Request.Browser.Capabilities; 
+System.Collections.IDictionary oDictionary = Request.Browser.Capabilities; 
+foreach(System.Collections.DictionaryEntry oDictionaryEntry in oDictionary) 
+{ 
+  sHTML += "; 
+  sHTML += "" + (oDictionaryEntry.Key == null ? 
+			"NULL" : oDictionaryEntry.Key.ToString()) + ""; 
+  sHTML += "" + (oDictionaryEntry.Value==null?
+			"NULL":oDictionaryEntry.Value.ToString()) + ""; 
+  sHTML += ""; 
+}</pre>
+</p>
+<p>
+<strong>Does this always work?&nbsp;</strong>
+
+</p>
+<p>
+This trick may not always work, especially with the famous public email services. They take enough steps to restrict it, since it is an indirect disclosure of privacy. As the image points to the external content, the user is required to be connected to internet if the receipt is to be received. Also the HTML email reader must be available to the user.&nbsp;
+
+</p>
+<p>
+<strong>How service providers are restricting it?&nbsp;</strong>
+
+</p>
+<p>
+Mail service providers like GMail, Yahoo and Hotmail do restrict these things. They simply restrict it by not allowing the &ldquo;External&rdquo; content to be displayed. As the image in the above example points to the external content (on your site), this will also get restricted. But it still works with Outlook and many other web-mail services. It will still take time to be restricted from most places. Till then &hellip;Enjoy!!!.&nbsp;
+
+</p>

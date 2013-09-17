@@ -1,0 +1,138 @@
+---
+title: Latent Semantic Indexing
+tags: C#, .NET, LSI, Semantic analysis
+meta: lsi, latent, semantic, indexing, documents, c#, .net, visual studio, analysis
+abstract: Latent semantic indexing (LSI) provides the ability to correlate semantically related terms that could be latent in the set of documents. Latent semantic analysis allows us to see semantics in the set of documents and how we can extract meaning of the text in the documents. This article will briefly explain latent semantic indexing and show its demo implementation in C# .NET. 
+thumbnail: 
+date: 2008-03-23
+---
+<p>
+Latent semantic indexing (LSI) provides the ability to correlate semantically related terms that could be latent in the set of documents. Latent semantic analysis allows us to see semantics in the set of documents and how we can extract meaning of the text in the documents.&nbsp;This is used to get a response to queries that return more "meaningful" results and not just a keyword search.
+</p>
+<p>
+
+<em>Excerpt from Wikipedia:</em>
+<a title="Latent Semantic Indexing Wiki" href="http://en.wikipedia.org/wiki/Latent_semantic_indexing" target="_blank">http://en.wikipedia.org/wiki/Latent_semantic_indexing</a>
+</p>
+<p>
+
+"A key feature of LSI is its ability to extract the conceptual content of a body of text by establishing associations between those terms that occur in similar contexts..... The method, also called latent semantic analysis (LSA), uncovers the underlying latent semantic structure in the usage of words in a body of text and how it can be used to extract the meaning of the text in response to user queries, commonly referred to as concept searches. Queries, or concept searches, against a set of documents that have undergone LSI will return results that are conceptually similar in meaning to the search criteria even if the results don&rsquo;t share a specific word or words with the search criteria&rdquo;
+
+</p>
+<p>
+
+<hr />&nbsp;
+
+<strong><em>ABOUT THE CODE</em>:</strong>&nbsp;This is a very old code-base that was created in 2008. And publishing this now in Aug 2012 (on public demand). It was created while preparing for my PhD admission - But me and my prospective guide(s) got terribly pissed off at each other - I had first-hand experience of pathetic academic elitism- anyways it's another sad story.
+
+Personally, I do not use .NET framework anymore, so will not be making changes to this C# code, unless I have a good reason to do so.&nbsp;This code was also written in a hurry. This is not a very well organized code - perhaps not very efficient either. I encourage people to use this only for reference and implement efficient code of your own. If you do, and willing to share it, please send me the link to your page (or the code) and I&rsquo;ll update my page to include your link/code. If you like this post and it was helpful to you, please do rate it and leave a comment below.
+
+</p>
+<p>
+<a style="" title="LSI.NET source code" href="code/lsi_dotnet_src.zip"><strong>Download Source Code</strong> - lsi_dotnet_src.zip 56 KB</a><span style="">&nbsp;</span>
+
+</p>
+<p>
+<strong><a href="sample_collection.zip">Download sample collection of documents</a><span>&nbsp;</span></strong>
+
+</p>
+<p>
+<span style="font-size: xx-small; font-family: verdana, geneva;"><em>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</em></span>
+
+<span style="font-size: xx-small; font-family: verdana, geneva;"><em>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</em></span>
+
+</p>
+<hr />&nbsp;
+
+<p>
+<strong>UNDERSTANDING LSI:</strong>
+</p>
+<p>
+
+This has been done before by Dr. E. Garcia&nbsp;and in explained in good enough detail - I won't be doing justice to this topic if I explained it again. &nbsp;
+
+</p>
+<p>
+<strong>SVD LSI tutorial:&nbsp;</strong><a href="http://www.miislita.com/information-retrieval-tutorial/svd-lsi-tutorial-1-understanding.html" target="_blank">http://www.miislita.com/information-retrieval-tutorial/svd-lsi-tutorial-1-understanding.html</a>
+</p>
+<p>
+
+This tutorial is in 5 parts, but if you know what LSI is - jump over to it's 4th part. Some of the variable names in the code also come from these tutorials - so it would be easy to map to the code.
+
+</p>
+<p>
+<strong>In here</strong>, I&rsquo;ll be explaining the steps followed in the source-code in two parts.&nbsp;
+<p style="margin-left: 30px;">Part 1 -&nbsp;What the code does. You are currently reading it.</p>
+<p style="margin-left: 30px;"><a title="Creating index" href="/posts/latent-semantic-indexing-part-2/">Part 2 - Indexing</a></p>
+<p style="margin-left: 30px;"><a title="Searching" href="/posts/latent-semantic-indexing-part-3/">Part 3 - Searching</a></p>
+<strong><strong>&nbsp;</strong></strong>
+</p>
+<p>
+
+Below is the demo implementation in C# .NET.&nbsp;
+</p>
+<p>
+
+Examples from a <a href="sample_collection.zip">sample collection of documents</a>&nbsp;
+
+</p>
+<p>
+<a title="Click to open a larger image" href="images/lsi_img1_r30.jpg" target="_blank"><img src="images/lsi_img1_r30.jpg" alt="" class="dropShadow" /></a>
+</p>
+<p>
+
+Above: Simple search query w.r.t. contents in the sample. Show the matching documents.&nbsp;Rank approximation: 35% of collection
+
+</p>
+<p>
+
+<a title="Click to open a larger image" href="images/lsi_img2_r30.jpg" target="_blank"><img src="images/lsi_img2_r30.jpg" alt=""  class="dropShadow" /></a>
+
+</p>
+<p>
+Above:&nbsp;The same query, but see the document in highlighted result. The document mentions word "fighting" which is synonymous to "clash". (Of course, the collection must have enough content to be able to establish synonymy).&nbsp;Rank approximation: 35% of collection
+
+</p>
+<p>
+
+<a title="Click to open a larger image" href="images/lsi_img3_r30.jpg" target="_blank"><img src="images/lsi_img3_r30.jpg" alt=""  class="dropShadow" /></a>
+
+</p>
+<p>
+Above:&nbsp;Another random query that just occurred to me. The word "people" is present in the documents. The word "convince" does not occur in the highlighted document. But, interestingly, it ranks documents related to "social engineering".&nbsp;Rank approximation: 35% of collection
+
+</p>
+<p>
+<a title="Creating Index" href="/posts/latent-semantic-indexing-part-2/"><strong><br class="Apple-interchange-newline" />Part 2: - Creating Index .... Continue reading &gt;</strong></a>
+</p>
+<p>
+
+
+<strong><em><a name="lsi-references"></a>REFERENCES:</em></strong>
+
+</p>
+<p>
+<strong>SVD LSI tutorial:&nbsp;</strong><a title="SVD LSI Tutorial" href="http://www.miislita.com/information-retrieval-tutorial/svd-lsi-tutorial-1-understanding.html" target="_blank">http://www.miislita.com/information-retrieval-tutorial/svd-lsi-tutorial-1-understanding.html</a>
+
+</p>
+<p>
+<strong>Cosine similarity:&nbsp;</strong><a title="Cosine Similarity" href="http://www.miislita.com/information-retrieval-tutorial/cosine-similarity-tutorial.html" target="_blank">http://www.miislita.com/information-retrieval-tutorial/cosine-similarity-tutorial.html</a>
+
+</p>
+<p>
+<strong>DotNetMatrix:&nbsp;</strong><a title="DotNetMatrix library" href="http://www.codeproject.com/Articles/5835/DotNetMatrix-Simple-Matrix-Library-for-NET" target="_blank">http://www.codeproject.com/Articles/5835/DotNetMatrix-Simple-Matrix-Library-for-NET</a>
+
+</p>
+<p>
+<strong>Pivoted Document Length Normalization (and cosine normalization):&nbsp;</strong><a title="Pivoted Document length normalization &amp; cosine normalization" href="http://ir.iit.edu/~dagr/cs529/files/handouts/singhal96pivoted.pdf" target="_blank">http://ir.iit.edu/~dagr/cs529/files/handouts/singhal96pivoted.pdf</a>
+
+</p>
+<p>
+<strong>One more:&nbsp;</strong>Missing - I used one more web page as a reference - which explained cosine normalization and the creation of weighted term matrix in simpler language and helped me speed up this work. Unfortunately, I am unable to find the reference to that (after all it's 4 years since I last worked on this)
+
+</p>
+<p>
+
+<a title="Creating Index" href="/posts/latent-semantic-indexing-part-2/"><strong>Part 2: - Creating Index .... Continue reading &gt;</strong></a>
+
+</p>
