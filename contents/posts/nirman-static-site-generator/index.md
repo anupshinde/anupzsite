@@ -97,7 +97,7 @@ You can refer to the examples below for implementation details
 
 
 ## GitHub:
-[github.com/anupshinde/nirman)](https://github.com/anupshinde/nirman)
+[github.com/anupshinde/nirman](https://github.com/anupshinde/nirman)
 
 
 
