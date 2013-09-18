@@ -115,5 +115,12 @@
 
 	{% include "disqus_comment_count.html" %}
 
+<script>
+$(document.links).filter(function() {
+	
+    return (this.hostname != window.location.hostname && this.className.toLowerCase().indexOf('not__blank')<0)
+}).attr('target', '_blank');
+
+</script>
 </body>
 </html>
