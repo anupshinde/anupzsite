@@ -32,9 +32,6 @@ scope.getPosts = function() {
 					}
 					return post;
 				}).compact()
-				.filter(function(item) {
-					return !item.isDraft;
-				})
 				.value();
 	
   return posts;
