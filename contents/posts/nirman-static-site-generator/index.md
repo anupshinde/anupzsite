@@ -3,8 +3,9 @@ title: Nirman - Yet another flexible static site generator
 abstract: Introducing Nirman - A flexible static site generator for NodeJS that is written in JavaScript and does not get in your way.
 date: 2013-09-18
 ---
-#Nirman 
-## Flexible Static Site Generator for Node JS
+### Flexible Static Site Generator for Node JS
+
+<hr/>
 
 ## Usage 
 Install Nirman
@@ -16,7 +17,7 @@ Create a directory for your site.
 	mkdir mysite
 
 
-To create a new <a href="http://nirmandemo.anupshinde.com/" target="_blank">sample site as shown here</a>
+To create a new **<a href="http://nirmandemo.anupshinde.com/" target="_blank">sample site as shown here</a>**
 
     nirman --new
 
