@@ -19,15 +19,15 @@ This blog doesn't contain much dynamic stuff either. And having worked on creati
 
 There are many static site generators available - My search came down to a few that I felt comfortable about.
 
-* Jekyll
+* [Jekyll](http://jekyllrb.com/)
 
    Widely used. Based on Ruby
 
-* DocPad
+* [DocPad](http://docpad.org/)
 
    Uses NodeJS. Written in CoffeeScript. Lots of functionality
 
-* Wintersmith
+* [Wintersmith](http://wintersmith.io/)
 
    Uses NodeJS and written in CoffeeScript. Limited compared to DocPad but flexible
      
@@ -44,9 +44,9 @@ NOTE: If you are not concerned about the static site-generator language / archit
 <a href="https://help.github.com/articles/using-jekyll-with-pages" target="_blank">Find out more here</a>.
 
 
-At some point, while learning about DocPad and Wintersmith - I realized that I would either have to write plugins for those or write some kind of pre-post-processor hacks to automate some redundant stuff. And I ended up learning another stack of tech (I learnt lots of good stuff). Ultimately, I gave up those two frameworks and decided to write my own static-site-generator. This time in plain JavaScript (with NodeJS). That also gave me a hands on learning NodeJS (but not for web-apps). I knew beforehand that its going to take longer than using the existing frameworks. At the end I got the flexiblity that I needed and did not have to use hacks to get things done. At the time of writing this, the code is just about 600 lines using 8 NodeJS modules.
+At some point, while learning about DocPad and Wintersmith - I realized that I would either have to write plugins for those or write some kind of pre-post-processor hacks to automate some redundant stuff. And I ended up learning another stack of tech (I learnt lots of good stuff). Ultimately, I gave up those two frameworks and decided to write my own static-site-generator. This time in plain JavaScript (with NodeJS). That also gave me a hands on learning NodeJS (but not for web-apps). I knew beforehand that its going to take longer than using the existing frameworks. At the end I got the flexiblity that I needed and did not have to use hacks to get things done. At the time of writing this, the code is just about 700 lines using 8 NodeJS modules.
 
-You can have a look at the code **here**. Some of the features at time of writing this:
+You can have a look at the code **[here](https://github.com/anupshinde/nirman)**. Some of the features at time of writing this:
 
 1. Flexibility to arrange your site contents - the way you want it. All the stuff goes in "contents" directory.
 
@@ -66,11 +66,11 @@ You can have a look at the code **here**. Some of the features at time of writin
 
 6. Front Matter - Configuration for a post/document can be placed as a front-matter at the top of the content file. You can add date, title, or anything that is supported as YAML. All this configuration is available to the Scope of the template
 
-7. Code blocks within content.
+7. Code blocks within content ( <script type="application/x-nirman-code" ).
 
-   Sometimes, you want a modified version of your data. For example: Metadata provides you the list of posts. However, in your content, you may require the post to be sorted/filtered by date/title/category/ (whatever) ... Best is to leave this to the developer. 
+   Sometimes, you want a modified version of your data. For example: Metadata provides you the list of posts. However, in your content, you may require the post to be sorted/filtered by date/title/category/ (whatever) ... Best is to leave this to you. 
    
-   With this feature you can add code-methods(JS-functions) to you current template scope. And then use these methods in your template - Helps keeps code clean with code and HTML separation.
+   With this feature you can add JavaScript-functions to you current template scope. And then use these methods in your template - Helps keeps code clean with code and HTML separation.
    
 8. Paging support.
 
@@ -78,7 +78,8 @@ You can have a look at the code **here**. Some of the features at time of writin
 	
 
 Further... 
-I am also looking to add stuff like page-breaks within content to span through long articles. And support for ad-blocks within content
+I am also looking to add stuff like page-breaks within content to paginate through long articles. 
+
 
 
 **What about dynamic stuff?**
@@ -88,8 +89,7 @@ I do not have any dynamic stuff anyways - Comments are on Disqus. And the contac
 But "dynamic" is not completely optional - there are few cases where I wish create forms. I might use Mongolab/Firebase - or something similar that I developed earlier - without having to create a dynamic site again.
 
 
-This is the first post written after the change-to-static, using Notepad++. So far it has come out perfectly.
+This is the first post written after the change-to-static-site, using Notepad++. So far it has come out perfectly.
 
 Keep Watching and Happy Coding <i class="icon-smile"></i>
 
-*This post has disabled links - I'll be updating this and posting code soon over the weekend. Stay tuned*
