@@ -66,7 +66,7 @@ You can have a look at the code **[here](https://github.com/anupshinde/nirman)**
 
 6. Front Matter - Configuration for a post/document can be placed as a front-matter at the top of the content file. You can add date, title, or anything that is supported as YAML. All this configuration is available to the Scope of the template
 
-7. Code blocks within content ( <script type="application/x-nirman-code" ).
+7. Code blocks within content ( &lt;script type="application/x-nirman-code" ).
 
    Sometimes, you want a modified version of your data. For example: Metadata provides you the list of posts. However, in your content, you may require the post to be sorted/filtered by date/title/category/ (whatever) ... Best is to leave this to you. 
    
