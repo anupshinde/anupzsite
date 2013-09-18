@@ -2,6 +2,8 @@
 title: Nirman - Yet another flexible static site generator
 abstract: Introducing Nirman - A flexible static site generator for NodeJS that is written in JavaScript and does not get in your way.
 date: 2013-09-18
+thumbnail: thumb.jpg
+tags: nodejs, static, html, generator, javascript, nunjucks, markdown, github, niman
 ---
 ### Flexible Static Site Generator for Node JS
 
