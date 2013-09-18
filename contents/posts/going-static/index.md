@@ -74,7 +74,7 @@ You can have a look at the code **[here](https://github.com/anupshinde/nirman)**
    
 8. Paging support.
 
-    Simply create a code block within your content, get the items, and mention "scope.paginate(options)". The in your content use the paged-date to render content. You require ApplyTemplateToContent = TRUE to use this feature.
+    Simply create a code block within your content, get the items, and mention "scope.paginate(options)". Then, in your content use the paged-data to render content. You require ApplyTemplateToContent = TRUE to use this feature.
 	
 
 Further... 
