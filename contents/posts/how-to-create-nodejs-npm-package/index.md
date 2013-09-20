@@ -2,7 +2,7 @@
 title: How to create a NodeJS NPM package
 abstract: See how to create a simple NodeJS NPM package. We'll first create a simple program, add some node_modules  to it and walk through the process of creating a NPM package, publishing it and upgrading it. We'll also walk through see some common issues that you might face for the first time.
 tags: nodejs, javascript, npm, package, publish, deploy
-date: 2013-09-19
+date: 2013-09-20
 ---
 
 In this tutorial we will create a simple NodeJS program, create a NPM package, publish it. In the second part we will add dependencies to our package and upgrade it.
