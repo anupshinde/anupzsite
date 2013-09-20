@@ -410,7 +410,7 @@ node test myfile.txt
 ```
 Nicey. It works.
 
-If this last bit did not work for you, correct the **Errors in NODE_PATH** section below
+If this last bit did not work for you, check the **Errors in NODE_PATH** section below
 
 
 While this works, I do not recommend global install of  your program's ```require``` dependencies . You can do a ```npm uninstall -g uppercaseme``` and then do a ```npm install uppercaseme```
