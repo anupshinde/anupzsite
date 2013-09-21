@@ -167,7 +167,7 @@ Here we updated our package version and added a dependency ```commander```. The 
 
 ---
 
-We can now publish it using  
+We can now publish it from the ```src`` directory using  
 ``` 
 npm publish 
 ```
@@ -179,7 +179,7 @@ npm install -g uppercaseme
 ```
 
 
-We can now use our exciting new program to do one of these
+We can now use our exciting new program to do one of these, preferably in some other directory
 
 ```
 uppercaseme --help
@@ -190,6 +190,37 @@ uppercaseme --file file.txt
 
 
 ```
+
+---
+
+#### NOTE on not-polluting NPM registry with examples.
+
+While NPM makes it easier for us to distribute packages, I would recommnend that you unpublish **each and every** version of the sample packages that you created during this tutorial
+
+You can do so from your ```src``` directory
+
+```
+npm unpublish --force
+
+```
+
+NPM also maintains a local cache so that it does not download stuff everytime you do ```npm install```. You can clean this cache using
+
+
+```
+npm cache clean
+```
+
+---
+
+**Common issues when creating NPM packages for first time:**
+
+* NPM caching can cause "old-code" issues in testing if you are "just testing" publishing same version multiple times (in combination with install, unpublish). This is because npm installed from local cache - which is probably from your first install of that specific version.
+
+* If you are using Windows for development - make sure you test it on Linux/Mac environments too. Line-feed-character mismatches in your ```bin``` files may result in errors like ```node - command not found```
+
+_I faced the above two in combination and cost me a whole night <i class="icon-frown"></i>_
+
 
 ---
 
