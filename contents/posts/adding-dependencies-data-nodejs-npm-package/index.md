@@ -12,7 +12,7 @@ date: 2013-09-20T00:02
 
 ## Adding package dependencies
 
-Now that we created the package, lets add some dependencies to it. 
+Now that we created the package, let's add some dependencies to it. 
 
 
 We also want the user to create a file automatically  ```file.txt``` with a ```--new``` option.
@@ -20,7 +20,7 @@ For this, we will have to package a default file with the package.
 
 We will change the command line options for our program as shown below
 
-To convert a file. Note that we pass it as a named argument with ```--file```
+To convert a file we pass it as a named argument with ```--file```
 ```
 uppercaseme --file file.txt
 ```
@@ -134,7 +134,7 @@ node ./src/bin/uppercaseme --file file.txt
 ```
 
 
-Finally, lets add these dependencies to our ```package.json```
+Finally, let's add these dependencies to our ```package.json```
 
 ```
 {
@@ -167,7 +167,7 @@ Here we updated our package version and added a dependency ```commander```. The 
 
 ---
 
-We can now publish it from the ```src`` directory using  
+We can now publish it from the ```src``` directory using  
 ``` 
 npm publish 
 ```
@@ -195,7 +195,7 @@ uppercaseme --file file.txt
 
 #### NOTE on not-polluting NPM registry with examples.
 
-While NPM makes it easier for us to distribute packages, I would recommnend that you unpublish **each and every** version of the sample packages that you created during this tutorial
+While NPM makes it easier for us to distribute packages, I would recommend that you unpublished **each and every** version of the sample packages that you created during this tutorial
 
 You can do so from your ```src``` directory
 
