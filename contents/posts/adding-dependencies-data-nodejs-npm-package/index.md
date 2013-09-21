@@ -2,7 +2,7 @@
 title: Adding dependencies and data to Node-NPM package
 abstract: In the first part we created a package with no dependencies. In this part, we'll add some dependencies to our program and package. We'll also look at some additional tips that you may require when creating your first NPM package.
 tags: nodejs, javascript, npm, package, publish, deploy
-date: 2013-09-19T00:02
+date: 2013-09-20T00:02
 ---
 
 
