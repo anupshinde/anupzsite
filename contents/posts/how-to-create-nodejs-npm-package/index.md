@@ -449,7 +449,9 @@ Now try the above command again ``` node test myfile.txt ```
 
 ---
 
-In the next part(coming soon) we will see how to add dependencies to your program and NPM package
+
+### [Next, Adding dependencies and data to Node-NPM package >>](/posts/adding-dependencies-data-nodejs-npm-package/)
+
 
 ---
 
