@@ -46,7 +46,10 @@ NOTE: If you are not concerned about the static site-generator language / archit
 
 At some point, while learning about DocPad and Wintersmith - I realized that I would either have to write plugins for those or write some kind of pre-post-processor hacks to automate some redundant stuff. And I ended up learning another stack of tech (I learnt lots of good stuff). Ultimately, I gave up those two frameworks and decided to write my own static-site-generator. This time in plain JavaScript (with NodeJS). That also gave me a hands on learning NodeJS (but not for web-apps). I knew beforehand that its going to take longer than using the existing frameworks. At the end I got the flexiblity that I needed and did not have to use hacks to get things done. At the time of writing this, the code is just about 700 lines using 8 NodeJS modules.
 
-You can have a look at the code **[here](https://github.com/anupshinde/nirman)**. Some of the features at time of writing this:
+This tool is now published as [Nirman](https://github.com/anupshinde/nirman)**. 
+
+
+Some of the features at time of writing this:
 
 1. Flexibility to arrange your site contents - the way you want it. All the stuff goes in "contents" directory.
 
