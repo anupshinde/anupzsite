@@ -1,8 +1,8 @@
 ﻿---
 date: 2013-09-07
-title: Going Static
+title: Going Static - Why I don't need dynamic pages
 abstract: This blog has now been upgraded to use simple static html pages instead of a CMS.  Why did I do that? What tools did I use? And more details within.
-tags: static, site-generator, nodejs, javascript
+tags: static, site-generator, nodejs, javascript, html
 ---
 
 This blog has now been upgraded to use simple static html pages instead of a CMS. Just a few days back, I had a good enough CMS in place for my blog powered by Google App Engine / Python 2.5. Having control over the code made it seriously customizable. But soon after I upgraded my blog last year, GAE made Python 2.7 as the latest. 
