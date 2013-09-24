@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 {% block page_title %}
-	{{ display_title }} - {{Site.title}}
+	{{ display_title }} - Tutorials,tips, blogs, how-to - {{Site.title}}
 {% endblock %}
+
+{% block meta_desc %}
+	<meta name="description" content="{{ display_title }} - Tutorials,tips, blogs, how-to - {{Site.title}}">
+{% endblock %}
+
+
 
 {% block content %}
 	<h3><i class="icon-tag"></i> &nbsp;&nbsp; <span style="text-transform:capitalize;">{{ title }}</span></h3>

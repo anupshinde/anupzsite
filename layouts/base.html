@@ -10,7 +10,11 @@
 	
 	<title>
 		{% block page_title %}
-			{{ Site.about }} - {{Site.title}}
+			{% if title %}
+				{{ title }} - {{Site.title}}
+			{% else %}
+				{{ Site.about }} - {{Site.title}}
+			{% endif %}
 		{% endblock %}
 	</title>
 

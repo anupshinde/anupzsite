@@ -12,6 +12,19 @@
 {% block content %}
 	<h1> <a href="" class="post_title">{{ title }}</a></h1>
 	
+	<div class="row" style="padding-top:5px;">		
+		{% if tags %}
+		<p class="font_author">
+			{% for tg in tags.split(',') %}
+				{% set tag = tg.trim().toLowerCase() %}
+				<a href="/tag/{{ tag.split(' ').join('-').split('#').join('-sharp') }}">
+				<i class="icon-tag"></i> {{tag}}
+				</a> 
+				&nbsp;&nbsp;
+			{% endfor %}
+		</p>
+		{% endif %}
+	</div>
 	<div class="row" style="padding-top:5px;">
 		<div class="col-sm-2">
 			{% include "tweetbutton.html" %} 
@@ -27,7 +40,6 @@
 			{%endif%}
 		</div>
 	</div>
-	
 	<hr/>
 	<span class="better_fonts">
 	{{ content }}

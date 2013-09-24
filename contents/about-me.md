@@ -1,5 +1,6 @@
 ---
-layout: base
+layout: post
+title: About Me
 ---
 Hi!
 
