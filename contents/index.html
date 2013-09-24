@@ -50,12 +50,17 @@ scope.GetTags = function(post) {
 	return r;
 }
 
-scope.paginate(scope.getPosts(), {
-	zpageSize: 30
-});
+scope.paginate(scope.getPosts());
 
 	
  </script>
+{% if PageInfo.HasPrev %}
+	<link rel="prev" href="{{PageInfo.PrevPage.RelURL}}" />
+{% endif %}
+{% if PageInfo.HasNext %}
+	<link rel="next" href="{{PageInfo.NextPage.RelURL}}" />
+{% endif %}
+
 
 {% for post in PageInfo.Elements %}
 

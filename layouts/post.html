@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 
+{% block meta_desc %}
+	<meta name="description" content="{{ abstract }}">
+	<meta name ="keywords" content="{{ tags }}">
+{% endblock %}
+
 {% block page_title %}
-	{{ title }} | {{Site.title}}
+	{{ title }} - {{Site.title}}
 {% endblock %}
 
 {% block content %}

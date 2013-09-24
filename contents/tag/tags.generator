@@ -52,6 +52,7 @@ function createCategoryPages() {
 					tagsToPosts[tag] = {
 						posts:[], 
 						title: tagsArr[j],
+						display_title: tagsArr[j].charAt(0).toUpperCase() + tagsArr[j].slice(1) ,
 						moment: Moment,
 						_: _,
 						Site: Site
