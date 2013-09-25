@@ -10,6 +10,7 @@ How secure is the hardware that we use? With recent NSA revelations - question r
 
 Hardware Trojans are created with intentional and malicious changes to hardware's initial design. And are almost impossible to detect.
 
+
 The demonstration below from DEFCON-16 shows 
 
 * Thermal trojan - Exposes data via thermal emission
@@ -19,9 +20,12 @@ The demonstration below from DEFCON-16 shows
 * Radio - Additional pins causing radio emission.
 
 
+---
+
 <iframe src="//player.vimeo.com/video/1437702" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/1437702">Demonstration of Hardware Trojans</a> from <a href="http://vimeo.com/user642589">Ryan Hoover</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 
 
+---
 
 
 Sources:
