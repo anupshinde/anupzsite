@@ -1,5 +1,5 @@
 ---
-title: Chrome has updated - changed New Tab page
+title: Chrome has updated - How to fix the changed New Tab page
 abstract: Chrome recently auto-updated and changed the New Tab page to show Google Search box and recent websites. Just like me, you may not like it - read further on how to fix it via an extension
 tags: chrome, extension, update, chrome new tab, chrome apps, google
 date: 2013-09-24
