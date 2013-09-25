@@ -1,5 +1,5 @@
 ---
-title: Hardware Trojans - Does your device leak off-grid?
+title: Hardware Trojans - Does your device leak data?
 date: 2013-09-25
 tags: hardware, trojans, electronics, IC
 abstract: How secure is the hardware that we use? Hardware Trojans are created with intentional and malicious changes to hardware's initial design. 
