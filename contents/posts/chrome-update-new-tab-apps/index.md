@@ -1,9 +1,8 @@
 ---
-title: Chrome has updated - and changed New Tab page showing recent websites.
+title: Chrome has updated - changed New Tab page
 abstract: Chrome recently auto-updated and changed the New Tab page to show Google Search box and recent websites. Just like me, you may not like it - read further on how to fix it via an extension
 tags: chrome, extension, update, chrome new tab, chrome apps, google
-
-isDraft: true
+date: 2013-09-24
 
 ---
 
@@ -11,7 +10,25 @@ Chrome has updated - and changed New Tab page showing recent websites.
 
 Now it shows the Google's search box and recently visited websites.
 
-Seriously, that is a problem and I have not found any Chrome-based-setting to change it.
+---
+
+Before Chrome update:
+
+<img src="images/chrome-new-tab-before-update.png" alt="Chrome New Tab Before Update" title="Chrome New Tab Before Update" class="dropShadow" />
+
+
+---
+
+
+After the Chrome update: 
+
+<img src="images/chrome-update-new-apps-icon.png" alt="Chrome New Tab After Update" title="Chrome New Tab after Update" class="dropShadow" />
+
+
+---
+
+
+Seriously, that is a problem and I have not found any Chrome based setting to change it.
 
 1. I like to see Chrome Apps on the new tab - and not the recently visited websites - which was on another page before the upgrade.
 2. When sharing screen, obviously I do not want other people to see "My recently visited websites"
