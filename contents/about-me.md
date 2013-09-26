@@ -4,7 +4,7 @@ title: About Me
 ---
 Hi!
 
-I am a web developer who loves to work with HTML, JavaScript and CSS. Despite all these years, I find myself fascinated by programming.
+I am a web developer who loves to work with HTML, JavaScript and CSS. In spite of programming for so many years, I still find myself fascinated by the world of programming.
 
 
 I started with web development in 2002 - with a 2 year stint somewhere creating desktop apps. In the early days - my expertise was limited to ASP, ASP.NET and C#. HTML, CSS, JS were pretty much not-directly-used by me. However that has changed a lot. These days I tend to be inclined to HTML, JS and CSS, more than anything else.
