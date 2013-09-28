@@ -8,11 +8,28 @@
 {% block page_title %}
 	{{ title }} - {{Site.title}}
 {% endblock %}
+{% block top_bar_ad_content %}
+{% endblock %}
 
 {% block content %}
 	<h1> <a href="" class="post_title">{{ title }}</a></h1>
-	
-	<div class="row" style="padding-top:5px;">		
+	<span style="padding-top:10px; display:block"></span>
+	{% include "ad_top_bar_responsive.html" %} 
+	<span style="padding-bottom:5px; display:block"></span>
+	<div class="row" style="padding-top:5px;">
+		<div class="col-sm-2">
+			{% include "tweetbutton.html" %} 
+		</div>
+		<div class="col-sm-2">
+			{% include "gplusonebutton.html" %}
+		</div>
+		<div class="col-sm-2">
+			{% if not post.disallow_comments %}
+				<a><em><a class="font_comments2" href="#disqus_thread">Comments</a></em></a>
+			{%endif%}
+		</div>
+	</div>
+	<div class="row" style="padding-top:10px;">		
 		{% if tags %}
 		<p class="font_author">
 			{% for tg in tags.split(',') %}
@@ -24,21 +41,6 @@
 			{% endfor %}
 		</p>
 		{% endif %}
-	</div>
-	<div class="row" style="padding-top:5px;">
-		<div class="col-sm-2">
-			{% include "tweetbutton.html" %} 
-		</div>
-		<div class="col-sm-2">
-			{% include "gplusonebutton.html" %}
-		</div>
-	</div>
-	<div class="row" style="padding-top:5px;">
-		<div class="col-sm-2">
-			{% if not post.disallow_comments %}
-				<a><em><a class="font_comments2" href="#disqus_thread">Comments</a></em></a>
-			{%endif%}
-		</div>
 	</div>
 	<hr/>
 	<span class="better_fonts">

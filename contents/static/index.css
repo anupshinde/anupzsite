@@ -14,10 +14,11 @@
 }
 
 .post {
-	padding: 40px;
+	zpadding: 40px;
 	margin-bottom: 30px;
 	border-bottom: 1px solid #ddd;
-	apadding-bottom: 50px;
+	padding-bottom: 20px;
+	padding-top: 20px;
 	
 	border-radius: 1px;
 	/*
@@ -100,4 +101,5 @@ pre {
 	padding-top:95px;
 	padding-bottom:10px;
 	text-align: center;
+	background-color:transparent; 
 }

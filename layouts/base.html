@@ -56,18 +56,22 @@
 	  </div><!-- /.navbar-collapse -->
 	</nav>
 
-	<div class="jumbotron jumbo_mod">
-		<div class="container">
-			{% if not remove_ads %}
-				{% block top_bar_ad_content %}
-					{% include "ad_top_bar_responsive.html" %} 
-				{% endblock %}
-			{% endif %}
-		</div>
+	<div class="jumbo_mod">
 	</div>
 	<div class="container">
 		{% block container_content %}
 			
+			<div class="row">
+				<div class="col-md-9">
+					{% if not remove_ads %}
+						{% block top_bar_ad_content %}
+							<div class="post">
+								{% include "ad_top_bar_responsive.html" %} 
+							</div>
+						{% endblock %}
+					{% endif %}
+				</div>
+			</div>
 			<div class="row">
 				<div class="col-md-9">
 					{% block content %}
@@ -80,7 +84,7 @@
 				<div class="col-md-2">
 					{% if not remove_ads %}
 						{% block side_ad_content %}
-							<div class="row" style="height:550px; width:10px; border: 0"> </div>
+							<div class="row" style="height:350px; width:10px; border: 0"> </div>
 							{% block side_ad_content_first %}
 								<div class="row ad"> {% include "ad_side_bar_300_600.html" %} </div>
 							{% endblock %}

@@ -6,12 +6,18 @@
 {% block meta_desc %}
 	<meta name="description" content="{{ display_title }} - Tutorials,tips, blogs, how-to - {{Site.title}}">
 {% endblock %}
+{% block top_bar_ad_content %}
+{% endblock %}
 
 
 
 {% block content %}
 	<h3><i class="icon-tag"></i> &nbsp;&nbsp; <span style="text-transform:capitalize;">{{ title }}</span></h3>
 	
+	<hr/>
+	{% include "ad_top_bar_responsive.html" %} 
+	<hr/>
+
 	{% for post in posts %}
 
 		<div class="post">
