@@ -1,6 +1,6 @@
 ---
-title: Visual Ping - Email alerts on website change
-abstract: VisualPing sends you an email alert for the webpages you set for monitoring.
+title: Visual Ping - Email alerts on web page changes
+abstract: VisualPing sends you an email alert for the web pages you set for monitoring.
 date: 2013-09-28
 tags: visual ping, webpage monitoring, email alerts
 ---
