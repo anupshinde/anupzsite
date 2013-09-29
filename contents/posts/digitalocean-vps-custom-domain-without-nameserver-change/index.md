@@ -1,9 +1,8 @@
 ---
 title: How to move your Domain to DigitalOcean without changing your Name Servers
-abstract:
+abstract: DigitalOcean's guide to move your custom-domain shows that you need to change your Name Servers to that of DigitalOcean. And they have made it pretty simple to use.  However if you do not wish to migrate a lot of domain-records and do not wish to change your name servers, read on.
 date: 2013-09-29
 tags: DigitalOcean, DNS, Change Domain, VPS, Custom Domain
-isDraft: true
 ---
 
 
@@ -11,6 +10,7 @@ I recently moved my domain from AppEngine to DigitalOcean.  You can read about i
 
 DigitalOcean's guide [How To Set Up a Host Name with DigitalOcean](https://www.digitalocean.com/community/articles/how-to-set-up-a-host-name-with-digitalocean) to move your domain mentions that you need to change your Name Servers to that of DigitalOcean. However if you do not wish to migrate a lot of records and do not wish to change your name servers, read on.
 
+---
 
 ## Change A-Records
 
@@ -22,6 +22,7 @@ To change your A-Records, you need to access the control panel of your domain re
 
 <img src="images/a-records.png" class="dropShadow" alt="A-Records at domain registrar" title="A-Records at domain registrar" />
 
+---
 
 ## Configure your domain
 
@@ -33,6 +34,7 @@ Then create A and CNAME records as shown below. The "@" symbol in your A-record 
 
 <img src="images/do-dns-record.png" class="dropShadow" alt="Digital Ocean DNS Records" title="Digital Ocean DNS Records" />
 
+---
 
 ## Finish up
 
