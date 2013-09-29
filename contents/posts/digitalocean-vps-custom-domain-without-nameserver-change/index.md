@@ -14,7 +14,7 @@ DigitalOcean's guide [How To Set Up a Host Name with DigitalOcean](https://www.d
 
 ## Change A-Records
 
-In case you do not wish to change your Name Servers, you can also point your domain's A records to your DigitalOcean server IP. Similarly you also need to point your sub-domains to you DO IP.  Note that you'll need to create A records - and not CNAME records.
+In case you do not wish to change your Name Servers, you can also point your domain's A records to your DigitalOcean server IP. Similarly you also need to point your sub-domains to your DO IP.  Note that you'll need to create A records - and not CNAME records.
 
 
 To change your A-Records, you need to access the control panel of your domain registrar.
@@ -30,7 +30,7 @@ Once you have pointed your A-Records, you need to configure your domain. Move to
 
 In the DNS section, click Add Domain, and add the domain name and IP address of your server. The domain name must does not have a *www* at the beginning. 
 
-Then create A and CNAME records as shown below. The "@" symbol in your A-record connects your IP do your domain in that record. The sub domains "www" and "ww2" point to the primary domain.
+Then create A records and CNAME records as shown below. The "@" symbol in your A-record connects your IP do your domain in that record. The sub domains "www" and "ww2" point to the primary domain.
 
 <img src="images/do-dns-record.png" class="dropShadow" alt="Digital Ocean DNS Records" title="Digital Ocean DNS Records" />
 
@@ -41,7 +41,7 @@ Then create A and CNAME records as shown below. The "@" symbol in your A-record 
 Once you configured this,  your information will take a while to propagate and should be up and supported in a few hours (or up to a 48 hours).
 
 
-With this setup, you will not have to move all your CNAME/MX records to DigitalOcean. You can still have those set at your domain registrar's control panel. For example, I still have my previous CNAME records intact at my domain registrar. Except the "www" and "ww2" that I moved to A-records pointing to DO.
+With this setup, you will not have to move all your CNAME/MX records to DigitalOcean. You can still have those set at your domain registrar's control panel. For example, I still have my previous CNAME records intact at my domain registrar. That is I only moved the "www" and "ww2" to A-records pointing to DigitalOcean VPS.
 
 <img src="images/jod-mx-records.png" class="dropShadow" alt="MX records yet at domain registrar" title="MX records yet at domain registrar" />
 
