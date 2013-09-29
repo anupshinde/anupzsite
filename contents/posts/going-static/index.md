@@ -2,7 +2,7 @@
 date: 2013-09-07
 title: Going Static - Why I don't need dynamic pages
 abstract: This blog has now been upgraded to use simple static html pages instead of a CMS.  Why did I do that? What tools did I use? And more details within.
-tags: static, site-generator, nodejs, javascript, html
+tags: static, site-generator, nodejs, javascript, html, DigitalOcean
 ---
 
 This blog has now been upgraded to use simple static html pages instead of a CMS. Just a few days back, I had a good enough CMS in place for my blog powered by Google App Engine / Python 2.5. Having control over the code made it seriously customizable. But soon after I upgraded my blog last year, GAE made Python 2.7 as the latest. 
@@ -96,3 +96,5 @@ This is the first post written after the change-to-static-site, using Notepad++.
 
 Keep Watching and Happy Coding <i class="icon-smile"></i>
 
+---
+Update: After moving to static pages, I did experiment for a while with AppEngine and DigitalOcean for hosting. However I found maintaining my site with DigitalOcean was much easier. Additionally, I have found AppEngine having issues with serving static-content at certain times - this is since before I moved to static pages - I dont know why that happens. Overall, I am happy with DigitalOcean and it scales pretty well (with static pages) with moderate-to-heavy loads.
