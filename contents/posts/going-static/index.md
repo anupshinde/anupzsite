@@ -1,4 +1,4 @@
-﻿---
+---
 date: 2013-09-07
 title: Going Static - Why I don't need dynamic pages
 abstract: This blog has now been upgraded to use simple static html pages instead of a CMS.  Why did I do that? What tools did I use? And more details within.
