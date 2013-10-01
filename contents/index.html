@@ -22,7 +22,7 @@ scope.getPosts = function() {
 					var post = item.index;
 					if(!scope._.isUndefined(post.tags) && post.tags !=null ) {
 						post.tags = post.tags.split(",");
-						for(var i=0;i < post.tags.length; i++) {         /*>*/
+						for(var i=0;i < post.tags.length; i++) {
 							post.tags[i]= post.tags[i].trim();
 							if(_.contains(post.tags[i]," ")) {
 								//console.log("WARNING: Tag contains white-space: ", post.tags[i]);
@@ -101,6 +101,10 @@ scope.paginate(scope.getPosts());
 				{% endfor %}
 			</p>
 			{% endif %}
+		</p>
+		
+		<p class="readMore">
+			<a href="posts/{{post._filemeta.urlInfo.dirName}}/">Read More  &rarr;</a>
 		</p>
 	</div>
 {% endfor %}

@@ -65,28 +65,27 @@
 			
 			<div class="row">
 				<div class="col-md-8">
-					{% if not remove_ads %}
-						{% block top_bar_ad_content %}
-							<div class="post">
-								{% include "ad_top_bar_responsive.html" %} 
-							</div>
+					<div class="row col-md-12">
+						{% if not remove_ads %}
+							{% block top_bar_ad_content %}
+								<div class="post">
+									{% include "ad_top_bar_responsive.html" %} 
+								</div>
+							{% endblock %}
+						{% endif %}
+					</div>
+					<div class="row col-md-12">
+						{% block content %}
+							{{ content }}
 						{% endblock %}
-					{% endif %}
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-8">
-					{% block content %}
-						{{ content }}
-					{% endblock %}
-				</div>
-				<div class="col-md-1">
-					&nbsp;
-				</div>
-				<div class="col-md-2">
+				<div class="col-md-4">
 					{% if not remove_ads %}
 						{% block side_ad_content %}
-							<div class="row" style="height:350px; width:10px; border: 0"> </div>
+							<div class="row" style="height:520px; border: 0;">
+								
+							</div>
 							{% block side_ad_content_first %}
 								<div class="row ad"> {% include "ad_side_bar_300_600.html" %} </div>
 							{% endblock %}
@@ -98,16 +97,18 @@
 		
 		{% block ad_bottom_content %}
 			{% if not remove_ads %}
-				<div class="row ad text-center col-md-9">
+				<div class="row ad text-center col-md-8">
 					{% include "ad_sidebar_unit_first.html" %}
 				</div>
 			{% endif %}
 		{% endblock %}
-		<div class="row text-center col-md-9">
+		<div class="row text-center col-md-8">
 			<hr/>
 			<p>&copy; Copyright Anup Shinde. All rights reserved. &nbsp;&nbsp; | &nbsp;&nbsp; 
 			<a href="/privacy-policy">Privacy Policy</a>
 			</p>
+			<p>&nbsp;</p>
+			<p>&nbsp;</p>
 		</div>
 	</div>
 	
@@ -130,6 +131,7 @@
 	<script type="text/javascript" src="/static/base.js"></script>
 
 	{% include "disqus_comment_count.html" %}
+	{% include "add_this.html" %}
 
 <script>
 $(document.links).filter(function() {

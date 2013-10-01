@@ -103,3 +103,9 @@ pre {
 	text-align: center;
 	background-color:transparent; 
 }
+
+.readMore {
+	padding-top: 10px;
+	text-align: right;
+	font-weight: bold;
+}
