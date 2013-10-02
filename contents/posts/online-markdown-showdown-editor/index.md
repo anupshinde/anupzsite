@@ -1,13 +1,16 @@
 ---
 title: Online Markdown Showdown Editor 
 date: 2013-10-02
-abstract: Write your markdown and see the output in real-time. I usually write my posts in Markdown format (specifically Showdown). Its easier and speedier to write my content and see that rendered in real time. The editor is online and stores your content in Local storage
-tags: Markdown, Showdown, Online Editor, JavaScript, AngularJS
+abstract: Write your Markdown and see the formatted HTML output instantaneously . I usually write my posts in Markdown format (specifically Showdown).Now it is even more easier and faster to write my content with the Online Editor where I can see content rendered in real time. The editor is online and stores your content in Local storage. See more details within.
+---
+
+### Editor here: <a href="/markdown-editor" target="markdown_editor" title="Online Realtime Markdown Showdown Editor">Online Markdown Editor</a>
+
 ---
 
 ## Usage
 
-Just type your markdown in the textbox. Check out Markdown Cheatsheet for syntax
+Just type your markdown in the textbox. See Markdown Cheatsheet for syntax
 
 Chose from multiple themes. These should be available when you open the editor next time
 
@@ -19,7 +22,7 @@ You can also write code
 
 ```
 /* A simple hello world program */
-for(i=0;i<100;i++ {
+for(i=0;i<100;i++) {
     console.log("Hello World");
     // And this is a comment here
 }
@@ -46,9 +49,7 @@ var converter = new Showdown.converter();
 var html = converter.makeHtml(newstr);
 ```
 
----
 
-
-### If you like it and found it useful, please share this and/or leave a comment below
+**If you like it and found it useful, please share this and/or leave a comment below**
 
  
