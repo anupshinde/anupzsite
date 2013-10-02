@@ -1,7 +1,7 @@
 ---
 title: Online Markdown Showdown Editor 
 date: 2013-10-02
-tags: Markdown, Showdown, Online Editor, JavaScript, AngularJS
+tags: Markdown, Showdown, Online Editor, JavaScript, AngularJS, Bootstrap
 abstract: Write your Markdown and see the formatted HTML output instantaneously . I usually write my posts in Markdown format (specifically Showdown).Now it is even more easier and faster to write my content with the Online Editor where I can see content rendered in real time. The editor is online and stores your content in Local storage. See more details within.
 ---
 
