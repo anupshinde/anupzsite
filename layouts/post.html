@@ -17,6 +17,9 @@
 	{% include "ad_top_bar_responsive.html" %} 
 	</div>
 	<div class="row" style="padding-top:5px;">
+		<div class="col-md-4">
+			<em><i class="icon-time"></i> &nbsp;&nbsp;29 September 2013</em>
+		</div>
 		<div class="col-sm-2">
 			{% include "tweetbutton.html" %} 
 		</div>
@@ -25,7 +28,7 @@
 		</div>
 		<div class="col-sm-2">
 			{% if not post.disallow_comments %}
-				<a><em><a class="font_comments2" href="#disqus_thread">Comments</a></em></a>
+				<a><em><a class="font_comments2" href="#disqus_thread">&nbsp;</a></em></a>
 			{%endif%}
 		</div>
 	</div>

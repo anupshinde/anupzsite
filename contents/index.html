@@ -86,8 +86,8 @@ scope.paginate(scope.getPosts());
 			<em>
 			<i class="icon-time"></i> &nbsp;&nbsp;{{moment(post.date).format("D MMMM YYYY")}}</em>
 			{% if not post.disallow_comments %}
-				, &nbsp;&nbsp;
-				<a class="font_comments" href="posts/{{post._filemeta.urlInfo.dirName}}/#disqus_thread">Comments</a>
+				&nbsp;&nbsp;
+				<a class="font_comments" href="posts/{{post._filemeta.urlInfo.dirName}}/#disqus_thread">&nbsp;</a>
 			{%endif%}
 
 			<br/>
