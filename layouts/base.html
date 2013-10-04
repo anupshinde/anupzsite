@@ -68,13 +68,13 @@
 					<div class="row col-md-12">
 						{% if not remove_ads %}
 							{% block top_bar_ad_content %}
-								<div class="post">
+								<div class="post"  style="padding-bottom: 0px; margin-bottom: 0px; padding-top: 0px; border-bottom: 0px;">
 									{% include "ad_top_bar_responsive.html" %} 
 								</div>
 							{% endblock %}
 						{% endif %}
 					</div>
-					<div class="row col-md-12">
+					<div class="row col-md-12" style="padding-left: 5px;">
 						{% block content %}
 							{{ content }}
 						{% endblock %}
@@ -84,13 +84,16 @@
 					{% if not remove_ads %}
 						{% block side_ad_content %}
 							<div class="row">
-								<div style="height: 400px;width:1px">&nbsp;</div>
-								<div style="height: 250px;">
+								<div  class="col-md-12" style="height: 150px;width:1px">&nbsp;</div>
+								<div  class="col-md-12" style="padding-bottom: 20px; min-height:260px;">
+									<div class="fb-like-box" data-href="https://www.facebook.com/anupshindecom" data-width="292" data-height="The height of the plugin in pixels (optional)." data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="false"></div>
+								</div>
+								<div class="col-md-12" style="height: 250px;">
 									{% include "subscribe_newsletter_mc.html" %}
 								</div>
 							</div>
 							{% block side_ad_content_first %}
-								<div class="row ad"> {% include "ad_side_bar_300_600.html" %} </div>
+								<div class="row ad" style="padding-left:20px"> {% include "ad_side_bar_300_600.html" %} </div>
 							{% endblock %}
 						{% endblock %}
 					{% endif %}
@@ -131,6 +134,16 @@
 		  })();
 
 	</script>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+	</script>
+	
 	<script type="text/javascript" src="/static/base.js"></script>
 
 	{% include "disqus_comment_count.html" %}

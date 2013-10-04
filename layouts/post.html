@@ -13,10 +13,7 @@
 
 {% block content %}
 	<h1> <a href="" class="post_title">{{ title }}</a></h1>
-	<div style="border: 1px dashed #f2f2f2; border-left: none; border-right: none; padding:5px; margin-bottom: 15px; margin-top: 10px;">
-	{% include "ad_top_bar_responsive.html" %} 
-	</div>
-	<div class="row" style="padding-top:5px;">
+	<div class="row" style="padding-top:10px; padding-left:7px; border-top:1px solid #fdfdfd;">
 		<div class="col-md-4">
 			<em><i class="icon-time"></i> &nbsp;&nbsp;29 September 2013</em>
 		</div>
@@ -26,13 +23,16 @@
 		<div class="col-sm-2">
 			{% include "gplusonebutton.html" %}
 		</div>
+		<div class="col-sm-2" style="margin-left: -21px;">
+			<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-width="The pixel width of the plugin" data-height="The pixel height of the plugin" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="false" data-send="false"></div>
+		</div>
 		<div class="col-sm-2">
 			{% if not post.disallow_comments %}
 				<a><em><a class="font_comments2" href="#disqus_thread">&nbsp;</a></em></a>
 			{%endif%}
 		</div>
 	</div>
-	<div class="row" style="padding-top:10px;">		
+	<div class="row" style="padding-top:10px;padding-left:15px">		
 		{% if tags %}
 		<p class="font_author">
 			{% for tg in tags.split(',') %}
@@ -45,7 +45,10 @@
 		</p>
 		{% endif %}
 	</div>
-	<hr/>
+	<div style="border-bottom: 1px dashed #f2f2f2; padding:5px; margin-bottom: 15px; margin-top: 10px;">
+	{% include "ad_top_bar_responsive.html" %} 
+	</div>
+
 	<span class="better_fonts">
 	{{ content }}
 	</span>

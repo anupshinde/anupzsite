@@ -12,20 +12,19 @@
 
 
 {% block content %}
-	<h3><i class="icon-tag"></i> &nbsp;&nbsp; <span style="text-transform:capitalize;">{{ title }}</span></h3>
-	
-	<hr/>
-	{% include "ad_top_bar_responsive.html" %} 
-	<hr/>
+	<h1><i class="icon-tag"></i> &nbsp;&nbsp; <span style="text-transform:capitalize;">{{ title }}</span></h1>
+	<div style="padding-top: 15px;border-bottom: 1px solid #fcfcfc; padding-bottom: 11px;">
+		{% include "ad_top_bar_responsive.html" %}
+	</div>
 
 	{% for post in posts %}
 
 		<div class="post">
-			<h3>
+			<h2>
 				<a href="/posts/{{post._filemeta.urlInfo.dirName}}/" class="post_title">
 					{{ post.title  }} 
 				</a>
-			</h3>
+			</h2>
 			
 			<p>
 				{% if post.thumbnail %}
