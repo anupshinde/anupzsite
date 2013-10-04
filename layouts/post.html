@@ -15,7 +15,7 @@
 	<h1> <a href="" class="post_title">{{ title }}</a></h1>
 	<div class="row" style="padding-top:10px; padding-left:7px; border-top:1px solid #fdfdfd;">
 		<div class="col-md-4">
-			<em><i class="icon-time"></i> &nbsp;&nbsp;29 September 2013</em>
+			<em><i class="icon-time"></i> &nbsp;&nbsp;{{moment(date).format("D MMMM YYYY")}}</em>
 		</div>
 		<div class="col-sm-2">
 			{% include "tweetbutton.html" %} 
