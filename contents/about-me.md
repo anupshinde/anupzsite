@@ -1,6 +1,7 @@
 ---
 layout: post
 title: About Me
+remove_ads: true
 ---
 Hi!
 
