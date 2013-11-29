@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: base
 title: About Me
 remove_ads: true
 ---
