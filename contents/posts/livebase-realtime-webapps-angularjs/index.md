@@ -6,6 +6,8 @@ tags: nodejs, javascript, realtime, mongodb, angularjs
 date: 2014-01-19
 ---
 
+---
+
 After looking at the [FireBase + AngularJS demo](http://www.youtube.com/watch?v=C7ZI7z7qnHU), few months back, I wished for something similar for with MongoDB with angular integration being that simple to use.
 
 **FYI**: You may find [Meteor](https://www.meteor.com/) as a better option for "real-time"
@@ -13,7 +15,9 @@ After looking at the [FireBase + AngularJS demo](http://www.youtube.com/watch?v=
 
 The demo implementation here is todo app with real time sync.
 
-## [Demo here](http://www.anupshinde.com)
+#### [Demo here](http://www.anupshinde.com)
+
+---
 
 ##What do we need to implement this?
 
@@ -25,6 +29,8 @@ The demo implementation here is todo app with real time sync.
 
 4. A Todo app that consumes all of the above for the demo. 
 
+
+---
 
 The following gives a brief idea related to each component:
 
@@ -50,7 +56,7 @@ This service factory implementation works with the livebase.js to update the sco
 
 
 ##Todo App
-The todo app pretty much looks like the AngularJS todo list demo. The controller *TodoCtrl* uses *angularBase* and the code is shown below
+The todo app pretty much looks like the AngularJS todo list demo. The controller *TodoCtrl* uses *angularBase* and the code snippet is shown below. 
 
 ```
 var Todos = angularBase("http://localhost:9338","todos");
@@ -58,14 +64,9 @@ var Todos = angularBase("http://localhost:9338","todos");
 $scope.todos = Todos.getAll();
 
 ...
-...
-...
-...
 Todos.put(todo);
-...
-...
-...
 
+...
 Todos.remove(todo);
 
 ```
