@@ -16,7 +16,7 @@ The demo implementation here is todo app with real time sync.
 
 #### [Demo here](http://www.anupshinde.com)
 
-#### [Code at GitHub](http://www.anupshinde.com)
+#### [Code at GitHub](https://github.com/anupshinde/livebase)
 
 ---
 
@@ -95,6 +95,6 @@ todo_app.controller("TodoCtrl", function($scope, angularBase) {
 
 #### [Demo here](http://www.anupshinde.com)
 
-#### [Code at GitHub](http://www.anupshinde.com)
+#### [Code at GitHub](https://github.com/anupshinde/livebase)
 
 ---
