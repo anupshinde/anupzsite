@@ -35,7 +35,7 @@ The following gives a brief idea related to each component:
 
 ---
 
-##Server.js - Server code
+###Server.js - Server code
 Server opens up a connection to MongoDB and loads the Socket.
 The socket receives events and performs updates on the collection (todos). After each update via SocketIO the data is broadcast to all the connected clients.
 
@@ -45,12 +45,12 @@ This file also defines a type *MongoConnection* which can be moved to a module.
 
 
 ---
-##Livebase.js - Client JS lib that works with SocketIO client lib
+###Livebase.js - Client JS lib that works with SocketIO client lib
 
 Livebase.js works with SocketIO client library and exposes methods to update the collection, handles the socket events and fires events to be handled by its consumer.
 
 ---
-##livebase-angular.js: AngularJS service factory 
+###livebase-angular.js: AngularJS service factory 
 
 This service factory implementation works with the livebase.js to update the scope. This is defined as *angularBase* in the*livebase* module
 
@@ -59,7 +59,7 @@ This service factory implementation works with the livebase.js to update the sco
 
 
 ---
-##Todo App
+###Todo App
 The todo app pretty much looks like the AngularJS todo list demo. The controller *TodoCtrl* uses *angularBase* and the code snippet is shown below. 
 
 ```
