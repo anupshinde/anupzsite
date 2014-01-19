@@ -1,14 +1,13 @@
 ---
 title: Building real time web apps with AngularJS, NodeJS and MongoDB
 abstract: This is a demo implementation of creating real time web apps with AngularJS and MongoDB. In here we implement a todo list that is synchronised in real time for all the users
-isDraft: true
 tags: nodejs, javascript, realtime, mongodb, angularjs
 date: 2014-01-19
 ---
 
 ---
 
-After looking at the [FireBase + AngularJS demo](http://www.youtube.com/watch?v=C7ZI7z7qnHU), few months back, I wished for something similar for with MongoDB with angular integration being that simple to use.
+After looking at the [FireBase + AngularJS demo](http://www.youtube.com/watch?v=C7ZI7z7qnHU), few months back, I wished for something similar with MongoDB. And simple to use AngularJS integration.
 
 **FYI**: You may find [Meteor](https://www.meteor.com/) as a better option for "real-time"
 
@@ -17,6 +16,7 @@ The demo implementation here is todo app with real time sync.
 
 #### [Demo here](http://www.anupshinde.com)
 
+#### [Code at GitHub](http://www.anupshinde.com)
 
 ---
 
