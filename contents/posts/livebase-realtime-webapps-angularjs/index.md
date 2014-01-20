@@ -52,10 +52,10 @@ Livebase.js works with SocketIO client library and exposes methods to update the
 ---
 ###livebase-angular.js: AngularJS service factory 
 
-This service factory implementation works with the livebase.js to update the scope. This is defined as *angularBase* in the*livebase* module
+This service factory implementation works with the livebase.js to update the scope. This is defined as *angularBase* in the *livebase* module
 
 
-**NOTE**: All the three server.js->MongoConnection, livebase.js and livebase-angular.js are collection independent. With an exception that server.js
+**NOTE**: All the above files: server.js->MongoConnection, livebase.js and livebase-angular.js are collection independent. With an exception that server.js
 
 
 ---
@@ -92,7 +92,7 @@ todo_app.controller("TodoCtrl", function($scope, angularBase) {
 ```
 
 In the demo code, I am using a different port for SocketIO. You could use the same port with ExpressJS.
-Different ports occur in my code because of the way this thing was developed and was used with local files earlier.
+Different ports occur in my code because this was used with local html files earlier.
 
 ---
 
@@ -101,4 +101,6 @@ Different ports occur in my code because of the way this thing was developed and
 #### [Code at GitHub](https://github.com/anupshinde/livebase)
 
 
-If you liked this stuff, go ahead and share this or leave a comment below.
+If you liked this stuff, go ahead and share this, or leave a comment below.
+
+Happy Coding <i class="icon-smile"></i>
