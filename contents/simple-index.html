@@ -1,0 +1,56 @@
+---
+layout: base
+ApplyTemplateToContent: true
+remove_ads: true
+---
+
+<script type="application/x-nirman-code">
+scope.getPosts = function() {
+ var _ = scope._;
+ var posts = scope._
+				.chain(scope.Meta.posts.Directories)
+				.filter(function(dir) {
+					// Filter out directories not having index file
+					return !scope._.isUndefined(dir.index);
+				})
+				.sortBy(function(dir) {
+					if(scope._.isUndefined(dir.index.date)) {
+						return -(new Date());
+					}
+					return -Date.parse(dir.index.date);
+				})
+				.map(function(item) {
+					return item.index;
+				}).compact()
+				.filter(function(item) {
+					return !item.isDraft;
+				})
+				.value();
+	
+  return posts;
+}
+
+
+//scope.paginate(scope.getPosts());
+
+	
+ </script>
+<style>
+ol>li {
+	padding-top: 10px;
+}
+</style>
+<h1>Index</h1>
+<div style="margin-top:20px;">
+<ol>
+{% for post in getPosts() %}
+	<li>
+		<a href="posts/{{post._filemeta.urlInfo.dirName}}/" class="post_title">
+			{{ post.title  }} 
+		</a>
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<em>{{moment(post.date).format("D MMMM YYYY")}}</em>
+	</li>
+{% endfor %}
+</ol>
+</div>
