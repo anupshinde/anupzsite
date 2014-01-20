@@ -91,10 +91,15 @@ todo_app.controller("TodoCtrl", function($scope, angularBase) {
 
 ```
 
+In the demo code, I am using a different port for SocketIO. You could use the same port with ExpressJS.
+Different ports occur in my code because of the way this thing was developed and was used with local files earlier.
+
 ---
 
 #### [Demo here](http://livebase.anupshinde.com)
 
 #### [Code at GitHub](https://github.com/anupshinde/livebase)
 
+
+If you liked this stuff, go ahead and share this or leave a comment below.
 ---
