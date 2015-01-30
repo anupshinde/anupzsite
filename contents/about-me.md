@@ -15,7 +15,7 @@ Most of my consulting work consists of helping develop new SaaS products. I also
 
 I believe everybody should know basic coding. As Steve Jobs said - it teaches you how to think.
 
-Need help with your product or application development? Need help with a proof-of-concept? Want to consult on technology? Or just want to chat? <a data-toggle="modal" href="#sayhi">*Contact me here* <i class="icon-envelope-alt"></i></a> 
+Need help with your product or application development? Need help with a proof-of-concept? Or just want to drop a line? <a data-toggle="modal" href="#sayhi">*Contact me here* <i class="icon-envelope-alt"></i></a> 
 
 
 ---
