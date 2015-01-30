@@ -15,14 +15,15 @@ Most of my consulting work consists of helping develop new SaaS products. I also
 
 I believe everybody should know basic coding. As Steve Jobs said - it teaches you how to think.
 
-Need help with your product or application development? Need help with a proof-of-concept? Want to consult on technology? Or just want to chat? <a data-toggle="modal" href="#sayhi">**Contact me here** <i class="icon-envelope-alt"></i></a> 
-
+Need help with your product or application development? Need help with a proof-of-concept? Want to consult on technology? Or just want to chat? <a data-toggle="modal" href="#sayhi">*Contact me here* <i class="icon-envelope-alt"></i></a> 
 
 
 ---
 
-Following are some of my skills (that keep upgrading faster than this page can update)
-Web Design and Development
+###Skills:
+
+####Web Design and Development
+
 - JavaScript, AngularJS, NodeJS, ExpressJS, MongoDB (MEAN stack)
 - Python programming
 - HTML, CSS, CSS3, jQuery, Bootstrap, Sencha ExtJS, Sencha Touch
@@ -30,13 +31,14 @@ Web Design and Development
 - Salesforce, Force.com, ASP.NET, MSSQL, C#.NET
 - PHP, WordPress, MySQL
 
-Machine Learning and Data Science:
+####Machine Learning and Data Science:
 - Data mining and Predictive analytics
 - SciPy, scikit, NumPy, NLTK, Classification, Regression, Clustering
 - Genetic algorithms, Genetic Programming
 - Web scraping, Web bots and web spiders.
 - Computer Vision, Face recognition, Natural language processing
 - R Programming, MT4 Expert Advisors
+
 
 
   <div class="modal fade" id="sayhi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
