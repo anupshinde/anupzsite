@@ -5,23 +5,38 @@ remove_ads: true
 ---
 Hi!
 
-I am a web developer who loves to work with HTML, JavaScript and CSS. In spite of programming for so many years, I still find myself fascinated by the world of programming.
+My name is Anup Shinde. A full stack web developer, data engineer, a machine learning researcher and an entrepreneur. 
 
+I specialise in developing high quality web applications with expertise in JavaScript. 
 
-I started with web development in 2002 - with a 2 year stint somewhere creating desktop apps. In the early days - my expertise was limited to ASP, ASP.NET and C#. HTML, CSS, JS were pretty much not-directly-used by me. However that has changed a lot. These days I tend to be inclined to HTML, JS and CSS, more than anything else.
+An entrepreneur at heart - I work as an independent consultant now after having worked 10+ years as a corporate software engineer and a product analyst. 
 
-
-My journey in software started with developing control systems for robots and communications. I was much "hardware-bound" or "physical-reality-bound" back then. I hope I could do a Ctrl+Z when I mis-soldered a chip.
-
-
-Since then I have worked with multiple languages ( C, C++, COBOL, Java, VB6, VB.NET, C#, Python, Ruby, JavaScript .... )
-I also hold an MCSD (Microsoft Certified Solution Developer) certification back in 2005. These days I am steadily moving away from Microsoft tech - and towards Python,JavaScript,HTML. 
-
-My bread and butter comes from working with the Salesforce's tech - Force.com platform and its Visualforce/APEX language. My opinion about it is not good. Although I am a serious disliker of Force.com platform - we still make some interesting apps. 
-
-
+Most of my consulting work consists of helping develop new SaaS products. I also work with data scientists on implementing machine learning algorithms, data mining and developing systems to find meaningful information from raw data.
 
 I believe everybody should know basic coding. As Steve Jobs said - it teaches you how to think.
+
+Need help with your product or application development? Need help with a proof-of-concept? Want to consult on technology? Or just want to chat? <a data-toggle="modal" href="#sayhi">**Contact me here** <i class="icon-envelope-alt"></i></a> 
+
+
+
+---
+
+Following are some of my skills (that keep upgrading faster than this page can update)
+Web Design and Development
+- JavaScript, AngularJS, NodeJS, ExpressJS, MongoDB (MEAN stack)
+- Python programming
+- HTML, CSS, CSS3, jQuery, Bootstrap, Sencha ExtJS, Sencha Touch
+- Google Cloud, Google Analytics, Google Apps Script, Google APIs, Google App Engine, Google Cloud
+- Salesforce, Force.com, ASP.NET, MSSQL, C#.NET
+- PHP, WordPress, MySQL
+
+Machine Learning and Data Science:
+- Data mining and Predictive analytics
+- SciPy, scikit, NumPy, NLTK, Classification, Regression, Clustering
+- Genetic algorithms, Genetic Programming
+- Web scraping, Web bots and web spiders.
+- Computer Vision, Face recognition, Natural language processing
+- R Programming, MT4 Expert Advisors
 
 
   <div class="modal fade" id="sayhi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -41,7 +56,7 @@ I believe everybody should know basic coding. As Steve Jobs said - it teaches yo
   </div>
   
   
-<a data-toggle="modal" href="#sayhi">*"Say Hi"* <i class="icon-envelope-alt"></i></a> 
+<a data-toggle="modal" href="#sayhi">*Contact Anup Shinde"* <i class="icon-envelope-alt"></i></a> 
 
 <a href="https://twitter.com/Anup_Shinde" class="twitter-follow-button" data-show-count="false">Follow @Anup_Shinde</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
