@@ -20,9 +20,9 @@ Need help with your product or application development? Need help with a proof-o
 
 ---
 
-###Skills:
+####Skills:
 
-####Web Design and Development
+#####Web Design and Development
 
 - JavaScript, AngularJS, NodeJS, ExpressJS, MongoDB (MEAN stack)
 - Python programming
@@ -31,7 +31,7 @@ Need help with your product or application development? Need help with a proof-o
 - Salesforce, Force.com, ASP.NET, MSSQL, C#.NET
 - PHP, WordPress, MySQL
 
-####Machine Learning and Data Science:
+#####Machine Learning and Data Science:
 - Data mining and Predictive analytics
 - SciPy, scikit, NumPy, NLTK, Classification, Regression, Clustering
 - Genetic algorithms, Genetic Programming
