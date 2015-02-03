@@ -11,7 +11,7 @@ I specialise in developing high quality web applications with expertise in JavaS
 
 An entrepreneur at heart - I work as an independent consultant now after having worked 10+ years as a corporate software engineer and a product analyst. 
 
-Most of my consulting work consists of helping develop new SaaS products. I also work with data scientists on implementing machine learning algorithms, data mining and developing systems to find meaningful information from raw data.
+Most of the time I help develop/design/architect new SaaS and cloud based products. I also work with data scientists on implementing machine learning algorithms helping them find meaningful information and new patterns from raw data.
 
 I believe everybody should know basic coding. As Steve Jobs said - it teaches you how to think.
 
@@ -27,17 +27,16 @@ Need help with your product or application development? Need help with a proof-o
 - JavaScript, AngularJS, NodeJS, ExpressJS, MongoDB (MEAN stack)
 - Python programming
 - HTML, CSS, CSS3, jQuery, Bootstrap, Sencha ExtJS, Sencha Touch
-- Google Cloud, Google Analytics, Google Apps Script, Google APIs, Google App Engine, Google Cloud
-- Salesforce, Force.com, ASP.NET, MSSQL, C#.NET
-- PHP, WordPress, MySQL
+- Google App Engine, Google Cloud, Google Analytics, Google Apps Script, Google APIs, Cloud endpoints
+- Salesforce.com, Force.com,
+- ASP.NET, C#.NET, PHP, MS-SQL, MySQL
 
 #####Machine Learning and Data Science:
 - Data mining and Predictive analytics
 - SciPy, scikit, NumPy, NLTK, Classification, Regression, Clustering
 - Genetic algorithms, Genetic Programming
-- Web scraping, Web bots and web spiders.
-- Computer Vision, Face recognition, Natural language processing
-- R Programming, MT4 Expert Advisors
+- Web bots and web spiders.
+- Computer Vision and Natural language processing
 
 
 
