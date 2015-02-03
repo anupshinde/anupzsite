@@ -11,7 +11,7 @@ I specialise in developing high quality web applications with expertise in JavaS
 
 An entrepreneur at heart - I work as an independent consultant now after having worked 10+ years as a corporate software engineer and a product analyst. 
 
-Most of the time I help develop/design/architect new SaaS and cloud based products. I also work with data scientists on implementing machine learning algorithms helping them find meaningful information and new patterns from raw data.
+Most of the time I help develop/design/architect new SaaS and cloud based products. I also work with data scientists on implementing machine learning algorithms helping find meaningful information and new patterns from raw data.
 
 I believe everybody should know basic coding. As Steve Jobs said - it teaches you how to think.
 
