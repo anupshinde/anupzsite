@@ -118,7 +118,11 @@ pre {
 
 }
 
-.contact_extern:hover {
+.contact_extern,
+.contact_extern:link,
+.contact_extern:hover,
+.contact_extern:visited,
+.contact_extern:active {
 	text-decoration: none;
 }
 
