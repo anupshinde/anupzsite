@@ -110,3 +110,18 @@ pre {
 	text-align: right;
 	font-weight: bold;
 }
+
+.contact_extern {
+	display:block;
+	margin-top:15px;
+	margin-left: 10px
+
+}
+
+.contact_extern:hover {
+	text-decoration: none;
+}
+
+.contact_extern > i {
+	padding-right: 10px
+}
